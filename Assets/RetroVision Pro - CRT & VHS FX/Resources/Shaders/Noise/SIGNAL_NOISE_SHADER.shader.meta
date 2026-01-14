@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ccc2ad3d06fd5b140a6f875801dad0f6
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Noise/SIGNAL_NOISE_SHADER.shader
+  uploadId: 811764

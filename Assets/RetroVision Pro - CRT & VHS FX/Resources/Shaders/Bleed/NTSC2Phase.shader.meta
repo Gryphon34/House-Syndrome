@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0d8f1285f9de0a14da167859dbd3703e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Bleed/NTSC2Phase.shader
+  uploadId: 811764

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 74abaf4275fad06449cff335abb53fad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Scripts/Volumes/FISHEYE_VIGNETTE.cs
+  uploadId: 811764
