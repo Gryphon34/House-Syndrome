@@ -119,6 +119,39 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &96235681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 96235682}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &96235682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96235681}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.15728, y: 0.26784, z: -3.08267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1963407210}
+  - {fileID: 1028774394}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &112730834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +210,17 @@ PrefabInstance:
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 475325190dd42af4db4a3d7c0de7839a, type: 3}
 --- !u!1 &216619694
+--- !u!1 &182993968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2271036430416539205, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
+  m_PrefabInstance: {fileID: 2271036429879105427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &182993971 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
+  m_PrefabInstance: {fileID: 2271036429879105427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &220213323
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,6 +234,11 @@ GameObject:
   - component: {fileID: 216619696}
   m_Layer: 8
   m_Name: Mirror
+  - component: {fileID: 220213324}
+  - component: {fileID: 220213326}
+  - component: {fileID: 220213325}
+  m_Layer: 5
+  m_Name: DayText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,6 +246,8 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &216619695
 Transform:
+--- !u!224 &220213324
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -212,6 +263,21 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &216619696
 BoxCollider:
+  m_GameObject: {fileID: 220213323}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1956072134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 203.8}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &220213325
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -233,6 +299,94 @@ BoxCollider:
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &216619697
 MeshRenderer:
+  m_GameObject: {fileID: 220213323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Day 1
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &220213326
+CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -288,6 +442,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216619694}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  m_GameObject: {fileID: 220213323}
+  m_CullTransparentMesh: 1
 --- !u!1 &315531135
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +663,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 315531136}
+  - {fileID: 1956072134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -548,6 +705,7 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1029248341
+--- !u!1 &1028774393
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -558,12 +716,17 @@ GameObject:
   - component: {fileID: 1029248342}
   m_Layer: 8
   m_Name: mirror
+  - component: {fileID: 1028774394}
+  - component: {fileID: 1028774395}
+  m_Layer: 0
+  m_Name: PlayerSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1029248342
+--- !u!4 &1028774394
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -580,6 +743,30 @@ Transform:
   - {fileID: 216619695}
   m_Father: {fileID: 4000013093203068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1028774393}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.759, y: 1.045, z: 8.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 96235682}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1028774395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028774393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  prefabToSpawn:
+  - {fileID: 182993968}
+  repeatInterval: 0
 --- !u!215 &1042990060
 ReflectionProbe:
   m_ObjectHideFlags: 0
@@ -783,6 +970,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1517554124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517554125}
+  - component: {fileID: 1517554127}
+  - component: {fileID: 1517554126}
+  m_Layer: 5
+  m_Name: DayPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1517554125
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517554124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1956072134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 5.8949966, y: -254.13708}
+  m_SizeDelta: {x: 1734.0289, y: 581.875}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1517554126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517554124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1517554127
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517554124}
+  m_CullTransparentMesh: 1
 --- !u!1 &1524741413
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,6 +1055,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1524741415}
   - component: {fileID: 1524741414}
+  - component: {fileID: 1524741417}
+  - component: {fileID: 1524741418}
   - component: {fileID: 1524741416}
   m_Layer: 0
   m_Name: Directional Light
@@ -875,7 +1139,7 @@ Transform:
   m_GameObject: {fileID: 1524741413}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4663312, y: -0.8375822, z: 0.224288, w: 0.17517519}
-  m_LocalPosition: {x: 1.84, y: 11.45, z: 0.06700021}
+  m_LocalPosition: {x: 1.84, y: 90, z: 0.06700015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -910,6 +1174,40 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!95 &1524741417
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524741413}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6630070651ad2354e80705c56ca702e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1524741418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524741413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab75430601af2b944a4c90cc141d34f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayNightEventReceiver
 --- !u!1 &1553410515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,6 +1650,121 @@ Transform:
   - {fileID: 1553410516}
   m_Father: {fileID: 737768570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1956072133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956072134}
+  m_Layer: 5
+  m_Name: Day
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1956072134
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956072133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 220213324}
+  - {fileID: 1517554125}
+  m_Father: {fileID: 737076982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 253}
+  m_SizeDelta: {x: 200, y: 506}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1963407209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963407210}
+  - component: {fileID: 1963407211}
+  - component: {fileID: 1963407212}
+  m_Layer: 0
+  m_Name: DayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963407210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963407209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 96235682}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1963407211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963407209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c014650367425c540b793807160e699f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayManager
+  currentDay: 1
+  dayText: {fileID: 220213325}
+  displayDuration: 2
+  fadeSpeed: 2
+  interactionDistance: 1.8
+  interactKey: 101
+  fadeScreen: {fileID: 1517554124}
+  spawnPoint: {fileID: 1028774394}
+  player: {fileID: 182993971}
+  sleepFadeDuration: 1
+  dayNightReceiver: {fileID: 1524741418}
+--- !u!95 &1963407212
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963407209}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6630070651ad2354e80705c56ca702e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &2016432080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1284543342789227805, guid: 475325190dd42af4db4a3d7c0de7839a, type: 3}
@@ -1376,7 +1789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012897614300}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grpDraw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1392,7 +1805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011674146008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1410,9 +1823,10 @@ GameObject:
   - component: {fileID: 4000010687502222}
   - component: {fileID: 33000011417150348}
   - component: {fileID: 23000014409106786}
-  m_Layer: 0
+  - component: {fileID: 33000011417150349}
+  m_Layer: 6
   m_Name: BedBase
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1428,7 +1842,7 @@ GameObject:
   - component: {fileID: 4000014504432472}
   - component: {fileID: 65000010820858040}
   - component: {fileID: 114000010801415420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_doorsL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000010749285976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: doors_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1876,7 @@ GameObject:
   - component: {fileID: 4000012855429090}
   - component: {fileID: 33000013102944126}
   - component: {fileID: 23000012868526532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1481,7 +1895,7 @@ GameObject:
   - component: {fileID: 65000013452632570}
   - component: {fileID: 95000010571617282}
   - component: {fileID: 114000012739898224}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_BedsideTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,7 +1914,7 @@ GameObject:
   - component: {fileID: 33000011417655948}
   - component: {fileID: 23000013698042012}
   - component: {fileID: 64000013245663476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Lamp (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1932,7 @@ GameObject:
   - component: {fileID: 4000011609233644}
   - component: {fileID: 33000011055907632}
   - component: {fileID: 23000011962807088}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1537,7 +1951,7 @@ GameObject:
   - component: {fileID: 65000011357803306}
   - component: {fileID: 95000013642635910}
   - component: {fileID: 114000010399675020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_BedsideTable (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1969,7 @@ GameObject:
   - component: {fileID: 4000013571706454}
   - component: {fileID: 33000013601525590}
   - component: {fileID: 23000012846358336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1575,7 +1989,7 @@ GameObject:
   - component: {fileID: 23000014711229030}
   - component: {fileID: 65000010388378992}
   - component: {fileID: 65000010388378993}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: rightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1594,7 +2008,7 @@ GameObject:
   - component: {fileID: 33000011002565604}
   - component: {fileID: 23000012200341304}
   - component: {fileID: 64000010478566812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +2027,7 @@ GameObject:
   - component: {fileID: 33000012490078194}
   - component: {fileID: 23000014553510152}
   - component: {fileID: 64000010247636692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Curtain (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1638,7 +2052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000010424822790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,7 +2066,7 @@ GameObject:
   - component: {fileID: 23000013368633844}
   - component: {fileID: 64000012030856716}
   - component: {fileID: 114000010855316274}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1670,7 +2084,7 @@ GameObject:
   - component: {fileID: 4000012557018974}
   - component: {fileID: 33000013495529550}
   - component: {fileID: 23000012167163992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Lightswitch (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1690,7 +2104,7 @@ GameObject:
   - component: {fileID: 23000009759944812}
   - component: {fileID: 64000010236528432}
   - component: {fileID: 114000010508705706}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1709,7 +2123,7 @@ GameObject:
   - component: {fileID: 33000013187875776}
   - component: {fileID: 23000011979686686}
   - component: {fileID: 64000012661880570}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_FreestandMirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1727,7 +2141,7 @@ GameObject:
   - component: {fileID: 4000010648209100}
   - component: {fileID: 108000013509383026}
   - component: {fileID: 1902988706496340922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1743,7 +2157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000013261505104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_drawsDoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1762,7 +2176,7 @@ GameObject:
   - component: {fileID: 33000012625130604}
   - component: {fileID: 23000009728849312}
   - component: {fileID: 64000013244860998}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1782,7 +2196,7 @@ GameObject:
   - component: {fileID: 23000013530363146}
   - component: {fileID: 64000014141150714}
   - component: {fileID: 114000012601823896}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1800,7 +2214,7 @@ GameObject:
   - component: {fileID: 4000011958916694}
   - component: {fileID: 33000010316206422}
   - component: {fileID: 23000009643772836}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: BathroomSink_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1820,7 +2234,7 @@ GameObject:
   - component: {fileID: 95000010528638656}
   - component: {fileID: 114000012126913656}
   - component: {fileID: 114000010343600006}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PFB_DoorDouble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1838,7 +2252,7 @@ GameObject:
   - component: {fileID: 4000010541493328}
   - component: {fileID: 108000010936076546}
   - component: {fileID: 2833774942270783253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +2272,7 @@ GameObject:
   - component: {fileID: 23000013576728484}
   - component: {fileID: 64000012561499302}
   - component: {fileID: 114000012303654000}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1876,7 +2290,7 @@ GameObject:
   - component: {fileID: 4000011800575732}
   - component: {fileID: 65000014104488026}
   - component: {fileID: 114000011277781684}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door01_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1892,7 +2306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011568108274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1912,7 +2326,7 @@ GameObject:
   - component: {fileID: 23000014734467288}
   - component: {fileID: 64000012184236024}
   - component: {fileID: 114000013944161932}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +2344,7 @@ GameObject:
   - component: {fileID: 4000014639091906}
   - component: {fileID: 108000012319623700}
   - component: {fileID: 4203429521866108273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1949,7 +2363,7 @@ GameObject:
   - component: {fileID: 33000013623816528}
   - component: {fileID: 23000013281540604}
   - component: {fileID: 64000011548199840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_OvenExhaustFan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1969,7 +2383,7 @@ GameObject:
   - component: {fileID: 23000009474245982}
   - component: {fileID: 64000011608419864}
   - component: {fileID: 114000010347492900}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1988,13 +2402,13 @@ GameObject:
   - component: {fileID: 33000011597806890}
   - component: {fileID: 23000011963857298}
   - component: {fileID: 64000012578095286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Sofa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000010744775238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +2418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000014166162496}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grp_doorL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011734708438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2040,7 +2454,7 @@ GameObject:
   - component: {fileID: 23000012095371348}
   - component: {fileID: 64000013264984354}
   - component: {fileID: 114000013281949022}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2056,7 +2470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011811228826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BakedLightSet_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2075,7 +2489,7 @@ GameObject:
   - component: {fileID: 33000013010579364}
   - component: {fileID: 23000011540345906}
   - component: {fileID: 64000013945210284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Towel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2093,7 +2507,7 @@ GameObject:
   - component: {fileID: 4000011343092642}
   - component: {fileID: 108000011479669048}
   - component: {fileID: 392608454452531935}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2114,7 +2528,7 @@ GameObject:
   - component: {fileID: 64000013270498432}
   - component: {fileID: 54000014746527826}
   - component: {fileID: 65000009415088052}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: DoorSingle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2132,7 +2546,7 @@ GameObject:
   - component: {fileID: 4000012967405346}
   - component: {fileID: 65000013100041926}
   - component: {fileID: 114000012110743372}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door04_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2150,7 +2564,7 @@ GameObject:
   - component: {fileID: 4000012060031086}
   - component: {fileID: 65000011785117876}
   - component: {fileID: 114000013270390430}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door05_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2170,7 +2584,7 @@ GameObject:
   - component: {fileID: 23000013576378170}
   - component: {fileID: 64000015215606990}
   - component: {fileID: 114000011167162334}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2189,7 +2603,7 @@ GameObject:
   - component: {fileID: 65000012511913838}
   - component: {fileID: 95000011105663386}
   - component: {fileID: 114000014417673876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_KitchenBench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2209,7 +2623,7 @@ GameObject:
   - component: {fileID: 23000010854090628}
   - component: {fileID: 64000010333226618}
   - component: {fileID: 114000014360145020}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2227,7 +2641,7 @@ GameObject:
   - component: {fileID: 4000009480610010}
   - component: {fileID: 33000010110662806}
   - component: {fileID: 23000014773994524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Lightswitch (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2245,7 +2659,7 @@ GameObject:
   - component: {fileID: 4000010895669944}
   - component: {fileID: 33000013833699018}
   - component: {fileID: 23000014321945412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2264,7 +2678,7 @@ GameObject:
   - component: {fileID: 33000010973087292}
   - component: {fileID: 23000014627809336}
   - component: {fileID: 64000013598479924}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Basket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2282,7 +2696,7 @@ GameObject:
   - component: {fileID: 4000012278249740}
   - component: {fileID: 108000013819265928}
   - component: {fileID: 8294417938642865414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2299,7 +2713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011738016226}
   - component: {fileID: 64000010279051952}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Shower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2315,7 +2729,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011669017004}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grp_doorR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2333,7 +2747,7 @@ GameObject:
   - component: {fileID: 4000011851172240}
   - component: {fileID: 33000013588788750}
   - component: {fileID: 23000009588809646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Lightswitch (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2353,7 +2767,7 @@ GameObject:
   - component: {fileID: 23000014712694278}
   - component: {fileID: 64000010821146086}
   - component: {fileID: 114000011359776196}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2371,7 +2785,7 @@ GameObject:
   - component: {fileID: 4000012811214812}
   - component: {fileID: 33000010149378828}
   - component: {fileID: 23000010646519944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2391,7 +2805,7 @@ GameObject:
   - component: {fileID: 23000012100891988}
   - component: {fileID: 64000013039375476}
   - component: {fileID: 114000014014614034}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2409,7 +2823,7 @@ GameObject:
   - component: {fileID: 4000013057061642}
   - component: {fileID: 33000012849244780}
   - component: {fileID: 23000011153325120}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2425,7 +2839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000014226380310}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: DoorDouble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2445,7 +2859,7 @@ GameObject:
   - component: {fileID: 23000011814609012}
   - component: {fileID: 64000012129505356}
   - component: {fileID: 114000013084744130}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2461,7 +2875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000014176122554}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grp_doorR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2480,7 +2894,7 @@ GameObject:
   - component: {fileID: 33000012681804558}
   - component: {fileID: 23000011900428460}
   - component: {fileID: 64000013673754448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_DiningChair (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2498,7 +2912,7 @@ GameObject:
   - component: {fileID: 4000012995836542}
   - component: {fileID: 65000012939113378}
   - component: {fileID: 114000011400923844}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: 'door03_interact '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2517,7 +2931,7 @@ GameObject:
   - component: {fileID: 33000010864253322}
   - component: {fileID: 23000011252146264}
   - component: {fileID: 64000012969566620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2535,7 +2949,7 @@ GameObject:
   - component: {fileID: 4000014434003902}
   - component: {fileID: 33000012198135588}
   - component: {fileID: 23000009675854104}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: BathroomSink_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2551,7 +2965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000010637424646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BakedLightSet_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2570,7 +2984,7 @@ GameObject:
   - component: {fileID: 33000013621186858}
   - component: {fileID: 23000013568520198}
   - component: {fileID: 64000014144032480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Fridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2589,7 +3003,7 @@ GameObject:
   - component: {fileID: 33000011343927974}
   - component: {fileID: 23000012612074690}
   - component: {fileID: 64000012830864104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_DiningChair (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2605,7 +3019,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000014619850028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2621,7 +3035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012477025512}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2640,7 +3054,7 @@ GameObject:
   - component: {fileID: 33000012738854340}
   - component: {fileID: 23000013676515568}
   - component: {fileID: 64000014107997752}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2658,7 +3072,7 @@ GameObject:
   - component: {fileID: 4000012651730566}
   - component: {fileID: 33000011546295980}
   - component: {fileID: 23000012212381938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2698,7 +3112,7 @@ GameObject:
   - component: {fileID: 33000009857592590}
   - component: {fileID: 23000010650199538}
   - component: {fileID: 64000013460796684}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2717,7 +3131,7 @@ GameObject:
   - component: {fileID: 33000010366611014}
   - component: {fileID: 23000012251068342}
   - component: {fileID: 64000010231499500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Curtain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2735,9 +3149,10 @@ GameObject:
   - component: {fileID: 4000012305392726}
   - component: {fileID: 33000010258299756}
   - component: {fileID: 23000012559279088}
-  m_Layer: 0
+  - component: {fileID: 33000010258299757}
+  m_Layer: 6
   m_Name: BedBlanket
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2751,7 +3166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000009534770560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TVStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2769,7 +3184,7 @@ GameObject:
   - component: {fileID: 4000011030698448}
   - component: {fileID: 108000013161319488}
   - component: {fileID: 1550881271858591936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2788,7 +3203,7 @@ GameObject:
   - component: {fileID: 33000011135811356}
   - component: {fileID: 23000011146605376}
   - component: {fileID: 64000014055673420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_DiningTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2806,7 +3221,7 @@ GameObject:
   - component: {fileID: 4000011782346744}
   - component: {fileID: 33000013108730644}
   - component: {fileID: 23000009659305120}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2825,7 +3240,7 @@ GameObject:
   - component: {fileID: 95000011151765756}
   - component: {fileID: 114000011013357284}
   - component: {fileID: 65000010404450356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_TVStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2841,7 +3256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000010910897682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2859,9 +3274,10 @@ GameObject:
   - component: {fileID: 4000012749177042}
   - component: {fileID: 33000010195362240}
   - component: {fileID: 23000011913931862}
-  m_Layer: 0
+  - component: {fileID: 33000010195362241}
+  m_Layer: 6
   m_Name: BedPillow01
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2878,7 +3294,7 @@ GameObject:
   - component: {fileID: 33000013565732570}
   - component: {fileID: 23000012688272380}
   - component: {fileID: 64000010614146000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: KitchenBench_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2894,7 +3310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000013181289950}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grpDraw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2912,7 +3328,7 @@ GameObject:
   - component: {fileID: 4000013316621752}
   - component: {fileID: 65000011941948486}
   - component: {fileID: 114000010472301588}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door02_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2931,7 +3347,7 @@ GameObject:
   - component: {fileID: 33000012393969658}
   - component: {fileID: 23000010851870334}
   - component: {fileID: 64000011646540226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Stove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2949,7 +3365,7 @@ GameObject:
   - component: {fileID: 4000011726776464}
   - component: {fileID: 33000010008359484}
   - component: {fileID: 23000012372742624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2969,7 +3385,7 @@ GameObject:
   - component: {fileID: 23000012008031574}
   - component: {fileID: 64000013963920366}
   - component: {fileID: 114000010929148010}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2987,7 +3403,7 @@ GameObject:
   - component: {fileID: 4000011794413892}
   - component: {fileID: 33000013144688362}
   - component: {fileID: 23000011206011642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3005,9 +3421,10 @@ GameObject:
   - component: {fileID: 4000014368744766}
   - component: {fileID: 33000013110989562}
   - component: {fileID: 23000012481367368}
-  m_Layer: 0
+  - component: {fileID: 33000013110989563}
+  m_Layer: 6
   m_Name: BedPillow02
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3024,7 +3441,7 @@ GameObject:
   - component: {fileID: 33000011294592788}
   - component: {fileID: 23000011370714990}
   - component: {fileID: 64000013641685896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_DiningChair (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3040,7 +3457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000013125103812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3058,7 +3475,7 @@ GameObject:
   - component: {fileID: 4000014492296528}
   - component: {fileID: 108000013060411960}
   - component: {fileID: 3523999682020720555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3076,7 +3493,7 @@ GameObject:
   - component: {fileID: 4000011595946850}
   - component: {fileID: 65000013392669486}
   - component: {fileID: 114000013157535918}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorL_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3094,7 +3511,7 @@ GameObject:
   - component: {fileID: 4000009721059620}
   - component: {fileID: 65000010667537242}
   - component: {fileID: 114000010230379412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_doorsR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3132,7 +3549,7 @@ GameObject:
   - component: {fileID: 4000010850050988}
   - component: {fileID: 33000013370193824}
   - component: {fileID: 23000011458944380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3148,7 +3565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000014168808766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3164,7 +3581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011892948898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: draws
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3182,7 +3599,7 @@ GameObject:
   - component: {fileID: 4000013256884502}
   - component: {fileID: 33000011379699144}
   - component: {fileID: 23000012589197860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: showerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3201,7 +3618,7 @@ GameObject:
   - component: {fileID: 33000012008559632}
   - component: {fileID: 23000012383069102}
   - component: {fileID: 64000011561451334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_DiningChair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3221,7 +3638,7 @@ GameObject:
   - component: {fileID: 23000012885462020}
   - component: {fileID: 64000010119355576}
   - component: {fileID: 114000012058492700}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3241,7 +3658,7 @@ GameObject:
   - component: {fileID: 23000011223501978}
   - component: {fileID: 64000013945388894}
   - component: {fileID: 114000010460066686}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: draw03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3259,7 +3676,7 @@ GameObject:
   - component: {fileID: 4000012195327906}
   - component: {fileID: 108000013221911798}
   - component: {fileID: 4998529288243106568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3275,7 +3692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011479925182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightsGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3295,7 +3712,7 @@ GameObject:
   - component: {fileID: 23000011882811102}
   - component: {fileID: 64000013156300238}
   - component: {fileID: 114000013377958352}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3314,7 +3731,7 @@ GameObject:
   - component: {fileID: 33000012673843408}
   - component: {fileID: 23000014617672044}
   - component: {fileID: 64000012644823430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tvStandBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3333,7 +3750,7 @@ GameObject:
   - component: {fileID: 33000011873553782}
   - component: {fileID: 23000014788256350}
   - component: {fileID: 64000012321905414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_CoffeeTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3353,7 +3770,7 @@ GameObject:
   - component: {fileID: 23000013614536156}
   - component: {fileID: 64000012051174442}
   - component: {fileID: 114000014037745934}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3372,7 +3789,7 @@ GameObject:
   - component: {fileID: 33000012568057396}
   - component: {fileID: 23000013617539062}
   - component: {fileID: 64000012768834610}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3391,7 +3808,7 @@ GameObject:
   - component: {fileID: 33000014907900052}
   - component: {fileID: 23000012846556834}
   - component: {fileID: 64000012811143148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_TV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3409,7 +3826,7 @@ GameObject:
   - component: {fileID: 4000011430112710}
   - component: {fileID: 65000010781901986}
   - component: {fileID: 114000012723664098}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: 'doorR_interact '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3428,7 +3845,7 @@ GameObject:
   - component: {fileID: 33000011094909020}
   - component: {fileID: 23000012234955474}
   - component: {fileID: 64000014097595170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tvStandDoor_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3447,7 +3864,7 @@ GameObject:
   - component: {fileID: 33000011278426168}
   - component: {fileID: 23000011103624614}
   - component: {fileID: 64000010825315774}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3466,7 +3883,7 @@ GameObject:
   - component: {fileID: 33000013773661294}
   - component: {fileID: 23000012917186310}
   - component: {fileID: 64000011547648748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3482,7 +3899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012382088020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grp_draw_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3502,7 +3919,7 @@ GameObject:
   - component: {fileID: 114000010981740184}
   - component: {fileID: 95000013118653964}
   - component: {fileID: 65000009568408496}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PFB_Closet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3519,9 +3936,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4000014128780214}
   - component: {fileID: 64000010502417694}
-  m_Layer: 0
+  - component: {fileID: 64000010502417695}
+  m_Layer: 6
   m_Name: PFB_Bed
-  m_TagString: Untagged
+  m_TagString: Bed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3538,7 +3956,7 @@ GameObject:
   - component: {fileID: 33000013594956144}
   - component: {fileID: 23000011937639908}
   - component: {fileID: 64000011391167558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Toilet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3557,7 +3975,7 @@ GameObject:
   - component: {fileID: 33000015058021466}
   - component: {fileID: 23000012722262224}
   - component: {fileID: 64000013790157428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Curtain (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3576,7 +3994,7 @@ GameObject:
   - component: {fileID: 33000010016690432}
   - component: {fileID: 23000011762126574}
   - component: {fileID: 64000012499325750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Curtain (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3594,7 +4012,7 @@ GameObject:
   - component: {fileID: 4000013238696402}
   - component: {fileID: 33000012606756624}
   - component: {fileID: 23000012905818156}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_LightCover (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3614,7 +4032,7 @@ GameObject:
   - component: {fileID: 23000011620417628}
   - component: {fileID: 65000011706050498}
   - component: {fileID: 65000011706050499}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: leftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3632,7 +4050,7 @@ GameObject:
   - component: {fileID: 4000011916987654}
   - component: {fileID: 33000015015398792}
   - component: {fileID: 23000009521391078}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_Carpet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3651,7 +4069,7 @@ GameObject:
   - component: {fileID: 33000011490702974}
   - component: {fileID: 23000013139369664}
   - component: {fileID: 64000011527835412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: chestOfDraws_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3670,7 +4088,7 @@ GameObject:
   - component: {fileID: 33000010915350482}
   - component: {fileID: 23000013209948848}
   - component: {fileID: 64000011310882332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_SofaSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3689,7 +4107,7 @@ GameObject:
   - component: {fileID: 65000012511505676}
   - component: {fileID: 95000012307282696}
   - component: {fileID: 114000011978948268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_ChestOfDraws
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3705,7 +4123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012208429268}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grp_doorL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3723,7 +4141,7 @@ GameObject:
   - component: {fileID: 4000011525902390}
   - component: {fileID: 108000011965118122}
   - component: {fileID: 8080235841632126168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3742,7 +4160,7 @@ GameObject:
   - component: {fileID: 33000011360910592}
   - component: {fileID: 23000012093455900}
   - component: {fileID: 64000014067139632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tvStandDoor_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3762,7 +4180,7 @@ GameObject:
   - component: {fileID: 23000012579909562}
   - component: {fileID: 64000012345542394}
   - component: {fileID: 114000014371087676}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: door01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3780,7 +4198,7 @@ GameObject:
   - component: {fileID: 4000013039701134}
   - component: {fileID: 108000014855499988}
   - component: {fileID: 3440830548719311426}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3800,7 +4218,7 @@ GameObject:
   - component: {fileID: 95000010753248068}
   - component: {fileID: 114000013741850640}
   - component: {fileID: 114000013129005480}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PFB_DoorSingle_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3819,7 +4237,7 @@ GameObject:
   - component: {fileID: 33000013585440060}
   - component: {fileID: 23000014305624526}
   - component: {fileID: 64000011190896806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PFB_BedroomSofa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3840,7 +4258,7 @@ GameObject:
   - component: {fileID: 114000013724499958}
   - component: {fileID: 114000012195197806}
   - component: {fileID: 64000013579815398}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PFB_BathroomSink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3858,7 +4276,7 @@ GameObject:
   - component: {fileID: 4000012061016292}
   - component: {fileID: 108000012575367122}
   - component: {fileID: 6330251778186095941}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3939,7 +4357,7 @@ Transform:
   m_GameObject: {fileID: 1000011441802048}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071066, z: -0, w: -0.70710695}
-  m_LocalPosition: {x: 1.8216801, y: 1.642, z: -9.61441}
+  m_LocalPosition: {x: 1.574, y: 1.642, z: -9.61441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4523,7 +4941,7 @@ Transform:
   m_GameObject: {fileID: 1000013087595204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.28168, y: -0.049790397, z: -3.75441}
+  m_LocalPosition: {x: 2.28168, y: 0.198, z: -3.75441}
   m_LocalScale: {x: 1, y: 1.2238, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4797,7 +5215,7 @@ Transform:
   m_GameObject: {fileID: 1000011500893080}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000016292068}
-  m_LocalPosition: {x: 0.34868002, y: 1.642, z: 0.30359006}
+  m_LocalPosition: {x: 0.34868002, y: 1.642, z: 0.3017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5171,7 +5589,7 @@ Transform:
   m_GameObject: {fileID: 1000010425310260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 1.96168, y: 1.642, z: -8.52441}
+  m_LocalPosition: {x: 1.9663, y: 1.642, z: -8.52441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5323,7 +5741,7 @@ Transform:
   m_GameObject: {fileID: 1000010208993142}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.834, y: 2.6450002, z: -6.106}
+  m_LocalPosition: {x: -1.834, y: 2.974, z: -6.106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5697,7 +6115,7 @@ Transform:
   m_GameObject: {fileID: 1000010346567438}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8340001, y: 2.6450002, z: -8.447}
+  m_LocalPosition: {x: -1.8340001, y: 2.974, z: -8.447}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10068,6 +10486,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000012521218984}
   m_Mesh: {fileID: 4300000, guid: 78cca8ac5dce04729af9f9377e69636c, type: 3}
+--- !u!65 &33000010195362241
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012521218984}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.77606213, y: 0.12631279, z: 0.35785177}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &33000010258299756
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10076,6 +10515,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000012249865706}
   m_Mesh: {fileID: 4300004, guid: 78cca8ac5dce04729af9f9377e69636c, type: 3}
+--- !u!65 &33000010258299757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012249865706}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9385126, y: 0.30549246, z: 1.988763}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &33000010316206422
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10236,6 +10696,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000009130304266}
   m_Mesh: {fileID: 4300008, guid: 78cca8ac5dce04729af9f9377e69636c, type: 3}
+--- !u!65 &33000011417150349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000009130304266}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9144218, y: 0.91347665, z: 2.5719576}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &33000011417655948
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10436,6 +10917,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000012838624942}
   m_Mesh: {fileID: 4300002, guid: 78cca8ac5dce04729af9f9377e69636c, type: 3}
+--- !u!65 &33000013110989563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012838624942}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7677564, y: 0.12525734, z: 0.35893905}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &33000013144688362
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10882,6 +11384,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 7215b57939ceb4461b4bf22e3245f486, type: 3}
+--- !u!65 &64000010502417695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013739298700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!64 &64000010614146000
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12539,7 +13062,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010575709524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: db3c458dc081c49348506c648e9c5fd4, type: 2}
   m_CullingMode: 0
@@ -12561,7 +13084,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010291621808}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 09fae39040dee4f398a1d75425d3c823, type: 2}
   m_CullingMode: 0
@@ -12627,7 +13150,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000011397312162}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bf8732cce940a439ca21e3ac1966f4db, type: 2}
   m_CullingMode: 0
@@ -12649,7 +13172,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000012481046780}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6e134baca9b154265b12e6d080c74bb7, type: 2}
   m_CullingMode: 0
@@ -12671,7 +13194,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000014162932298}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d52c44b6f593943aca203d1493777a62, type: 2}
   m_CullingMode: 0
@@ -12715,7 +13238,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010321615680}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 09fae39040dee4f398a1d75425d3c823, type: 2}
   m_CullingMode: 0
@@ -12737,7 +13260,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000014340845326}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0c196be1b21d24214a5af57528f6ecb3, type: 2}
   m_CullingMode: 0
@@ -14432,7 +14955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5875828
+      value: -0.88
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14440,11 +14963,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.1313925
+      value: 5.09
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.97826344
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -14452,7 +14975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.20736592
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalRotation.z
@@ -14464,7 +14987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2271036430416539210, guid: d512ebcdf02532446b58dc05fc0f10d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -14787,6 +15310,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1524741415}
   - {fileID: 1208883405}
+  - {fileID: 96235682}
   - {fileID: 737076982}
   - {fileID: 2271036429879105427}
   - {fileID: 4000010640060132}
