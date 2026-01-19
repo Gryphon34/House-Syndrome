@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 668b90b68b30cdc4fa273af4bd4ed8ad
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/VHS_Tape_Rewind.shader
+  uploadId: 811764

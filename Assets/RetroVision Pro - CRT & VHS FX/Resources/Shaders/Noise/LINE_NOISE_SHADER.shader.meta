@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 053bf69998a47f94faed90ffe3828180
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Noise/LINE_NOISE_SHADER.shader
+  uploadId: 811764

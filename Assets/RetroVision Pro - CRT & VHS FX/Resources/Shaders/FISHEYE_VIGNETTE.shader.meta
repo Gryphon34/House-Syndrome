@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 030e6c5c1a1305645ad43f859e55efb9
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/FISHEYE_VIGNETTE.shader
+  uploadId: 811764

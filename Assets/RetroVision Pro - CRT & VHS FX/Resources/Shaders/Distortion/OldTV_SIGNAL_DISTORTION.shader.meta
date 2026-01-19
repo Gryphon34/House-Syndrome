@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ae7965391a8dd3743ace4f9219e18a94
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Distortion/OldTV_SIGNAL_DISTORTION.shader
+  uploadId: 811764

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dc8624a99b6a61946a5ebc110cdb1390
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Distortion/VHS_JITTER.shader
+  uploadId: 811764
