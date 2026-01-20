@@ -21,7 +21,7 @@ public class DayManager : MonoBehaviour
 
     [Header("Sleep Transition")]
     public GameObject fadeScreen;          // 전체 화면 페이드용 (검은색 Image + CanvasGroup)
-    public Transform spawnPoint;            // 잠에서 깨어날 위치
+    public Transform[] spawnPoints;         // 날짜별 스폰 포인트 (Day1 = index 0, Day2 = index 1, ...)
     public Transform player;                // 플레이어 Transform
     public float sleepFadeDuration = 1f;    // 페이드 시간
 
@@ -147,13 +147,13 @@ public class DayManager : MonoBehaviour
         // 페이드 아웃
         yield return StartCoroutine(FadeRoutine(0f, 1f));
 
-        // 플레이어를 스폰 포인트로 이동
-        TeleportPlayerToSpawn();
-
-        // 날짜 진행
+        // 날짜 진행 (스폰 포인트 이동 전에 먼저 증가)
         currentDay++;
         IsNightTime = false;
         Debug.Log($"<color=cyan>Day {currentDay} 시작!</color>");
+
+        // 플레이어를 새로운 날짜의 스폰 포인트로 이동
+        TeleportPlayerToSpawn();
         
         // Day UI 표시
         ShowDayUI();
@@ -194,9 +194,20 @@ public class DayManager : MonoBehaviour
 
     void TeleportPlayerToSpawn()
     {
-        if (player == null || spawnPoint == null)
+        if (player == null || spawnPoints == null || spawnPoints.Length == 0)
         {
-            Debug.LogWarning("Player 또는 SpawnPoint가 설정되지 않았습니다.");
+            Debug.LogWarning("Player 또는 SpawnPoints가 설정되지 않았습니다.");
+            return;
+        }
+
+        // 현재 날짜에 맞는 스폰 포인트 선택 (Day1 = index 0, Day2 = index 1, ...)
+        // 배열 범위를 벗어나면 마지막 스폰 포인트 사용
+        int spawnIndex = Mathf.Clamp(currentDay - 1, 0, spawnPoints.Length - 1);
+        Transform targetSpawnPoint = spawnPoints[spawnIndex];
+
+        if (targetSpawnPoint == null)
+        {
+            Debug.LogWarning($"Day {currentDay}의 스폰 포인트가 null입니다.");
             return;
         }
 
@@ -205,17 +216,17 @@ public class DayManager : MonoBehaviour
         if (cc != null)
         {
             cc.enabled = false;
-            player.position = spawnPoint.position;
-            player.rotation = spawnPoint.rotation;
+            player.position = targetSpawnPoint.position;
+            player.rotation = targetSpawnPoint.rotation;
             cc.enabled = true;
         }
         else
         {
-            player.position = spawnPoint.position;
-            player.rotation = spawnPoint.rotation;
+            player.position = targetSpawnPoint.position;
+            player.rotation = targetSpawnPoint.rotation;
         }
 
-        Debug.Log($"<color=green>플레이어가 {spawnPoint.name}으로 이동했습니다.</color>");
+        Debug.Log($"<color=green>Day {currentDay}: 플레이어가 {targetSpawnPoint.name}으로 이동했습니다.</color>");
     }
 
     #region Day-Night Cycle
