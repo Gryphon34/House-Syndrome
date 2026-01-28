@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HandInputSystem : MonoBehaviour
 {
@@ -34,16 +35,16 @@ public class HandInputSystem : MonoBehaviour
     [Header("Game Logic - Gauge")]
     public static float leftGauge = 0f;
     public static float rightGauge = 0f;
-
     public float maxGaugePerHand = 100f;
-    public float cycleIncreaseAmount = 12f; // 사이클 완성 시 증가량 (상시 감소를 고려해 조금 상향)
-    public float failPenaltyAmount = 5f;    // 오입력 시 즉시 차감
-
-    [Space(10)]
-    public float constantDecayRate = 1.0f;  // [추가] 조작 중에도 발생하는 상시 감소량
     public float individualWinThreshold = 80f;
 
     public Slider individualGaugeUI;
+
+    // 수치 변수들은 이제 DifficultyManager에서 가져옵니다.
+    private float cycleIncreaseAmount;
+    private float failPenaltyAmount;
+    private float constantDecayRate;
+    private int sequenceLength;
 
     [Header("Visibility Settings (Raycast)")]
     public LayerMask handLayer;
@@ -57,9 +58,11 @@ public class HandInputSystem : MonoBehaviour
 
     void Start()
     {
+        // DifficultyManager가 있는지 확인하고 수치 가져오기
+        UpdateDifficultyFromManager();
+
         mainCam = Camera.main;
         if (thumbBone != null) initialThumbRotation = thumbBone.localRotation;
-
         initialFingerRotations = new Quaternion[fingerBones.Length];
         for (int i = 0; i < fingerBones.Length; i++)
         {
@@ -70,47 +73,48 @@ public class HandInputSystem : MonoBehaviour
         SetupUI();
     }
 
-    void LateUpdate()
+    void UpdateDifficultyFromManager()
     {
-        UpdateVisibilityByRaycast();
-        UpdateUIPositions();
+        if (DifficultyManager.Instance != null)
+        {
+            constantDecayRate = DifficultyManager.Instance.GetConstantDecayRate();
+            cycleIncreaseAmount = DifficultyManager.Instance.GetCycleIncreaseAmount();
+            failPenaltyAmount = DifficultyManager.Instance.GetFailPenaltyAmount();
+            sequenceLength = DifficultyManager.Instance.GetSequenceLength();
+        }
+        else
+        {
+            // 매니저가 없을 경우를 대비한 기본값
+            constantDecayRate = 1.0f;
+            cycleIncreaseAmount = 10f;
+            failPenaltyAmount = 5f;
+            sequenceLength = 4;
+        }
     }
 
     void Update()
     {
         CheckInput();
-        ApplyGaugeDecay(); // 강화된 감소 로직 실행
+        ApplyGaugeDecay();
         UpdateGaugeUI();
         CheckWinCondition();
     }
 
-    // [로직 강화] 상시 감소 + 방치 시 가속 감소
     void ApplyGaugeDecay()
     {
-        float currentDecay = constantDecayRate; // 기본적으로 항상 감소함
+        float decayMultiplier = 1.0f;
+        // 안 보거나 엄지 뗐을 때 감소 가속 (날짜에 따라 더 빨라지게 매니저 참조 가능)
+        if (!uiParentGroup.activeSelf || !Input.GetKey(thumbKey))
+        {
+            decayMultiplier = 3.0f;
+        }
+
+        float totalDecay = constantDecayRate * decayMultiplier;
 
         if (handSide == HandSide.Left)
-            leftGauge = Mathf.Max(0, leftGauge - currentDecay * Time.deltaTime);
+            leftGauge = Mathf.Max(0, leftGauge - totalDecay * Time.deltaTime);
         else
-            rightGauge = Mathf.Max(0, rightGauge - currentDecay * Time.deltaTime);
-    }
-
-    void CheckInput()
-    {
-        if (Input.GetKey(thumbKey))
-        {
-            RotateBone(thumbBone, initialThumbRotation, bendAngle);
-            for (int i = 0; i < fingerKeys.Length; i++)
-            {
-                if (Input.GetKeyDown(fingerKeys[i]))
-                {
-                    StartCoroutine(FingerTapRoutine(i));
-                    if (fingerKeys[i] == currentSequence[currentIndex]) SuccessInput();
-                    else FailInput();
-                }
-            }
-        }
-        else if (thumbBone != null) thumbBone.localRotation = initialThumbRotation;
+            rightGauge = Mathf.Max(0, rightGauge - totalDecay * Time.deltaTime);
     }
 
     void SuccessInput()
@@ -130,8 +134,6 @@ public class HandInputSystem : MonoBehaviour
 
     void FailInput()
     {
-        Debug.Log($"<color=red>{handSide} 입력 실패! 시퀀스 및 게이지 패널티.</color>");
-
         if (handSide == HandSide.Left)
             leftGauge = Mathf.Max(0, leftGauge - failPenaltyAmount);
         else
@@ -139,6 +141,65 @@ public class HandInputSystem : MonoBehaviour
 
         GenerateNewSequence();
     }
+
+    void GenerateNewSequence()
+    {
+        currentSequence.Clear();
+        currentIndex = 0;
+        // 매니저에서 받아온 길이를 사용합니다.
+        for (int i = 0; i < sequenceLength; i++)
+            currentSequence.Add(fingerKeys[Random.Range(0, fingerKeys.Length)]);
+    }
+
+    void WakeUp()
+    {
+        Debug.Log("<color=yellow>가위 탈출 성공!</color>");
+
+        if (DifficultyManager.Instance != null)
+        {
+            DifficultyManager.Instance.NextDay(); // 날짜 증가
+        }
+
+        // [핵심] 다음 날을 위해 게이지를 반드시 초기화해야 합니다.
+        leftGauge = 0;
+        rightGauge = 0;
+
+        // 현재 씬을 다시 로드하여 '다음 날'의 난이도가 적용된 상태로 시작합니다.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void LateUpdate()
+    {
+        UpdateVisibilityByRaycast();
+        UpdateUIPositions();
+    }
+
+    void OnEnable()
+    {
+        // 오브젝트가 켜질 때 현재 활성화된 메인 카메라(NightmareCamera)를 다시 가져옵니다.
+        mainCam = Camera.main;
+        UpdateDifficultyFromManager();
+    }
+
+
+    void CheckInput()
+    {
+        if (Input.GetKey(thumbKey))
+        {
+            RotateBone(thumbBone, initialThumbRotation, bendAngle);
+            for (int i = 0; i < fingerKeys.Length; i++)
+            {
+                if (Input.GetKeyDown(fingerKeys[i]))
+                {
+                    StartCoroutine(FingerTapRoutine(i));
+                    if (fingerKeys[i] == currentSequence[currentIndex]) SuccessInput();
+                    else FailInput();
+                }
+            }
+        }
+        else if (thumbBone != null) thumbBone.localRotation = initialThumbRotation;
+    }
+
 
     IEnumerator ShowCycleFeedback()
     {
@@ -167,26 +228,39 @@ public class HandInputSystem : MonoBehaviour
         }
     }
 
-    void WakeUp()
-    {
-        Debug.Log("<color=yellow>가위 탈출 성공!</color>");
-    }
-
     void UpdateVisibilityByRaycast()
     {
+        if (mainCam == null || !mainCam.gameObject.activeInHierarchy)
+        {
+            mainCam = Camera.main;
+        }
+
         if (mainCam == null || uiParentGroup == null) return;
+
         Ray ray = mainCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red);
+
         RaycastHit hit;
         bool isLookingAtMe = false;
 
+        // 1. 레이저가 "Hand" 레이어에 맞았는지 확인
         if (Physics.Raycast(ray, out hit, rayDistance, handLayer))
         {
-            Transform handRoot = thumbBone.parent.parent;
-            if (hit.transform == handRoot || hit.transform.IsChildOf(handRoot))
+            // 2. 맞은 오브젝트의 이름에 현재 설정된 handSide 문자열이 포함되어 있는지 검사
+            // 예: 스크립트가 Left 설정이고, 맞은 뼈대 이름이 "mixamorig9:LeftHand"이면 통과
+            string hitName = hit.transform.name;
+
+            if (handSide == HandSide.Left && hitName.Contains("Left"))
+            {
+                isLookingAtMe = true;
+            }
+            else if (handSide == HandSide.Right && hitName.Contains("Right"))
             {
                 isLookingAtMe = true;
             }
         }
+
+        // 일치할 때만 해당 UI 그룹(Left_UI_Group 또는 Right_UI_Group)을 활성화
         uiParentGroup.SetActive(isLookingAtMe);
     }
 
@@ -239,13 +313,5 @@ public class HandInputSystem : MonoBehaviour
             ui.position = screenPos;
         }
         else ui.gameObject.SetActive(false);
-    }
-
-    void GenerateNewSequence()
-    {
-        currentSequence.Clear();
-        currentIndex = 0;
-        for (int i = 0; i < 4; i++)
-            currentSequence.Add(fingerKeys[Random.Range(0, fingerKeys.Length)]);
     }
 }
