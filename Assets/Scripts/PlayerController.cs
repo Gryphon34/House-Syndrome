@@ -1,51 +1,119 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [Header("Movement")]
+    [SerializeField] private string horizontalInputName = "Horizontal";
+    [SerializeField] private string verticalInputName = "Vertical";
+    [FormerlySerializedAs("moveSpeed")]
+    public float movementSpeed = 5f;
+    [Tooltip("If true uses CharacterController.SimpleMove (auto deltaTime + gravity). Otherwise uses Move.")]
+    public bool useSimpleMove = true;
+
+    [Header("Look")]
+    [SerializeField] private string mouseXInputName = "Mouse X";
+    [SerializeField] private string mouseYInputName = "Mouse Y";
     public float mouseSensitivity = 100f;
     public Transform cameraTransform;
 
     [Header("Look Settings")]
-    public float minViewAngle = -90f; // À§¸¦ º¸´Â Á¦ÇÑ
-    public float maxViewAngle = 70f;  // ¾Æ·¡¸¦ º¸´Â Á¦ÇÑ (±âÁ¸ 90¿¡¼­ 70À¸·Î ¼öÁ¤)
+    public float minViewAngle = -90f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float maxViewAngle = 70f;  // ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ 90ï¿½ï¿½ï¿½ï¿½ 70ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
     private float xRotation = 0f;
     private CharacterController controller;
     private Animator animator;
+    private bool cursorLocked = true;
+    [Header("Animation")]
+    [SerializeField] private string isMovingBoolName = "isMoving";
 
-    void Start()
+    void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
+
+        if (cameraTransform == null)
+        {
+            Camera childCam = GetComponentInChildren<Camera>();
+            if (childCam != null) cameraTransform = childCam.transform;
+        }
+
+        // Initialize pitch from current camera local rotation (prevents snapping).
+        if (cameraTransform != null)
+        {
+            float initialX = cameraTransform.localEulerAngles.x;
+            if (initialX > 180f) initialX -= 360f;
+            xRotation = initialX;
+        }
+
+        ApplyCursorLockState(true);
     }
 
     void Update()
     {
-        // 1. ½ÃÁ¡ È¸Àü ·ÎÁ÷
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        HandleCursorLockToggle();
+        HandleLook();
+        HandleMovementAndAnimation();
+    }
+
+    private void HandleCursorLockToggle()
+    {
+        // Escape unlocks cursor, left click re-locks (same behavior as PlayerLook.cs).
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            ApplyCursorLockState(false);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            ApplyCursorLockState(true);
+        }
+    }
+
+    private void ApplyCursorLockState(bool locked)
+    {
+        cursorLocked = locked;
+        Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !locked;
+    }
+
+    private void HandleLook()
+    {
+        if (cameraTransform == null) return;
+
+        float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis(mouseYInputName) * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
-
-        // [¼öÁ¤] ¾Æ·¡¸¦ º¸´Â °¢µµ¸¦ 70µµ·Î Á¦ÇÑÇÏ¿© ¸öÅë ¶Õ¸² ¹æÁö
         xRotation = Mathf.Clamp(xRotation, minViewAngle, maxViewAngle);
 
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
 
-        // 2. ÀÌµ¿ ·ÎÁ÷
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+    private void HandleMovementAndAnimation()
+    {
+        if (controller == null) return;
 
-        Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        float x = Input.GetAxis(horizontalInputName);
+        float z = Input.GetAxis(verticalInputName);
 
-        bool isMoving = (x != 0 || z != 0);
-        if (animator != null)
+        Vector3 move = (transform.right * x) + (transform.forward * z);
+
+        if (useSimpleMove)
         {
-            animator.SetBool("isMoving", isMoving);
+            // SimpleMove applies gravity and deltaTime internally.
+            controller.SimpleMove(move * movementSpeed);
+        }
+        else
+        {
+            controller.Move(move * movementSpeed * Time.deltaTime);
+        }
+
+        if (animator != null && !string.IsNullOrWhiteSpace(isMovingBoolName))
+        {
+            bool isMoving = !Mathf.Approximately(x, 0f) || !Mathf.Approximately(z, 0f);
+            animator.SetBool(isMovingBoolName, isMoving);
         }
     }
 }

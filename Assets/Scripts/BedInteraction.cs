@@ -26,6 +26,13 @@ public class BedInteraction : MonoBehaviour
 
     void Start()
     {
+        // If nightmarePlayer is not assigned, try to find it by name
+        if (nightmarePlayer == null)
+        {
+            GameObject found = GameObject.Find("NightMarePlayer");
+            if (found != null) nightmarePlayer = found;
+        }
+
         if (walkingPlayer != null) walkingPlayer.SetActive(true);
         if (nightmarePlayer != null) nightmarePlayer.SetActive(false);
         if (nightmareHUD != null) nightmareHUD.SetActive(false); // ½ÃÀÛÇÒ ¶§ HUD ²û

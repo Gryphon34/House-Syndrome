@@ -69,12 +69,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2271036430416539205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8decf0f1ddf210d45b3a28656cf18716, type: 3}
+  m_Script: {fileID: 11500000, guid: c5977814f2d07bc4aa1af440fbcb3c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalInputName: Horizontal
   verticalInputName: Vertical
   movementSpeed: 2
+  useSimpleMove: 1
+  mouseXInputName: Mouse X
+  mouseYInputName: Mouse Y
+  mouseSensitivity: 150
+  cameraTransform: {fileID: 2271036430514701900}
+  minViewAngle: -90
+  maxViewAngle: 70
+  isMovingBoolName: isMoving
 --- !u!1 &2271036430514701901
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +94,6 @@ GameObject:
   - component: {fileID: 2271036430514701900}
   - component: {fileID: 2271036430514701937}
   - component: {fileID: 2271036430514701938}
-  - component: {fileID: 2271036430514701939}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -168,22 +175,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2271036430514701901}
   m_Enabled: 1
---- !u!114 &2271036430514701939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2271036430514701901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b232818755d59e4489b2d74edb2c0e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseXInputName: Mouse X
-  mouseYInputName: Mouse Y
-  mouseSensitivity: 150
-  playerBody: {fileID: 2271036430416539210}
 --- !u!1 &6960614526942748821
 GameObject:
   m_ObjectHideFlags: 0
