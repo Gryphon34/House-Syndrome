@@ -66,6 +66,9 @@ public class ItemInteraction : MonoBehaviour
         interactPromptUI.SetActive(false);
     }
 
+    /// <summary>E키 상호작용 후에도 씬에 남겨둘 아이템 이름 (사라지지 않음)</summary>
+    public static readonly string[] PersistentItemNames = { "bathroom_handle" };
+
     void Collect(Item item)
     {
         collectedItems.Add(item.itemName);
@@ -75,7 +78,18 @@ public class ItemInteraction : MonoBehaviour
             logText.text = $"'{item.itemName}'??(??) ??????.\n{item.description}";
             Invoke("ClearLog", 4f); // 4?? ?? ??? ????
         }
-        Destroy(item.gameObject); // ?????? ?????? ????
+
+        bool keepInScene = false;
+        for (int i = 0; i < PersistentItemNames.Length; i++)
+        {
+            if (item.itemName == PersistentItemNames[i])
+            {
+                keepInScene = true;
+                break;
+            }
+        }
+        if (!keepInScene)
+            Destroy(item.gameObject);
     }
 
     [Header("Phone - E? ??? 10? ? ?? ??")]

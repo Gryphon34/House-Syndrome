@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// ???? ????? ??: E?? ?? ?? ? ?? ??, ?? ? I?? ???? DayManager? ?? ??.
+/// ?? ????? ??? DayManager? ??.
+/// </summary>
 public class BedInteraction : MonoBehaviour
 {
     [Header("Player Objects")]
@@ -9,8 +13,8 @@ public class BedInteraction : MonoBehaviour
     public GameObject nightmarePlayer;
 
     [Header("Cameras")]
-    public Camera walkingCamera;    // 탐사용 카메라를 직접 연결하세요.
-    public Camera nightmareCamera;  // 가위눌림용 카메라를 직접 연결하세요.
+    public Camera walkingCamera;    // ???? ???? ???? ?????????.
+    public Camera nightmareCamera;  // ?????????? ???? ???? ?????????.
 
     [Header("UI & Effect")]
     public Image fadeImage;
@@ -22,7 +26,7 @@ public class BedInteraction : MonoBehaviour
 
     private bool isTransitioning = false;
 
-    public GameObject nightmareHUD; // 날짜와 게이지가 들어있는 부모 오브젝트
+    public GameObject nightmareHUD; // ????? ???????? ?????? ??? ???????
 
     void Start()
     {
@@ -35,14 +39,29 @@ public class BedInteraction : MonoBehaviour
 
         if (walkingPlayer != null) walkingPlayer.SetActive(true);
         if (nightmarePlayer != null) nightmarePlayer.SetActive(false);
-        if (nightmareHUD != null) nightmareHUD.SetActive(false); // 시작할 때 HUD 끔
+        if (nightmareHUD != null) nightmareHUD.SetActive(false); // ?????? ?? HUD ??
         if (fadeImage != null) fadeImage.color = new Color(0, 0, 0, 0);
     }
 
     void Update()
     {
-        // 이미 가위눌림 모드이거나 전환 중이면 체크 안 함
-        if (isTransitioning || (nightmarePlayer != null && nightmarePlayer.activeSelf)) return;
+        if (isTransitioning) return;
+
+        // ??(NightMare) ??: I? = ?? ?? ???, O? = 1??? ??
+        if (nightmarePlayer != null && nightmarePlayer.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+                StartCoroutine(WakeUpToNextDay());
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                if (nightmareHUD != null) nightmareHUD.SetActive(false);
+                nightmarePlayer.SetActive(false);
+                if (walkingPlayer != null) walkingPlayer.SetActive(true);
+                if (DayManager.Instance != null)
+                    DayManager.Instance.ResetToDay1();
+            }
+            return;
+        }
 
         CheckBed();
     }
@@ -51,7 +70,7 @@ public class BedInteraction : MonoBehaviour
     {
         if (walkingCamera == null) return;
 
-        // 활성화된 탐사용 카메라 기준으로 레이 발사
+        // ?????? ???? ???? ???????? ???? ???
         Ray ray = walkingCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
@@ -72,7 +91,7 @@ public class BedInteraction : MonoBehaviour
         isTransitioning = true;
         if (sleepPromptUI != null) sleepPromptUI.SetActive(false);
 
-        // 1. 암전 (Fade Out)
+        // 1. ???? (Fade Out)
         float timer = 0f;
         while (timer < 1f)
         {
@@ -83,18 +102,53 @@ public class BedInteraction : MonoBehaviour
 
         walkingPlayer.SetActive(false);
         nightmarePlayer.SetActive(true);
-        if (nightmareHUD != null) nightmareHUD.SetActive(true); // 가위눌림 시작 시 HUD 켬
+        if (nightmareHUD != null) nightmareHUD.SetActive(true); // ???????? ???? ?? HUD ??
 
-        // 씬 전환 시간 벌기
+        // ?? ??? ??? ????
         yield return new WaitForSeconds(1f);
 
-        // 3. 다시 밝아짐 (Fade In)
+        // 3. ??? ????? (Fade In)
         while (timer > 0f)
         {
             timer -= Time.deltaTime;
             if (fadeImage != null) fadeImage.color = new Color(0, 0, 0, timer);
             yield return null;
         }
+        isTransitioning = false;
+    }
+
+    /// <summary>
+    /// ?? ???? I? ?? ?: ?? ?? ??, ?? ???? ??, Walking ????? ??.
+    /// DayManager? ?? ?? ??. DayManager.player?? Walking ???? Transform? ?????.
+    /// </summary>
+    IEnumerator WakeUpToNextDay()
+    {
+        isTransitioning = true;
+        if (nightmareHUD != null) nightmareHUD.SetActive(false);
+
+        float timer = 0f;
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime;
+            if (fadeImage != null) fadeImage.color = new Color(0, 0, 0, timer);
+            yield return null;
+        }
+
+        if (DayManager.Instance != null)
+            DayManager.Instance.AdvanceDayFromNightmare();
+
+        if (nightmarePlayer != null) nightmarePlayer.SetActive(false);
+        if (walkingPlayer != null) walkingPlayer.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        while (timer > 0f)
+        {
+            timer -= Time.deltaTime;
+            if (fadeImage != null) fadeImage.color = new Color(0, 0, 0, timer);
+            yield return null;
+        }
+
         isTransitioning = false;
     }
 }

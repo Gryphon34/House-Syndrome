@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform;
 
     [Header("Look Settings")]
-    public float minViewAngle = -90f; // ���� ���� ����
-    public float maxViewAngle = 70f;  // �Ʒ��� ���� ���� (���� 90���� 70���� ����)
+    public float minViewAngle = -90f; // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+    public float maxViewAngle = 70f;
 
     private float xRotation = 0f;
     private CharacterController controller;
