@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -23,6 +23,15 @@ public class PlayerController : MonoBehaviour
 
     private float xRotation = 0f;
     private CharacterController controller;
+
+    /// <summary> 카메라 현재 피치를 xRotation에 반영. (CameraDownLook 애니 종료 후 동기화용) </summary>
+    public void SyncPitchFromCamera()
+    {
+        if (cameraTransform == null) return;
+        float x = cameraTransform.localEulerAngles.x;
+        if (x > 180f) x -= 360f;
+        xRotation = Mathf.Clamp(x, minViewAngle, maxViewAngle);
+    }
     private Animator animator;
     private bool cursorLocked = true;
     [Header("Animation")]
@@ -87,7 +96,9 @@ public class PlayerController : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, minViewAngle, maxViewAngle);
 
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        // 아래 보기 애니메이션 중에는 카메라 피치를 건드리지 않음 (애니 종료 후 다시 적용됨)
+        if (!CameraDownLook.IsAnimating)
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 

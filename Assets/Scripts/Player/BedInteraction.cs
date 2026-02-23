@@ -57,8 +57,8 @@ public class BedInteraction : MonoBehaviour
                 if (nightmareHUD != null) nightmareHUD.SetActive(false);
                 nightmarePlayer.SetActive(false);
                 if (walkingPlayer != null) walkingPlayer.SetActive(true);
-                if (DayManager.Instance != null)
-                    DayManager.Instance.ResetToDay1();
+                if (SpawnManager.Instance != null)
+                    SpawnManager.Instance.ResetToDay1();
             }
             return;
         }
@@ -78,8 +78,17 @@ public class BedInteraction : MonoBehaviour
         {
             if (hit.transform.CompareTag(bedTag))
             {
-                if (sleepPromptUI != null) sleepPromptUI.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E)) StartCoroutine(SwapToNightmare());
+                bool isNight = SpawnManager.Instance != null && SpawnManager.Instance.IsNightTime;
+                bool ruleDone = SleepRuleManager.Instance != null && SleepRuleManager.Instance.CanSleep;
+                if (isNight && ruleDone)
+                {
+                    if (sleepPromptUI != null) sleepPromptUI.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.E)) StartCoroutine(SwapToNightmare());
+                }
+                else
+                {
+                    if (sleepPromptUI != null) sleepPromptUI.SetActive(false);
+                }
                 return;
             }
         }
@@ -134,8 +143,8 @@ public class BedInteraction : MonoBehaviour
             yield return null;
         }
 
-        if (DayManager.Instance != null)
-            DayManager.Instance.AdvanceDayFromNightmare();
+        if (SpawnManager.Instance != null)
+            SpawnManager.Instance.AdvanceDayFromNightmare();
 
         if (nightmarePlayer != null) nightmarePlayer.SetActive(false);
         if (walkingPlayer != null) walkingPlayer.SetActive(true);

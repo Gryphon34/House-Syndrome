@@ -6,12 +6,15 @@ using UnityEngine;
 public class DayNightCycle : MonoBehaviour
 {
     [Header("Day/Night Cycle Settings")]
+    [Tooltip("하루를 0~1로 표현한 현재 시각. 0=자정, 0.25=아침, 0.5=정오, 0.75=저녁. 낮에만 증가하고 밤이 되면 멈춤.")]
     public float time;
+    [Tooltip("낮이 흐르는 실제 시간(초). 예: 300이면 낮이 5분 동안 진행된 뒤 밤이 됨.")]
     public float fullDayLength;
+    [Tooltip("게임 시작 시 time 초기값 (0~1). 예: 0.4 = 낮 중반쯤에서 시작.")]
     public float startTime = 0.4f;
-    [Tooltip("0~1. 낮 시작 시각 (이때부터 낮)")]
+    [Tooltip("0~1. 이 값 이상이면 '낮'으로 간주되고 시간이 흐름. (아침 시작 시각)")]
     public float dayStartTime = 0.25f;
-    [Tooltip("0~1. 밤 시작 시각 (이때부터 다음 날 시작 전까지 밤 유지)")]
+    [Tooltip("0~1. 이 값에 도달하면 '밤'이 되고 시간이 멈춤. 잠자기 가능. (저녁/밤 시작 시각)")]
     public float nightStartTime = 0.75f;
     private float timeRate;
     public Vector3 noon;

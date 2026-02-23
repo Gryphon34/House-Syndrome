@@ -6,11 +6,11 @@ using System.Collections;
 /// 침대에서 깨어났을 때의 스폰 위치·날짜 진행·Day UI만 담당.
 /// 침대 상호작용(레이캐스트, E/I키)은 BedInteraction이 담당.
 /// </summary>
-public class DayManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
-    public static DayManager Instance { get; private set; }
+    public static SpawnManager Instance { get; private set; }
 
-    [Header("Day Settings")]
+    [Header("Spawn Settings")]
     public int currentDay = 1;
 
     [Header("Spawn (침대에서 깨어났을 때)")]
@@ -24,6 +24,9 @@ public class DayManager : MonoBehaviour
 
     [Header("Day-Night Cycle")]
     public DayNightCycle dayNightCycle;
+
+    [Header("Day Map (1~7일차별 맵 활성화)")]
+    public DayMapManager dayMapManager;
 
     /// <summary> 현재 밤인지. DayNightCycle에서 조회. </summary>
     public bool IsNightTime => dayNightCycle != null && dayNightCycle.IsNightTime;
@@ -49,6 +52,8 @@ public class DayManager : MonoBehaviour
         }
 
         ShowDayUI();
+        if (dayMapManager != null)
+            dayMapManager.RefreshMapsForCurrentDay();
     }
 
     /// <summary>
@@ -68,6 +73,7 @@ public class DayManager : MonoBehaviour
         ShowDayUI();
         OnDayChanged();
         if (dayNightCycle != null) dayNightCycle.ResetToDay();
+        if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
 
         isSleeping = false;
         Debug.Log($"<color=cyan>Day {currentDay} 시작 (침대에서 깨어남)</color>");
@@ -90,6 +96,7 @@ public class DayManager : MonoBehaviour
         ShowDayUI();
         OnDayChanged();
         if (dayNightCycle != null) dayNightCycle.ResetToDay();
+        if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
 
         isSleeping = false;
         Debug.Log("<color=cyan>Day 1로 리셋</color>");
@@ -170,6 +177,8 @@ public class DayManager : MonoBehaviour
 
     protected virtual void OnDayChanged()
     {
+        if (dayMapManager != null)
+            dayMapManager.RefreshMapsForCurrentDay();
     }
 
     public int GetCurrentDay()

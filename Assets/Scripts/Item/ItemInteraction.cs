@@ -47,6 +47,8 @@ public class ItemInteraction : MonoBehaviour
             {
                 if (item.itemName == PhonePlace.PhoneItemName)
                     HidePhone(item);
+                else if (IsHandleItem(item.itemName))
+                    ToggleHandleObject();
                 else
                     Collect(item);
             }
@@ -67,7 +69,41 @@ public class ItemInteraction : MonoBehaviour
     }
 
     /// <summary>E키 상호작용 후에도 씬에 남겨둘 아이템 이름 (사라지지 않음)</summary>
-    public static readonly string[] PersistentItemNames = { "bathroom_handle" };
+    public static readonly string[] PersistentItemNames = { "bathroom_handle"};
+
+    /// <summary>이름이 handle(또는 bathroom_handle)인 아이템은 E키로 지정 오브젝트 활성/비활성 토글.</summary>
+    public const string BathroomHandleItemName = "bathroom_handle";
+
+    [Header("Handle - E키로 표시/숨김 토글")]
+    [Tooltip("이름이 handle인 아이템과 E키 상호작용 시 켜졌다 꺼졌다 할 오브젝트들 (복제한 prefab 인스턴스 등 모두 추가)")]
+    public List<GameObject> objectsToToggleWithHandle = new List<GameObject>();
+
+    static bool IsHandleItem(string itemName)
+    {
+        return itemName == BathroomHandleItemName;
+    }
+
+    void ToggleHandleObject()
+    {
+        if (objectsToToggleWithHandle == null || objectsToToggleWithHandle.Count == 0) return;
+        bool setActive = true;
+        for (int i = 0; i < objectsToToggleWithHandle.Count; i++)
+        {
+            if (objectsToToggleWithHandle[i] != null)
+            {
+                setActive = !objectsToToggleWithHandle[i].activeSelf;
+                break;
+            }
+        }
+        for (int i = 0; i < objectsToToggleWithHandle.Count; i++)
+        {
+            if (objectsToToggleWithHandle[i] != null)
+                objectsToToggleWithHandle[i].SetActive(setActive);
+        }
+
+        if (SleepRuleManager.Instance != null)
+            SleepRuleManager.Instance.RecordBathroomHandleToggle(setActive);
+    }
 
     void Collect(Item item)
     {
