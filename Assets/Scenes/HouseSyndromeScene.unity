@@ -28768,14 +28768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  currentDay: 1
-  spawnPoints: []
-  player: {fileID: 0}
-  dayText: {fileID: 0}
-  displayDuration: 2
-  fadeSpeed: 1
-  dayNightCycle: {fileID: 0}
-  dayMapManager: {fileID: 0}
 --- !u!1 &486018135
 GameObject:
   m_ObjectHideFlags: 0
@@ -48760,16 +48752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c014650367425c540b793807160e699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
-  currentDay: 1
-  spawnPoints: []
-  player: {fileID: 0}
-  dayText: {fileID: 0}
-  displayDuration: 2
-  fadeSpeed: 1
-  dayNightCycle: {fileID: 0}
-  waterLeakByDay: []
-  dayTextCanvasGroup: {fileID: 0}
-  isSleeping: 0
 --- !u!1 &838147701
 GameObject:
   m_ObjectHideFlags: 0
@@ -56076,7 +56058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3b23e5fbd66f474ba75aace46fc33b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.421
+      value: 17.565
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d3b23e5fbd66f474ba75aace46fc33b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -68382,14 +68364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  currentDay: 1
-  spawnPoints: []
-  player: {fileID: 0}
-  dayText: {fileID: 0}
-  displayDuration: 2
-  fadeSpeed: 1
-  dayNightCycle: {fileID: 0}
-  dayMapManager: {fileID: 0}
 --- !u!1 &1177073160
 GameObject:
   m_ObjectHideFlags: 0
@@ -108176,7 +108150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866498417}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8054d50cd32527848ada8b0cbeb80219, type: 3}
   m_Name: 
@@ -111603,14 +111577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  currentDay: 1
-  spawnPoints: []
-  player: {fileID: 0}
-  dayText: {fileID: 0}
-  displayDuration: 2
-  fadeSpeed: 1
-  dayNightCycle: {fileID: 0}
-  dayMapManager: {fileID: 0}
 --- !u!1 &1921420547
 GameObject:
   m_ObjectHideFlags: 0

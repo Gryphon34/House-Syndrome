@@ -80,6 +80,31 @@ public class SpawnManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 개발용: 지정한 일차로 이동. 숫자키 스킵 등에서 호출.
+    /// </summary>
+    public void GoToDay(int day)
+    {
+        if (isSleeping) return;
+        if (spawnPoints == null || spawnPoints.Length == 0) return;
+
+        int d = Mathf.Clamp(day, 1, spawnPoints.Length);
+        isSleeping = true;
+        currentDay = d;
+
+        if (DifficultyManager.Instance != null)
+            DifficultyManager.Instance.currentDay = currentDay;
+
+        TeleportPlayerToSpawn();
+        ShowDayUI();
+        OnDayChanged();
+        if (dayNightCycle != null) dayNightCycle.ResetToDay();
+        if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
+
+        isSleeping = false;
+        Debug.Log($"<color=yellow>[Dev] Day {currentDay}로 이동</color>");
+    }
+
+    /// <summary>
     /// O키 등으로 Day 1로 돌아갈 때 호출. 날짜 1로 고정 후 Day1 스폰 위치로 이동 + Day UI + 낮 리셋.
     /// </summary>
     public void ResetToDay1()
