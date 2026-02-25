@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 침대에서 깨어났을 때의 스폰 위치·날짜 진행·Day UI만 담당.
@@ -209,5 +210,24 @@ public class SpawnManager : MonoBehaviour
     public int GetCurrentDay()
     {
         return currentDay;
+    }
+
+    public void ReturnToPreviousDay()
+    {
+        //날짜를 1일 감소(최소 1일 유지)
+        currentDay = Mathf.Max(1, currentDay - 1);
+
+        //현재 날짜 데이터를 저장하고 씬을 다시 로드
+        SaveDayData();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void SaveDayData()
+    {
+        //DifficultyManager 등 연관된 데이터도 함께 동기화
+        if(DifficultyManager.Instance !=null)
+        {
+            DifficultyManager.Instance.currentDay= currentDay;
+        }
     }
 }
