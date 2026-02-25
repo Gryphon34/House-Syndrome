@@ -56,12 +56,15 @@ public class HandInputSystem : MonoBehaviour
     private int currentIndex = 0;
     private Camera mainCam;
 
+    private EyeBlinkController eyeController;
     void Start()
     {
         // DifficultyManager가 있는지 확인하고 수치 가져오기
         UpdateDifficultyFromManager();
 
         mainCam = Camera.main;
+
+        eyeController=FindFirstObjectByType<EyeBlinkController>();
         if (thumbBone != null) initialThumbRotation = thumbBone.localRotation;
         initialFingerRotations = new Quaternion[fingerBones.Length];
         for (int i = 0; i < fingerBones.Length; i++)
@@ -153,19 +156,18 @@ public class HandInputSystem : MonoBehaviour
 
     void WakeUp()
     {
-        Debug.Log("<color=yellow>가위 탈출 성공!</color>");
-
-        if (DifficultyManager.Instance != null)
+        // 씬에 있는 모든 귀신에게 탈출 성공을 알림
+        NormalGhost[] ghosts = FindObjectsByType<NormalGhost>(FindObjectsSortMode.None);
+        foreach (var ghost in ghosts)
         {
-            DifficultyManager.Instance.NextDay(); // 날짜 증가
+            ghost.OnPlayerWakeUp();
         }
 
-        // [핵심] 다음 날을 위해 게이지를 반드시 초기화해야 합니다.
-        leftGauge = 0;
-        rightGauge = 0;
-
-        // 현재 씬을 다시 로드하여 '다음 날'의 난이도가 적용된 상태로 시작합니다.
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // 기존 탈출 로직 (날짜 증가 등)
+        if (SpawnManager.Instance != null)
+        {
+            SpawnManager.Instance.AdvanceDayFromNightmare();
+        }
     }
 
     void LateUpdate()
@@ -237,30 +239,25 @@ public class HandInputSystem : MonoBehaviour
 
         if (mainCam == null || uiParentGroup == null) return;
 
-        Ray ray = mainCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red);
+        // [수정] 눈이 거의 감긴 상태라면 UI를 아예 표시하지 않음
+        if (eyeController != null && eyeController.eyeOpenAmount < 0.1f)
+        {
+            uiParentGroup.SetActive(false);
+            return;
+        }
 
+        Ray ray = mainCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         bool isLookingAtMe = false;
 
-        // 1. 레이저가 "Hand" 레이어에 맞았는지 확인
+        // 기존 레이캐스트 감지 로직
         if (Physics.Raycast(ray, out hit, rayDistance, handLayer))
         {
-            // 2. 맞은 오브젝트의 이름에 현재 설정된 handSide 문자열이 포함되어 있는지 검사
-            // 예: 스크립트가 Left 설정이고, 맞은 뼈대 이름이 "mixamorig9:LeftHand"이면 통과
             string hitName = hit.transform.name;
-
-            if (handSide == HandSide.Left && hitName.Contains("Left"))
-            {
-                isLookingAtMe = true;
-            }
-            else if (handSide == HandSide.Right && hitName.Contains("Right"))
-            {
-                isLookingAtMe = true;
-            }
+            if (handSide == HandSide.Left && hitName.Contains("Left")) isLookingAtMe = true;
+            else if (handSide == HandSide.Right && hitName.Contains("Right")) isLookingAtMe = true;
         }
 
-        // 일치할 때만 해당 UI 그룹(Left_UI_Group 또는 Right_UI_Group)을 활성화
         uiParentGroup.SetActive(isLookingAtMe);
     }
 
