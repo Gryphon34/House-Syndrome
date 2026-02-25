@@ -88,7 +88,7 @@ public class MoveObjectController : MonoBehaviour
 			Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 			RaycastHit hit;
 
-			if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, reachRange, rayLayerMask))
+			if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, reachRange, rayLayerMask, QueryTriggerInteraction.Collide))
 			{
 				MoveableObject moveableObject = null;
 				if (!isEqualToParent(hit.collider, out moveableObject))
