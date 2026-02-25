@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class MoveObjectController : MonoBehaviour 
 {
-	public float reachRange = 1.8f;			
+	public float reachRange = 1.8f;
+
+	[Tooltip("체크 시 상호작용/레이캐스트 동작을 로그로 출력")]
+	public bool debugMode = false;
 
 	private Animator anim;
 	private Camera fpsCam;
@@ -16,33 +19,45 @@ public class MoveObjectController : MonoBehaviour
 	private GUIStyle guiStyle;
 	private string msg;
 
-	private int rayLayerMask; 
-
+	private int rayLayerMask;
+	private bool useInteractLayer;
 
 	void Start()
 	{
-		//Initialize moveDrawController if script is enabled.
 		player = GameObject.FindGameObjectWithTag("Player");
+		if (player == null && debugMode) Debug.LogWarning("[MoveObjectController] Tag 'Player'인 오브젝트가 없습니다.");
 
 		fpsCam = Camera.main;
-		if (fpsCam == null)	//a reference to Camera is required for rayasts
+		if (fpsCam == null)
 		{
-			Debug.LogError("A camera tagged 'MainCamera' is missing.");
+			Debug.LogError("[MoveObjectController] Tag가 'MainCamera'인 카메라가 없습니다.");
+			return;
 		}
 
-		//create AnimatorOverrideController to re-use animationController for sliding draws.
-		anim = GetComponent<Animator>(); 
-		anim.enabled = false;  //disable animation states by default.  
+		anim = GetComponent<Animator>();
+		if (anim == null)
+		{
+			Debug.LogError("[MoveObjectController] 같은 오브젝트에 Animator가 없습니다.", gameObject);
+			return;
+		}
+		anim.enabled = false;
 
-		//the layer used to mask raycast for interactable objects only
-		LayerMask iRayLM = LayerMask.NameToLayer("InteractRaycast");
-		rayLayerMask = 1 << iRayLM.value;  
+		int iRayLM = LayerMask.NameToLayer("InteractRaycast");
+		if (iRayLM >= 0)
+		{
+			rayLayerMask = 1 << iRayLM;
+			useInteractLayer = true;
+		}
+		else
+		{
+			rayLayerMask = ~0;
+			useInteractLayer = false;
+			if (debugMode) Debug.LogWarning("[MoveObjectController] 'InteractRaycast' 레이어가 없어 모든 레이어를 대상으로 레이캐스트합니다.");
+		}
 
-		//setup GUI style settings for user prompts
 		setupGui();
-
 	}
-		
+
 	void OnTriggerEnter(Collider other)
 	{		
 		if (other.gameObject == player)		//player has collided with trigger
@@ -65,47 +80,59 @@ public class MoveObjectController : MonoBehaviour
 
 
 	void Update()
-	{		
-		if (playerEntered)
-		{	
+	{
+		if (fpsCam == null || anim == null) return;
 
-			//center point of viewport in World space.
-			Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f,0.5f,0f));
+		if (playerEntered)
+		{
+			Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 			RaycastHit hit;
 
-			//if raycast hits a collider on the rayLayerMask
-			if (Physics.Raycast(rayOrigin,fpsCam.transform.forward, out hit,reachRange,rayLayerMask))
+			if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, reachRange, rayLayerMask))
 			{
 				MoveableObject moveableObject = null;
-				//is the object of the collider player is looking at the same as me?
 				if (!isEqualToParent(hit.collider, out moveableObject))
-				{	//it's not so return;
 					return;
-				}
-					
-				if (moveableObject != null)		//hit object must have MoveableDraw script attached
+
+				if (moveableObject != null)
 				{
 					showInteractMsg = true;
 					string animBoolNameNum = animBoolName + moveableObject.objectNumber.ToString();
 
-					bool isOpen = anim.GetBool(animBoolNameNum);	//need current state for message.
+					bool hasParam = HasAnimatorBool(anim, animBoolNameNum);
+					if (debugMode && !hasParam)
+						Debug.LogWarning("[MoveObjectController] Animator에 Bool 파라미터 '" + animBoolNameNum + "'가 없습니다. Animator Controller에 추가하세요.", gameObject);
+
+					bool isOpen = hasParam ? anim.GetBool(animBoolNameNum) : false;
 					msg = getGuiMsg(isOpen);
 
 					if (Input.GetKeyUp(KeyCode.E) || Input.GetButtonDown("Fire1"))
 					{
+						if (debugMode) Debug.Log("[MoveObjectController] 상호작용 키 입력, isOpen=" + isOpen + ", param=" + animBoolNameNum);
 						anim.enabled = true;
-						anim.SetBool(animBoolNameNum,!isOpen);
-						msg = getGuiMsg(!isOpen);
+						if (hasParam)
+						{
+							anim.SetBool(animBoolNameNum, !isOpen);
+							msg = getGuiMsg(!isOpen);
+						}
 					}
-
 				}
 			}
 			else
 			{
 				showInteractMsg = false;
+				if (debugMode && (Input.GetKeyUp(KeyCode.E) || Input.GetButtonDown("Fire1")))
+					Debug.Log("[MoveObjectController] E 키 눌림 but 레이캐스트에 히트 없음 (거리/방향/레이어 확인)");
 			}
 		}
+	}
 
+	static bool HasAnimatorBool(Animator a, string name)
+	{
+		if (a == null || string.IsNullOrEmpty(name)) return false;
+		foreach (var p in a.parameters)
+			if (p.type == AnimatorControllerParameterType.Bool && p.name == name) return true;
+		return false;
 	}
 
 	//is current gameObject equal to the gameObject of other.  check its parents

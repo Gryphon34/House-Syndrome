@@ -908,6 +908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &28990197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,6 +1542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &35210894
 Animator:
   serializedVersion: 7
@@ -2003,6 +2005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &46932605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2177,6 +2180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &52825752
 Animator:
   serializedVersion: 7
@@ -2628,6 +2632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &60082491
 Animator:
   serializedVersion: 7
@@ -3298,6 +3303,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 282083853}
   - {fileID: 1386206956}
   - {fileID: 353611207}
   - {fileID: 12411546}
@@ -3504,6 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &76810718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6056,6 +6063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &126335930
 Animator:
   serializedVersion: 7
@@ -7292,6 +7300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &143251684
 Animator:
   serializedVersion: 7
@@ -9972,8 +9981,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1496168473}
   - {fileID: 72917603}
-  - {fileID: 1864023219}
   m_Father: {fileID: 432453216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205423591
@@ -10407,7 +10416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 213321539}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grp_doorR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10422,7 +10431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213321538}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5712818, y: 1.0518062, z: 0.31746882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12331,6 +12340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &241596848
 Animator:
   serializedVersion: 7
@@ -13265,6 +13275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &254083322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13437,6 +13448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &255922114
 Animator:
   serializedVersion: 7
@@ -14308,6 +14320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &278049592
 Animator:
   serializedVersion: 7
@@ -14351,6 +14364,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.76, z: 0.73}
   m_Center: {x: 0, y: 0.46, z: 0.61}
+--- !u!4 &282083853 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+  m_PrefabInstance: {fileID: 1670897175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &283382176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17592,6 +17610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &328395305
 Animator:
   serializedVersion: 7
@@ -19478,7 +19497,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5471146182848992024, guid: 38eb59ff3938cc742af7f0e5dd48798b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.8265
+      value: 28.93
       objectReference: {fileID: 0}
     - target: {fileID: 5471146182848992024, guid: 38eb59ff3938cc742af7f0e5dd48798b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19486,7 +19505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471146182848992024, guid: 38eb59ff3938cc742af7f0e5dd48798b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.202
+      value: -6.712
       objectReference: {fileID: 0}
     - target: {fileID: 5471146182848992024, guid: 38eb59ff3938cc742af7f0e5dd48798b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20731,6 +20750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &365973336
 Animator:
   serializedVersion: 7
@@ -21180,6 +21200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &371420837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21710,6 +21731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &379919205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23246,6 +23268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &407375960
 Animator:
   serializedVersion: 7
@@ -23381,6 +23404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &407963714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24921,6 +24945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &426924851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27075,6 +27100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &457192827
 Animator:
   serializedVersion: 7
@@ -27379,6 +27405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &462448937
 Animator:
   serializedVersion: 7
@@ -27963,6 +27990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &472706298
 Animator:
   serializedVersion: 7
@@ -28793,6 +28821,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  currentDay: 1
+  spawnPoints: []
+  player: {fileID: 0}
+  dayText: {fileID: 0}
+  displayDuration: 2
+  fadeSpeed: 1
+  dayNightCycle: {fileID: 0}
+  dayMapManager: {fileID: 0}
 --- !u!1 &486018135
 GameObject:
   m_ObjectHideFlags: 0
@@ -29816,6 +29852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &499842722
 Animator:
   serializedVersion: 7
@@ -31896,6 +31933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &535429985
 Animator:
   serializedVersion: 7
@@ -32858,6 +32896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &551130347
 Animator:
   serializedVersion: 7
@@ -32954,6 +32993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &553420112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36516,6 +36556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &614134478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38216,7 +38257,7 @@ GameObject:
   - component: {fileID: 647717178}
   - component: {fileID: 647717177}
   - component: {fileID: 647717176}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40126,6 +40167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &679837970
 Animator:
   serializedVersion: 7
@@ -41041,6 +41083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &704126490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44801,6 +44844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &769599529
 Animator:
   serializedVersion: 7
@@ -45683,6 +45727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &777282373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47915,6 +47960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &815956113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48441,6 +48487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &830829851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49295,6 +49342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &848155386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49731,6 +49779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &853890937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51700,6 +51749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &885193052
 Animator:
   serializedVersion: 7
@@ -54486,6 +54536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &932411309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59390,6 +59441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!65 &1017256167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59840,6 +59892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &1024874048
 Animator:
   serializedVersion: 7
@@ -62448,6 +62501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1060652745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62892,6 +62946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &1067577425
 Animator:
   serializedVersion: 7
@@ -63243,6 +63298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1074739548
 Animator:
   serializedVersion: 7
@@ -66632,6 +66688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1149904058
 Animator:
   serializedVersion: 7
@@ -67717,6 +67774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1168527650
 Animator:
   serializedVersion: 7
@@ -68048,6 +68106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1170849593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68336,6 +68395,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  currentDay: 1
+  spawnPoints: []
+  player: {fileID: 0}
+  dayText: {fileID: 0}
+  displayDuration: 2
+  fadeSpeed: 1
+  dayNightCycle: {fileID: 0}
+  dayMapManager: {fileID: 0}
 --- !u!1 &1177073160
 GameObject:
   m_ObjectHideFlags: 0
@@ -68961,6 +69028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1185927707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70043,6 +70111,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201166175}
   m_Mesh: {fileID: 4300000, guid: 2c3e54670f1114c709157026c232cfeb, type: 3}
+--- !u!1001 &1201764883
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 204292787}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 80.555
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 80.555
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 80.555
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.212
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.833
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.649
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6506723
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6506722
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.2768134
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.2768133
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 46.092
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+      propertyPath: m_Name
+      value: Meshy_AI_Peekaboo_in_a_Box_0223135417_texture
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
 --- !u!1 &1203016284
 GameObject:
   m_ObjectHideFlags: 0
@@ -71696,6 +71833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1230626413
 Animator:
   serializedVersion: 7
@@ -72057,6 +72195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1234559073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73456,6 +73595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1255012522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74137,6 +74277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1268454804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74792,8 +74933,8 @@ GameObject:
   - component: {fileID: 1276932178}
   - component: {fileID: 1276932177}
   - component: {fileID: 1276932176}
-  m_Layer: 8
-  m_Name: PFB_Closet
+  m_Layer: 6
+  m_Name: glitch_PFB_Closet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74812,6 +74953,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1517406722}
   - {fileID: 2015749408}
   m_Father: {fileID: 600137888}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -74871,6 +75013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1276932179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75263,6 +75406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1288196749
 Animator:
   serializedVersion: 7
@@ -79029,6 +79173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &1380682907
 Animator:
   serializedVersion: 7
@@ -79549,7 +79694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8906425250074482598, guid: 500323bccd493e245b4849779f9e4d64, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2190616
+      value: 0.9555005
       objectReference: {fileID: 0}
     - target: {fileID: 8906425250074482598, guid: 500323bccd493e245b4849779f9e4d64, type: 3}
       propertyPath: m_LocalScale.z
@@ -79557,15 +79702,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8906425250074482598, guid: 500323bccd493e245b4849779f9e4d64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.597
+      value: 28.796
       objectReference: {fileID: 0}
     - target: {fileID: 8906425250074482598, guid: 500323bccd493e245b4849779f9e4d64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.824
+      value: 9.2045
       objectReference: {fileID: 0}
     - target: {fileID: 8906425250074482598, guid: 500323bccd493e245b4849779f9e4d64, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.043
+      value: -7.502
       objectReference: {fileID: 0}
     - target: {fileID: 8906425250074482598, guid: 500323bccd493e245b4849779f9e4d64, type: 3}
       propertyPath: m_LocalRotation.w
@@ -80301,6 +80446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1402920968
 Animator:
   serializedVersion: 7
@@ -81353,6 +81499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &1421032334
 Animator:
   serializedVersion: 7
@@ -82511,7 +82658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1441057678}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grp_doorL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82526,7 +82673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441057677}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.59204257, y: 1.0518062, z: 0.31766778}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -82608,6 +82755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1441429104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83863,6 +84011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1468974379
 Animator:
   serializedVersion: 7
@@ -84507,6 +84656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1480555048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85305,6 +85455,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495330507}
   m_Mesh: {fileID: 4300002, guid: 6d218f58f8d994088bdbda6c916f467f, type: 3}
+--- !u!4 &1496168473 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 34a073585b2af9445bbcb8be260def36, type: 3}
+  m_PrefabInstance: {fileID: 1201764883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1496601693
 GameObject:
   m_ObjectHideFlags: 0
@@ -86743,6 +86898,80 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517004279}
   m_Mesh: {fileID: 4300000, guid: fc85b0ed6feee4d46a876935af58e858, type: 3}
+--- !u!1001 &1517406721
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1276932175}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 72.50452
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 72.50452
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 72.50452
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5951232
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.80363446
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1.4210855e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -1.4210855e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -106.957
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+      propertyPath: m_Name
+      value: "\uC758\uC0AC\uAC00\uC6B4_glitch"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+--- !u!4 &1517406722 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6f47484d83d15f9478c4a14a5c61b050, type: 3}
+  m_PrefabInstance: {fileID: 1517406721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1517777511
 GameObject:
   m_ObjectHideFlags: 0
@@ -86904,6 +87133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1520072759
 Animator:
   serializedVersion: 7
@@ -88742,7 +88972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -90584,6 +90814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1564467814
 Animator:
   serializedVersion: 7
@@ -92429,6 +92660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &1597273711
 Animator:
   serializedVersion: 7
@@ -92707,6 +92939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1603377147
 Animator:
   serializedVersion: 7
@@ -93940,6 +94173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1616282749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97141,6 +97375,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669586827}
   m_CullTransparentMesh: 1
+--- !u!1001 &1670897175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 72917603}
+    m_Modifications:
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3089
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0301167
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30.175999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.5631
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.2418
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.80720717
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5902682
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 72.352
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312198631143287708, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022513274167853266, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
+      propertyPath: m_Name
+      value: Box 2 (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 173fd9777cd281e4b8dfc3c91d1abbd3, type: 3}
 --- !u!1 &1672148608
 GameObject:
   m_ObjectHideFlags: 0
@@ -99057,6 +99356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1709139213
 Animator:
   serializedVersion: 7
@@ -100671,6 +100971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1732825672
 Animator:
   serializedVersion: 7
@@ -100980,6 +101281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1736091840
 Animator:
   serializedVersion: 7
@@ -101111,6 +101413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1740630679
 Animator:
   serializedVersion: 7
@@ -102149,6 +102452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1756625988
 Animator:
   serializedVersion: 7
@@ -102702,6 +103006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1767205619
 Animator:
   serializedVersion: 7
@@ -105515,6 +105820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1818521516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107789,6 +108095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1858178624
 Animator:
   serializedVersion: 7
@@ -107978,118 +108285,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1864023218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1864023219}
-  - component: {fileID: 1864023222}
-  - component: {fileID: 1864023221}
-  - component: {fileID: 1864023220}
-  m_Layer: 0
-  m_Name: glitch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1864023219
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864023218}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.819, y: 9.646, z: -8.143}
-  m_LocalScale: {x: 0.77259576, y: 0.77259576, z: 0.77259576}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 204292787}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1864023220
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864023218}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1864023221
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864023218}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1864023222
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864023218}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1866498417
 GameObject:
   m_ObjectHideFlags: 0
@@ -109161,6 +109356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1880289497
 Animator:
   serializedVersion: 7
@@ -110535,6 +110731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1902134140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111282,7 +111479,7 @@ GameObject:
   - component: {fileID: 1915484394}
   - component: {fileID: 1915484393}
   - component: {fileID: 1915484392}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: doorR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111556,6 +111753,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  currentDay: 1
+  spawnPoints: []
+  player: {fileID: 0}
+  dayText: {fileID: 0}
+  displayDuration: 2
+  fadeSpeed: 1
+  dayNightCycle: {fileID: 0}
+  dayMapManager: {fileID: 0}
 --- !u!1 &1921420547
 GameObject:
   m_ObjectHideFlags: 0
@@ -111630,6 +111835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1921420551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111847,6 +112053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &1922837017
 Animator:
   serializedVersion: 7
@@ -114674,6 +114881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &1977693892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116609,7 +116817,7 @@ GameObject:
   - component: {fileID: 2015749411}
   - component: {fileID: 2015749410}
   - component: {fileID: 2015749409}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116761,6 +116969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!114 &2016379968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117331,6 +117540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &2033695064
 Animator:
   serializedVersion: 7
@@ -121298,6 +121508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.8
+  debugMode: 0
 --- !u!95 &2109815433
 Animator:
   serializedVersion: 7
@@ -121783,6 +121994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+  debugMode: 0
 --- !u!95 &2119820696
 Animator:
   serializedVersion: 7
