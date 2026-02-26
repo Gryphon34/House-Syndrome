@@ -154,16 +154,17 @@ public class HandInputSystem : MonoBehaviour
             currentSequence.Add(fingerKeys[Random.Range(0, fingerKeys.Length)]);
     }
 
+    // HandInputSystem.cs의 WakeUp 함수 수정
+
     void WakeUp()
     {
-        // 씬에 있는 모든 귀신에게 탈출 성공을 알림
-        NormalGhost[] ghosts = FindObjectsByType<NormalGhost>(FindObjectsSortMode.None);
-        foreach (var ghost in ghosts)
-        {
-            ghost.OnPlayerWakeUp();
-        }
+        Debug.Log("<color=cyan>가위 탈출 성공!</color>");
 
-        // 기존 탈출 로직 (날짜 증가 등)
+        // 1. 게이지 초기화
+        leftGauge = 0;
+        rightGauge = 0;
+
+        // 2. SpawnManager의 성공 로직 호출
         if (SpawnManager.Instance != null)
         {
             SpawnManager.Instance.AdvanceDayFromNightmare();
