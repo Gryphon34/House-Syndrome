@@ -46,9 +46,8 @@ public class SleepRuleManager : MonoBehaviour
         handleHiddenAfterShow = false;
     }
 
-    /// <summary> 밤이고, handle 켜기 → 끄기 순서를 완료했을 때만 true. </summary>
+    /// <summary> handle 켜기 → 끄기 순서를 완료했을 때만 true. </summary>
     public bool CanSleep =>
-        (SpawnManager.Instance != null && SpawnManager.Instance.IsNightTime)
-        && handleShownThisNight
+        handleShownThisNight
         && handleHiddenAfterShow;
 }
