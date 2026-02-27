@@ -51,39 +51,53 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        if (dayText != null)
+        // [추가] 시작할 때 난이도 매니저의 날짜를 가져와서 동기화합니다.
+        if (DifficultyManager.Instance != null)
         {
-            dayTextCanvasGroup = dayText.GetComponent<CanvasGroup>();
-            if (dayTextCanvasGroup == null)
-                dayTextCanvasGroup = dayText.gameObject.AddComponent<CanvasGroup>();
+            currentDay = DifficultyManager.Instance.currentDay;
         }
 
-        ShowDayUI();
-        if (dayMapManager != null)
-            dayMapManager.RefreshMapsForCurrentDay();
+        if (Instance == null) Instance = this;
+
+        // UI 및 맵 초기화
+        if (dayText != null) dayTextCanvasGroup = dayText.GetComponent<CanvasGroup>();
+
+        OnDayChanged(); // 현재 날짜에 맞는 맵 활성화
+        ShowDayUI();    // "Day X" UI 표시
+        TeleportPlayerToSpawn(); // 침대 위치로 플레이어 이동
     }
 
     /// <summary>
     /// 밤몽에서 깨어날 때 BedInteraction이 호출. 날짜 진행 + 스폰 이동 + Day UI + 낮 리셋.
     /// </summary>
+    // [핵심] 가위 탈출 성공 시 호출되는 함수
     public void AdvanceDayFromNightmare()
     {
-        if (isSleeping) return;
-
-        isSleeping = true;
+        // 1. 날짜 증가 (최대 7일)
         currentDay++;
+        if (currentDay > 7) currentDay = 7;
 
+        // 2. 난이도 매니저(Persistent)에 날짜 저장
         if (DifficultyManager.Instance != null)
+        {
             DifficultyManager.Instance.currentDay = currentDay;
+        }
 
-        TeleportPlayerToSpawn();
-        ShowDayUI();
-        OnDayChanged();
-        if (dayNightManager != null) dayNightManager.ResetTime();
-        if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
+        // 3. 밤 상태 종료 (시간을 낮으로 되돌림)
+        if (dayNightCycle != null)
+        {
+            dayNightCycle.time = dayNightCycle.startTime;
+        }
 
-        isSleeping = false;
-        Debug.Log($"<color=cyan>Day {currentDay} 시작 (침대에서 깨어남)</color>");
+        // 4. 귀신 제거
+        if (GhostManager.Instance != null)
+        {
+            GhostManager.Instance.ClearGhost();
+        }
+
+        // 5. 씬 재시작 (모든 오브젝트 상태 리셋 및 다음 날 맵 로드)
+        // 이 방식이 가장 깔끔하게 다음 날로 넘어가는 방법입니다.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
