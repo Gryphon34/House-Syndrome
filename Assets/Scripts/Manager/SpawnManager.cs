@@ -2,7 +2,6 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using DayNightSystem;
 
 /// <summary>
 /// 침대에서 깨어났을 때의 스폰 위치·날짜 진행·Day UI만 담당.
@@ -25,18 +24,13 @@ public class SpawnManager : MonoBehaviour
     public float fadeSpeed = 1f;
 
     [Header("Day-Night Cycle")]
-    public DayNightSystem.DayNightManager dayNightManager;
+    public DayNightCycle dayNightCycle;
 
     [Header("Day Map (1~7일차별 맵 활성화)")]
     public DayMapManager dayMapManager;
 
-    [Header("Clocks (1~7일차별 시계)")]
-    [Tooltip("Element 0 = Day1 시계, Element 1 = Day2 시계, ... Element 6 = Day7 시계")]
-    public Clock[] clocksByDay = new Clock[7];
-
-    /// <summary> 현재 밤인지. DayNightManager 시간 기준 (예: 20시~6시). </summary>
-    public bool IsNightTime =>
-        dayNightManager != null && dayNightManager.IsWithinTime(20f, 6f);
+    /// <summary> 현재 밤인지. DayNightCycle에서 조회. </summary>
+    public bool IsNightTime => dayNightCycle != null && dayNightCycle.IsNightTime;
 
     private CanvasGroup dayTextCanvasGroup;
     private bool isSleeping = false;
@@ -118,7 +112,7 @@ public class SpawnManager : MonoBehaviour
         TeleportPlayerToSpawn();
         ShowDayUI();
         OnDayChanged();
-        if (dayNightManager != null) dayNightManager.ResetTime();
+        if (dayNightCycle != null) dayNightCycle.ResetToDay();
         if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
 
         isSleeping = false;
@@ -141,7 +135,7 @@ public class SpawnManager : MonoBehaviour
         TeleportPlayerToSpawn();
         ShowDayUI();
         OnDayChanged();
-        if (dayNightManager != null) dayNightManager.ResetTime();
+        if (dayNightCycle != null) dayNightCycle.ResetToDay();
         if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
 
         isSleeping = false;
@@ -225,28 +219,6 @@ public class SpawnManager : MonoBehaviour
     {
         if (dayMapManager != null)
             dayMapManager.RefreshMapsForCurrentDay();
-
-        bool resetDone = false;
-
-        if (clocksByDay != null &&
-            currentDay >= 1 &&
-            currentDay <= clocksByDay.Length)
-        {
-            var clockForDay = clocksByDay[currentDay - 1];
-            if (clockForDay != null)
-            {
-                clockForDay.ResetClockForNewDay();
-                resetDone = true;
-            }
-        }
-
-        // 배열에 할당 안 했거나 null이면 안전하게 씬의 모든 Clock 리셋
-        if (!resetDone)
-        {
-            var clocks = FindObjectsOfType<Clock>(true);
-            foreach (var clock in clocks)
-                clock.ResetClockForNewDay();
-        }
     }
 
     public int GetCurrentDay()
