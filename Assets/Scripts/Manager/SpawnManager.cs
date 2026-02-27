@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     public float fadeSpeed = 1f;
 
     [Header("Day-Night Cycle")]
-    public DayNightSystem.DayNightManager dayNightManager;
+    public DayNightSystem.DayNightManager dayNightCycle;
 
     [Header("Day Map (1~7일차별 맵 활성화)")]
     public DayMapManager dayMapManager;
@@ -36,7 +36,7 @@ public class SpawnManager : MonoBehaviour
 
     /// <summary> 현재 밤인지. DayNightManager 시간 기준 (예: 20시~6시). </summary>
     public bool IsNightTime =>
-        dayNightManager != null && dayNightManager.IsWithinTime(20f, 6f);
+        dayNightCycle != null && dayNightCycle.IsWithinTime(20f, 6f);
 
     private CanvasGroup dayTextCanvasGroup;
     private bool isSleeping = false;
@@ -86,7 +86,7 @@ public class SpawnManager : MonoBehaviour
         // 3. 밤 상태 종료 (시간을 낮으로 되돌림)
         if (dayNightCycle != null)
         {
-            dayNightCycle.time = dayNightCycle.startTime;
+            dayNightCycle.ResetTime();
         }
 
         // 4. 귀신 제거
@@ -118,7 +118,7 @@ public class SpawnManager : MonoBehaviour
         TeleportPlayerToSpawn();
         ShowDayUI();
         OnDayChanged();
-        if (dayNightManager != null) dayNightManager.ResetTime();
+        if (dayNightCycle != null) dayNightCycle.ResetTime();
         if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
 
         isSleeping = false;
@@ -141,7 +141,7 @@ public class SpawnManager : MonoBehaviour
         TeleportPlayerToSpawn();
         ShowDayUI();
         OnDayChanged();
-        if (dayNightManager != null) dayNightManager.ResetTime();
+        if (dayNightCycle != null) dayNightCycle.ResetTime();
         if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
 
         isSleeping = false;
