@@ -78,9 +78,8 @@ public class BedInteraction : MonoBehaviour
         {
             if (hit.transform.CompareTag(bedTag))
             {
-                bool isNight = SpawnManager.Instance != null && SpawnManager.Instance.IsNightTime;
                 bool ruleDone = SleepRuleManager.Instance != null && SleepRuleManager.Instance.CanSleep;
-                if (isNight && ruleDone)
+                if (ruleDone)
                 {
                     if (sleepPromptUI != null) sleepPromptUI.SetActive(true);
                     if (Input.GetKeyDown(KeyCode.E)) StartCoroutine(SwapToNightmare());
