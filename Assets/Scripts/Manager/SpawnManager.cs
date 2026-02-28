@@ -215,10 +215,14 @@ public class SpawnManager : MonoBehaviour
         dayText.gameObject.SetActive(false);
     }
 
+    /// <summary> 일차가 변경될 때 호출됨. GoToDay, ResetToDay1, AdvanceDayFromNightmare(씬 로드 후) 등. </summary>
+    public static event System.Action OnDayChangedEvent;
+
     protected virtual void OnDayChanged()
     {
         if (dayMapManager != null)
             dayMapManager.RefreshMapsForCurrentDay();
+        OnDayChangedEvent?.Invoke();
     }
 
     public int GetCurrentDay()

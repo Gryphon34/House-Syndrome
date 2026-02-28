@@ -3,6 +3,7 @@ using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemInteraction : MonoBehaviour
 {
@@ -47,8 +48,15 @@ public class ItemInteraction : MonoBehaviour
             {
                 if (item.itemName == PhonePlace.PhoneItemName)
                     HidePhone(item);
+                else if (item.itemName == "box")
+                    InteractWithBox(item);
                 else if (IsHandleItem(item.itemName))
-                    ToggleHandleObject();
+                {
+                    if (!_hasDoneBathroomHandleFadeOnce)
+                        StartCoroutine(ToggleHandleObjectWithFade());
+                    else
+                        ToggleHandleObject();
+                }
                 else
                     Collect(item);
             }
@@ -74,9 +82,63 @@ public class ItemInteraction : MonoBehaviour
     /// <summary>이름이 handle(또는 bathroom_handle)인 아이템은 E키로 지정 오브젝트 활성/비활성 토글.</summary>
     public const string BathroomHandleItemName = "bathroom_handle";
 
+    [Header("Box - E키 상호작용 시 box 사라지고 box_glitch 활성화")]
+    [Tooltip("box 아이템과 E키 상호작용 시 활성화할 오브젝트 (box_glitch)")]
+    public GameObject boxGlitchObject;
+
+    private GameObject _interactedBoxObject;
+
     [Header("Handle - E키로 표시/숨김 토글")]
     [Tooltip("이름이 handle인 아이템과 E키 상호작용 시 켜졌다 꺼졌다 할 오브젝트들 (복제한 prefab 인스턴스 등 모두 추가)")]
     public List<GameObject> objectsToToggleWithHandle = new List<GameObject>();
+
+    [Header("Handle - 화면 페이드 (bathroom_handle E키 시)")]
+    [Tooltip("bathroom_handle 상호작용 시 까매졌다 풀리는 효과에 쓸 풀스크린 검정 Image. BedInteraction의 fadeImage와 동일 오브젝트 지정 가능.")]
+    public Image bathroomHandleFadeImage;
+    [Tooltip("화면이 검게 유지되는 시간(초)")]
+    public float bathroomHandleFadeHoldDuration = 3f;
+    [Tooltip("페이드 인/아웃에 걸리는 시간(초)")]
+    public float bathroomHandleFadeTransitionDuration = 0.5f;
+
+    private bool _isHandleFading = false;
+    private bool _hasDoneBathroomHandleFadeOnce = false;
+
+    IEnumerator ToggleHandleObjectWithFade()
+    {
+        if (_isHandleFading || bathroomHandleFadeImage == null)
+        {
+            ToggleHandleObject();
+            yield break;
+        }
+        _isHandleFading = true;
+        bathroomHandleFadeImage.gameObject.SetActive(true);
+        Color c = bathroomHandleFadeImage.color;
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / bathroomHandleFadeTransitionDuration;
+            c.a = Mathf.Clamp01(t);
+            bathroomHandleFadeImage.color = c;
+            yield return null;
+        }
+        c.a = 1f;
+        bathroomHandleFadeImage.color = c;
+        ToggleHandleObject();
+        yield return new WaitForSeconds(bathroomHandleFadeHoldDuration);
+        t = 1f;
+        while (t > 0f)
+        {
+            t -= Time.deltaTime / bathroomHandleFadeTransitionDuration;
+            c.a = Mathf.Clamp01(t);
+            bathroomHandleFadeImage.color = c;
+            yield return null;
+        }
+        c.a = 0f;
+        bathroomHandleFadeImage.color = c;
+        bathroomHandleFadeImage.gameObject.SetActive(false);
+        _isHandleFading = false;
+        _hasDoneBathroomHandleFadeOnce = true;
+    }
 
     static bool IsHandleItem(string itemName)
     {
@@ -103,6 +165,35 @@ public class ItemInteraction : MonoBehaviour
 
         if (SleepRuleManager.Instance != null)
             SleepRuleManager.Instance.RecordBathroomHandleToggle(setActive);
+    }
+
+    void InteractWithBox(Item item)
+    {
+        _interactedBoxObject = item.gameObject;
+        _interactedBoxObject.SetActive(false);
+        if (boxGlitchObject != null)
+            boxGlitchObject.SetActive(true);
+    }
+
+    void OnEnable()
+    {
+        SpawnManager.OnDayChangedEvent += ResetBoxState;
+    }
+
+    void OnDisable()
+    {
+        SpawnManager.OnDayChangedEvent -= ResetBoxState;
+    }
+
+    void ResetBoxState()
+    {
+        if (_interactedBoxObject != null)
+        {
+            _interactedBoxObject.SetActive(true);
+            _interactedBoxObject = null;
+        }
+        if (boxGlitchObject != null)
+            boxGlitchObject.SetActive(false);
     }
 
     void Collect(Item item)
