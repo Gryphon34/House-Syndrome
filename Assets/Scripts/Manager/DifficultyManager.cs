@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
-    // ¾îµð¼­µç Á¢±ÙÇÒ ¼ö ÀÖ°Ô ½Ì±ÛÅæ(Singleton) ±¸Á¶·Î ¸¸µì´Ï´Ù.
+    // ï¿½ï¿½ð¼­µï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½(Singleton) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
     public static DifficultyManager Instance;
 
     [Header("Game Progress")]
-    public int currentDay = 1; // 1ÀÏºÎÅÍ 7ÀÏ±îÁö
+    public int currentDay = 1; // 1ï¿½Ïºï¿½ï¿½ï¿½ 7ï¿½Ï±ï¿½ï¿½ï¿½
 
     [Header("Difficulty Settings (Day 1 -> Day 7)")]
     public float minDecay = 0.2f;
@@ -23,33 +23,25 @@ public class DifficultyManager : MonoBehaviour
 
     void Awake()
     {
-<<<<<<< HEAD
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // [¼öÁ¤] ÀÎ½ºÅÏ½º°¡ È®Á¤µÇ¾úÀ» ¶§¸¸ ÆÄ±« ¹æÁö ¼³Á¤
+            DontDestroyOnLoad(gameObject); // [ï¿½ï¿½ï¿½ï¿½] ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else
         {
-            Destroy(gameObject); // ÀÌ¹Ì Á¸ÀçÇÑ´Ù¸é »õ·Î »ý¼ºµÈ °ÍÀº Áï½Ã »èÁ¦
+            Destroy(gameObject); // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             return;
         }
-=======
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-
-        // ¾ÀÀÌ ¹Ù²î¾îµµ ÆÄ±«µÇÁö ¾Ê°Ô ¼³Á¤ (ÇÊ¿ä ½Ã)
-        DontDestroyOnLoad(gameObject);
->>>>>>> 4083efea5b579c3a7ae83e2c02de76f61d5eedcc
     }
 
-    // ÇöÀç ³¯Â¥¿¡ µû¸¥ ³­ÀÌµµ ºñÀ² (0 ~ 1) °è»ê
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ (0 ~ 1) ï¿½ï¿½ï¿½
     private float GetDifficultyT()
     {
         return Mathf.Clamp01((currentDay - 1) / 6f);
     }
 
-    // --- ¿ÜºÎ(HandInputSystem)¿¡¼­ °¡Á®°¥ ¼öÄ¡µé ---
+    // --- ï¿½Üºï¿½(HandInputSystem)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ---
 
     public float GetConstantDecayRate()
     {
@@ -74,6 +66,6 @@ public class DifficultyManager : MonoBehaviour
     public void NextDay()
     {
         currentDay++;
-        if (currentDay > 7) Debug.Log("¸ðµç ³¯Â¥ Å¬¸®¾î!");
+        if (currentDay > 7) Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ Å¬ï¿½ï¿½ï¿½ï¿½!");
     }
 }
