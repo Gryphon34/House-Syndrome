@@ -194,6 +194,9 @@ public class ItemInteraction : MonoBehaviour
         }
         if (boxGlitchObject != null)
             boxGlitchObject.SetActive(false);
+        // 일차가 바뀔 때마다 bathroom_handle 첫 상호작용에서 다시 페이드 인/아웃이 재생되도록 리셋
+        _hasDoneBathroomHandleFadeOnce = false;
+        _isHandleFading = false;
     }
 
     void Collect(Item item)

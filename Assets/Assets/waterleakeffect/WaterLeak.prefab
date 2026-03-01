@@ -15116,10 +15116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842c8bd2e530a1b4bb3fb84a530973b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::AudioEmitter
-  soundKey: water
+  soundKey: bathroom
   playOnEnable: 1
   loop: 1
   volume: 1
+  playOnlyWhenActive: {fileID: 0}
 --- !u!1 &4843449649118444401
 GameObject:
   m_ObjectHideFlags: 0
