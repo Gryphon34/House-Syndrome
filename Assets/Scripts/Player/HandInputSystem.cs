@@ -40,7 +40,7 @@ public class HandInputSystem : MonoBehaviour
 
     public Slider individualGaugeUI;
 
-    // ¼öÄ¡ º¯¼öµéÀº ÀÌÁ¦ DifficultyManager¿¡¼­ °¡Á®¿É´Ï´Ù.
+    // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DifficultyManagerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
     private float cycleIncreaseAmount;
     private float failPenaltyAmount;
     private float constantDecayRate;
@@ -59,11 +59,11 @@ public class HandInputSystem : MonoBehaviour
     private EyeBlinkController eyeController;
     void Start()
     {
-        // [Ãß°¡] ¾ÀÀÌ ½ÃÀÛµÇ°Å³ª Àç·ÎµåµÉ ¶§ static °ÔÀÌÁö¸¦ 0À¸·Î ¸®¼ÂÇÕ´Ï´Ù.
+        // [ï¿½ß°ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÛµÇ°Å³ï¿½ ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ static ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         leftGauge = 0f;
         rightGauge = 0f;
 
-        // DifficultyManager°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í ¼öÄ¡ °¡Á®¿À±â
+        // DifficultyManagerï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         UpdateDifficultyFromManager();
 
         mainCam = Camera.main;
@@ -91,7 +91,7 @@ public class HandInputSystem : MonoBehaviour
         }
         else
         {
-            // ¸Å´ÏÀú°¡ ¾øÀ» °æ¿ì¸¦ ´ëºñÇÑ ±âº»°ª
+            // ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½
             constantDecayRate = 1.0f;
             cycleIncreaseAmount = 10f;
             failPenaltyAmount = 5f;
@@ -110,7 +110,7 @@ public class HandInputSystem : MonoBehaviour
     void ApplyGaugeDecay()
     {
         float decayMultiplier = 1.0f;
-        // ¾È º¸°Å³ª ¾öÁö ¶ÃÀ» ¶§ °¨¼Ò °¡¼Ó (³¯Â¥¿¡ µû¶ó ´õ »¡¶óÁö°Ô ¸Å´ÏÀú ÂüÁ¶ °¡´É)
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         if (!uiParentGroup.activeSelf || !Input.GetKey(thumbKey))
         {
             decayMultiplier = 3.0f;
@@ -153,22 +153,22 @@ public class HandInputSystem : MonoBehaviour
     {
         currentSequence.Clear();
         currentIndex = 0;
-        // ¸Å´ÏÀú¿¡¼­ ¹Þ¾Æ¿Â ±æÀÌ¸¦ »ç¿ëÇÕ´Ï´Ù.
+        // ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         for (int i = 0; i < sequenceLength; i++)
             currentSequence.Add(fingerKeys[Random.Range(0, fingerKeys.Length)]);
     }
 
-    // HandInputSystem.csÀÇ WakeUp ÇÔ¼ö ¼öÁ¤
+    // HandInputSystem.csï¿½ï¿½ WakeUp ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     void WakeUp()
     {
-        Debug.Log("<color=cyan>°¡À§ Å»Ãâ ¼º°ø!</color>");
+        Debug.Log("<color=cyan>ï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!</color>");
 
-        // 1. °ÔÀÌÁö ÃÊ±âÈ­
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         leftGauge = 0;
         rightGauge = 0;
 
-        // 2. SpawnManagerÀÇ ¼º°ø ·ÎÁ÷ È£Ãâ
+        // 2. SpawnManagerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
         if (SpawnManager.Instance != null)
         {
             SpawnManager.Instance.AdvanceDayFromNightmare();
@@ -183,7 +183,7 @@ public class HandInputSystem : MonoBehaviour
 
     void OnEnable()
     {
-        // ¿ÀºêÁ§Æ®°¡ ÄÑÁú ¶§ ÇöÀç È°¼ºÈ­µÈ ¸ÞÀÎ Ä«¸Þ¶ó(NightmareCamera)¸¦ ´Ù½Ã °¡Á®¿É´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½(NightmareCamera)ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
         mainCam = Camera.main;
         UpdateDifficultyFromManager();
     }
@@ -244,7 +244,7 @@ public class HandInputSystem : MonoBehaviour
 
         if (mainCam == null || uiParentGroup == null) return;
 
-        // [¼öÁ¤] ´«ÀÌ °ÅÀÇ °¨±ä »óÅÂ¶ó¸é UI¸¦ ¾Æ¿¹ Ç¥½ÃÇÏÁö ¾ÊÀ½
+        // [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ UIï¿½ï¿½ ï¿½Æ¿ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (eyeController != null && eyeController.eyeOpenAmount < 0.1f)
         {
             uiParentGroup.SetActive(false);
@@ -255,7 +255,7 @@ public class HandInputSystem : MonoBehaviour
         RaycastHit hit;
         bool isLookingAtMe = false;
 
-        // ±âÁ¸ ·¹ÀÌÄ³½ºÆ® °¨Áö ·ÎÁ÷
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (Physics.Raycast(ray, out hit, rayDistance, handLayer))
         {
             string hitName = hit.transform.name;
@@ -266,7 +266,7 @@ public class HandInputSystem : MonoBehaviour
         uiParentGroup.SetActive(isLookingAtMe);
     }
 
-    // ... (ÀÌÇÏ À¯Æ¿¸®Æ¼ ÇÔ¼ö FingerTapRoutine, RotateBone, SetupUI, UpdateUIPositions, FollowTarget, GenerateNewSequence µ¿ÀÏ)
+    // ... (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¿ï¿½ï¿½Æ¼ ï¿½Ô¼ï¿½ FingerTapRoutine, RotateBone, SetupUI, UpdateUIPositions, FollowTarget, GenerateNewSequence ï¿½ï¿½ï¿½ï¿½)
     IEnumerator FingerTapRoutine(int index)
     {
         if (index >= fingerBones.Length || fingerBones[index] == null) yield break;

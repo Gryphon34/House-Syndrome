@@ -32,6 +32,10 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float masterVolume = 1f;
 
+    [Header("키별 재생 지연 (AudioEmitter)")]
+    [Tooltip("'door' 키: AudioEmitter가 활성화된 후 이 시간(초) 뒤에 재생합니다. 0이면 지연 없음.")]
+    [SerializeField] private float doorSoundDelaySeconds = 120f;
+
     private readonly Dictionary<string, AudioClip> _clipByKey = new Dictionary<string, AudioClip>();
     private readonly Dictionary<string, float> _volumeByKey = new Dictionary<string, float>();
 
@@ -120,6 +124,19 @@ public class AudioManager : MonoBehaviour
         }
 
         return _clipByKey.TryGetValue(key, out clip);
+    }
+
+    /// <summary>
+    /// 특정 키에 대해 재생 지연 시간(초)을 반환합니다. 지연이 없으면 0을 반환합니다.
+    /// (예: 'door' 키는 doorSoundDelaySeconds 값 사용)
+    /// </summary>
+    public float GetPlayDelaySeconds(string key)
+    {
+        if (string.IsNullOrWhiteSpace(key))
+            return 0f;
+        if (string.Equals(key, "door", StringComparison.OrdinalIgnoreCase) && doorSoundDelaySeconds > 0f)
+            return doorSoundDelaySeconds;
+        return 0f;
     }
 
     /// <summary>

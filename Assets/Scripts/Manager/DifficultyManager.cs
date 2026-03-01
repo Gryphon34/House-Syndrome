@@ -23,6 +23,7 @@ public class DifficultyManager : MonoBehaviour
 
     void Awake()
     {
+<<<<<<< HEAD
         if (Instance == null)
         {
             Instance = this;
@@ -33,6 +34,13 @@ public class DifficultyManager : MonoBehaviour
             Destroy(gameObject); // 이미 존재한다면 새로 생성된 것은 즉시 삭제
             return;
         }
+=======
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        // 씬이 바뀌어도 파괴되지 않게 설정 (필요 시)
+        DontDestroyOnLoad(gameObject);
+>>>>>>> 4083efea5b579c3a7ae83e2c02de76f61d5eedcc
     }
 
     // 현재 날짜에 따른 난이도 비율 (0 ~ 1) 계산
