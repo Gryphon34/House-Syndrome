@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -22,7 +23,16 @@ public class AudioEmitter : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float volume = 1f;
 
+    [Header("재생 조건 (선택)")]
+    [Tooltip("지정하면, 이 오브젝트가 활성화되어 있을 때만 재생합니다.\n" +
+             "일반맵 오디오 → WalkingPlayer 지정 (악몽맵에서는 재생 안 함)\n" +
+             "N일차 맵 오디오 → 해당 N일차 일반맵 루트 지정 (다른 날에는 재생 안 함)")]
+    [SerializeField] private GameObject playOnlyWhenActive;
+
     private AudioSource _audioSource;
+    private Coroutine _playbackRoutine;
+    private Coroutine _doorDelayRoutine;
+    private bool _contextWasActive;
 
     private void Awake()
     {
@@ -44,11 +54,64 @@ public class AudioEmitter : MonoBehaviour
             return;
         }
 
-        StartPlayback();
+        _contextWasActive = IsContextActive();
+
+        // AudioManager 실행 순서 보장: 한 프레임 뒤에 재생 시작 (매번 활성화 시 정상 재생)
+        if (_playbackRoutine != null)
+        {
+            StopCoroutine(_playbackRoutine);
+        }
+
+        _playbackRoutine = StartCoroutine(StartPlaybackNextFrame());
+    }
+
+    private void Update()
+    {
+        if (playOnlyWhenActive == null)
+        {
+            return;
+        }
+
+        bool contextActive = playOnlyWhenActive.activeInHierarchy;
+
+        if (contextActive != _contextWasActive)
+        {
+            _contextWasActive = contextActive;
+            if (contextActive)
+            {
+                if (playOnEnable && _audioSource != null && !_audioSource.isPlaying)
+                {
+                    StartPlayback();
+                }
+            }
+            else
+            {
+                if (_audioSource != null && _audioSource.isPlaying)
+                {
+                    _audioSource.Stop();
+                }
+            }
+        }
+    }
+
+    private bool IsContextActive()
+    {
+        return playOnlyWhenActive == null || playOnlyWhenActive.activeInHierarchy;
     }
 
     private void OnDisable()
     {
+        if (_playbackRoutine != null)
+        {
+            StopCoroutine(_playbackRoutine);
+            _playbackRoutine = null;
+        }
+        if (_doorDelayRoutine != null)
+        {
+            StopCoroutine(_doorDelayRoutine);
+            _doorDelayRoutine = null;
+        }
+
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.OnMasterVolumeChanged -= HandleMasterVolumeChanged;
@@ -57,6 +120,16 @@ public class AudioEmitter : MonoBehaviour
         if (_audioSource != null && _audioSource.isPlaying)
         {
             _audioSource.Stop();
+        }
+    }
+
+    private IEnumerator StartPlaybackNextFrame()
+    {
+        yield return null;
+        _playbackRoutine = null;
+        if (isActiveAndEnabled && playOnEnable && IsContextActive())
+        {
+            StartPlayback();
         }
     }
 
@@ -99,20 +172,48 @@ public class AudioEmitter : MonoBehaviour
 
     public void StartPlayback()
     {
+        if (_audioSource == null)
+            return;
+
+        float delaySeconds = (AudioManager.Instance != null) ? AudioManager.Instance.GetPlayDelaySeconds(soundKey) : 0f;
+        if (delaySeconds > 0f)
+        {
+            if (_doorDelayRoutine != null)
+                StopCoroutine(_doorDelayRoutine);
+            _doorDelayRoutine = StartCoroutine(PlayAfterDelay(delaySeconds));
+            return;
+        }
+
+        PlayImmediate();
+    }
+
+    private IEnumerator PlayAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        _doorDelayRoutine = null;
+        if (isActiveAndEnabled && IsContextActive())
+            PlayImmediate();
+    }
+
+    private void PlayImmediate()
+    {
+        if (_audioSource == null)
+            return;
+
         if (AudioManager.Instance == null)
         {
             Debug.LogWarning("AudioManager 인스턴스가 씬에 없습니다.", this);
             return;
         }
 
-        if (!AudioManager.Instance.TryGetClip(soundKey, out var clip))
+        if (!AudioManager.Instance.TryGetClip(soundKey, out var clip) || clip == null)
         {
             Debug.LogWarning($"AudioEmitter: 키 \"{soundKey}\" 에 해당하는 클립을 AudioManager 에서 찾지 못했습니다.", this);
             return;
         }
 
         _audioSource.clip = clip;
-        _audioSource.loop = loop;
+        _audioSource.loop = loop; // 재생 직전에 루프 확실히 적용 (다른 스크립트/기본값에 덮어씌워지는 것 방지)
         ApplyVolume();
         _audioSource.Play();
     }
