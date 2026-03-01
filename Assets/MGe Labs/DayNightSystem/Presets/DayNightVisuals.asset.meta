@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fde0eed82c1e9d64f8f919a4a99c5622
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 331418
+  packageName: DayNight System
+  packageVersion: 1.0.2
+  assetPath: Assets/MGe Labs/DayNightSystem/Presets/DayNightVisuals.asset
+  uploadId: 803614

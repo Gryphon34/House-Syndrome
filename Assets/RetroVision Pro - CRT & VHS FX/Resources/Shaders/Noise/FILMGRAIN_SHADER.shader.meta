@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2076733d7af53b646adebed6ef5dfcd8
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Noise/FILMGRAIN_SHADER.shader
+  uploadId: 811764

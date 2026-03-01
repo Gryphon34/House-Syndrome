@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 04416859eca8e4a4dbc9a76fa7037f08
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Distortion/TapeDistortionShader.shader
+  uploadId: 811764

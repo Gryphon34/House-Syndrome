@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3fc489a6c93206847a50d2232d1303dc
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/VCRGhosting.shader
+  uploadId: 811764

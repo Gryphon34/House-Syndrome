@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c62a2d1eaad7640a1ab18ae1b7cc17c7
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/RETROSCALE.shader
+  uploadId: 811764

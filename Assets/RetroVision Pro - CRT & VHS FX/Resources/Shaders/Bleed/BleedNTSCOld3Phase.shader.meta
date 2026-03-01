@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7ffe2e9635fd94f06a0570f5c165cd7c
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Bleed/BleedNTSCOld3Phase.shader
+  uploadId: 811764

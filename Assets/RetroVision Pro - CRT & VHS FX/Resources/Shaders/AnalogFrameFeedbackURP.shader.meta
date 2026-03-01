@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ade5fffe2ca072b45b5f22e934a026df
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/AnalogFrameFeedbackURP.shader
+  uploadId: 811764

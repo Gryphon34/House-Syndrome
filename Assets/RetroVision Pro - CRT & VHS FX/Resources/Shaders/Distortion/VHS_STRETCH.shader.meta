@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7adf01ef6eb03c74dac41861bb2bdc3c
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Resources/Shaders/Distortion/VHS_STRETCH.shader
+  uploadId: 811764

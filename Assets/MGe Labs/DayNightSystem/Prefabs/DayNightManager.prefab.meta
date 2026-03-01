@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02f676de03f3ae74c95feb0162d861b6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 331418
+  packageName: DayNight System
+  packageVersion: 1.0.2
+  assetPath: Assets/MGe Labs/DayNightSystem/Prefabs/DayNightManager.prefab
+  uploadId: 803614

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 829e49b51eba2bb46b1b2fdb7f9a907d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: 1cf8eb7ba615849e98f3c04befe63b47, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 340594
+  packageName: Retro Vision Pro - CRT & VHS VFX
+  packageVersion: 1.0
+  assetPath: Assets/RetroVision Pro - CRT & VHS FX/Scripts/Volumes/Distortion/OldTV_SIGNAL_DISTORTION.cs
+  uploadId: 811764
