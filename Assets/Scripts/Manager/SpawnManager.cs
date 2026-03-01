@@ -67,30 +67,26 @@ public class SpawnManager : MonoBehaviour
     // [핵심] 가위 탈출 성공 시 호출되는 함수
     public void AdvanceDayFromNightmare()
     {
-        // 1. 날짜 증가 (최대 7일)
-        currentDay++;
-        if (currentDay > 7) currentDay = 7;
+        // 1. 현재 날짜를 먼저 가져옴
+        int nextDay = currentDay + 1;
+        if (nextDay > 7) nextDay = 7;
 
-        // 2. 난이도 매니저(Persistent)에 날짜 저장
+        // 2. 난이도 매니저(Instance)에 먼저 저장 (가장 중요)
         if (DifficultyManager.Instance != null)
         {
-            DifficultyManager.Instance.currentDay = currentDay;
+            DifficultyManager.Instance.currentDay = nextDay;
+            Debug.Log($"<color=cyan>날짜 저장 성공: Day {DifficultyManager.Instance.currentDay}</color>");
         }
-
-        // 3. 밤 상태 종료 (시간을 낮으로 되돌림)
-        if (dayNightCycle != null)
+        else
         {
-            dayNightCycle.time = dayNightCycle.startTime;
+            Debug.LogError("DifficultyManager 인스턴스를 찾을 수 없습니다!");
         }
 
-        // 4. 귀신 제거
-        if (GhostManager.Instance != null)
-        {
-            GhostManager.Instance.ClearGhost();
-        }
+        // 3. 밤 상태 리셋 및 귀신 제거
+        if (dayNightCycle != null) dayNightCycle.ResetToDay();
+        if (GhostManager.Instance != null) GhostManager.Instance.ClearGhost();
 
-        // 5. 씬 재시작 (모든 오브젝트 상태 리셋 및 다음 날 맵 로드)
-        // 이 방식이 가장 깔끔하게 다음 날로 넘어가는 방법입니다.
+        // 4. 씬 재시작
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
