@@ -1,5 +1,215 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8949140167258252171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee6942819209074799d6b5610ce2e67, type: 3}
+  m_Name: TAPE_NOISE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.TAPE_NOISE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: bba16b45b22496144b3b0968973a6628, type: 3}
+  Event: 550
+--- !u!114 &-8931492409691072944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4aaab42e3f7614ca4c47faae323b21, type: 3}
+  m_Name: VHS_TAPE_REWIND_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_TAPE_REWIND_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 668b90b68b30cdc4fa273af4bd4ed8ad, type: 3}
+  Event: 550
+--- !u!114 &-8096945839640151900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f4903fef9018443814ca266a95b4f5, type: 3}
+  m_Name: VHS_TWITCH_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_TWITCH_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 6a92ecc386ada4a8b89eca30c05846fc, type: 3}
+  Event: 550
+--- !u!114 &-7786329156572036837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f75c725b86c641cfb2fd4f9809eacc4, type: 3}
+  m_Name: DOT_CRAWL_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.DOT_CRAWL_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: de05f18631f0d684ab1a3509d5694722, type: 3}
+  Event: 550
+--- !u!114 &-7139737250193435204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853f057fb0c6303419dc2ecd403ef5ca, type: 3}
+  m_Name: WARP_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.WARP_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 3a6bb879253efe34a8f9ce02ea5c9b1a, type: 3}
+  Event: 550
+--- !u!114 &-5039464277166235649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbaaf9ba6614834f81448ed9d6a5cf4, type: 3}
+  m_Name: FILMGRAIN_NOISE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.FILMGRAIN_NOISE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 2076733d7af53b646adebed6ef5dfcd8, type: 3}
+  Event: 550
+--- !u!114 &-4512850926394735586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfbf9b80cf647a3a5806dba5c025fb, type: 3}
+  m_Name: NTSCCODEC_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.NTSCCODEC_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: fc1c36e4a95b544e6b56f2ab5c67ee1a, type: 3}
+  Event: 550
+--- !u!114 &-4345741168595344097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb803caceec8834fb9eb876439fc959, type: 3}
+  m_Name: OldTV_SIGNAL_DISTORTION_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.OldTV_SIGNAL_DISTORTION_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: ae7965391a8dd3743ace4f9219e18a94, type: 3}
+  Event: 550
+--- !u!114 &-4173074351558570128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c7a478b66c94e77b1960cd0a1d5d71, type: 3}
+  m_Name: CRTAPERTURE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.CRTAPERTURE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 071fec8b518b7430ab9d19b50ca97ce1, type: 3}
+  Event: 550
+--- !u!114 &-3823078762954084100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d48fd8e032622c4ca0e912d7396463c, type: 3}
+  m_Name: FISHEYE_VIGNETTE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.FISHEYE_VIGNETTE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 030e6c5c1a1305645ad43f859e55efb9, type: 3}
+  Event: 550
+--- !u!114 &-2979583160064047343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b423167cfe1da794a8ce6e3ed8eb47fa, type: 3}
+  m_Name: SIGNAL_NOISE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.SIGNAL_NOISE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: ccc2ad3d06fd5b140a6f875801dad0f6, type: 3}
+  Event: 550
+--- !u!114 &-2313960453659155132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae442fe48be043a42bb104fee03d7f4a, type: 3}
+  m_Name: BLEED2PHASE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.BLEED2PHASE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 0d8f1285f9de0a14da167859dbd3703e, type: 3}
+  Event: 550
+--- !u!114 &-2146795863422172882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a5aa0b62f42f444994ed38e7cc43aa9, type: 3}
+  m_Name: VHS_STRETCH_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_STRETCH_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 7adf01ef6eb03c74dac41861bb2bdc3c, type: 3}
+  Event: 550
+--- !u!114 &-349076817502522004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc854d79959bae478c399aded73f80b, type: 3}
+  m_Name: VHS_JITTER_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_JITTER_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: dc8624a99b6a61946a5ebc110cdb1390, type: 3}
+  Event: 550
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,32 +223,50 @@ MonoBehaviour:
   m_Name: PC_Renderer
   m_EditorClassIdentifier: 
   debugShaders:
-    debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7,
-      type: 3}
+    debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
-    probeVolumeSamplingDebugComputeShader: {fileID: 7200000, guid: 53626a513ea68ce47b59dc1299fe3959,
-      type: 3}
+    probeVolumeSamplingDebugComputeShader: {fileID: 7200000, guid: 53626a513ea68ce47b59dc1299fe3959, type: 3}
   probeVolumeResources:
-    probeVolumeDebugShader: {fileID: 4800000, guid: e5c6678ed2aaa91408dd3df699057aae,
-      type: 3}
-    probeVolumeFragmentationDebugShader: {fileID: 4800000, guid: 03cfc4915c15d504a9ed85ecc404e607,
-      type: 3}
-    probeVolumeOffsetDebugShader: {fileID: 4800000, guid: 53a11f4ebaebf4049b3638ef78dc9664,
-      type: 3}
-    probeVolumeSamplingDebugShader: {fileID: 4800000, guid: 8f96cd657dc40064aa21efcc7e50a2e7,
-      type: 3}
-    probeSamplingDebugMesh: {fileID: -3555484719484374845, guid: 57d7c4c16e2765b47a4d2069b311bffe,
-      type: 3}
-    probeSamplingDebugTexture: {fileID: 2800000, guid: 24ec0e140fb444a44ab96ee80844e18e,
-      type: 3}
-    probeVolumeBlendStatesCS: {fileID: 7200000, guid: b9a23f869c4fd45f19c5ada54dd82176,
-      type: 3}
+    probeVolumeDebugShader: {fileID: 4800000, guid: e5c6678ed2aaa91408dd3df699057aae, type: 3}
+    probeVolumeFragmentationDebugShader: {fileID: 4800000, guid: 03cfc4915c15d504a9ed85ecc404e607, type: 3}
+    probeVolumeOffsetDebugShader: {fileID: 4800000, guid: 53a11f4ebaebf4049b3638ef78dc9664, type: 3}
+    probeVolumeSamplingDebugShader: {fileID: 4800000, guid: 8f96cd657dc40064aa21efcc7e50a2e7, type: 3}
+    probeSamplingDebugMesh: {fileID: -3555484719484374845, guid: 57d7c4c16e2765b47a4d2069b311bffe, type: 3}
+    probeSamplingDebugTexture: {fileID: 2800000, guid: 24ec0e140fb444a44ab96ee80844e18e, type: 3}
+    probeVolumeBlendStatesCS: {fileID: 7200000, guid: b9a23f869c4fd45f19c5ada54dd82176, type: 3}
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
-  m_RendererFeatureMap: ad6b866f10d7b46c
+  - {fileID: -4345741168595344097}
+  - {fileID: 583249884472541614}
+  - {fileID: -8949140167258252171}
+  - {fileID: 478294410600511720}
+  - {fileID: -349076817502522004}
+  - {fileID: -2146795863422172882}
+  - {fileID: -8096945839640151900}
+  - {fileID: -5039464277166235649}
+  - {fileID: -2979583160064047343}
+  - {fileID: 4907265661062132108}
+  - {fileID: -4173074351558570128}
+  - {fileID: -7786329156572036837}
+  - {fileID: -4512850926394735586}
+  - {fileID: 172735771141874310}
+  - {fileID: 7170140736857226936}
+  - {fileID: -8931492409691072944}
+  - {fileID: -2313960453659155132}
+  - {fileID: 199041509203730755}
+  - {fileID: 1079579870808644664}
+  - {fileID: 8473461952633596896}
+  - {fileID: -7139737250193435204}
+  - {fileID: -3823078762954084100}
+  - {fileID: 3686994858487317653}
+  m_RendererFeatureMap: ad6b866f10d7b46c1f6515906ed3b0c3ae014603ae1e1808755c64b56e44ce83e8f8e5793b3ea3066c3570e57bd427fb2e817153890c35e2a4f8ab86a8dea18fff5f3cadf03910ba1187a505e764a6d68cb114721e1c1a4470cf0eb6fc4216c61bc141c6e266f1931e04f317fe215fc18622eac644ae6502b8beeed90275816350164476f9f60c844425582f3a29e3df4361a5b33223c302381c36322c70fb0ee06b8368c0c89775bc959884cc8eea9cfc30c8e11eb2f1ca9504d40c4ad62a33
   m_UseNativeRenderPass: 1
+  xrSystemData: {fileID: 0}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
-  m_AssetVersion: 2
+  m_AssetVersion: 3
+  m_PrepassLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_OpaqueLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -56,8 +284,131 @@ MonoBehaviour:
   m_RenderingMode: 2
   m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
+  m_DepthAttachmentFormat: 0
+  m_DepthTextureFormat: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 0
+--- !u!114 &172735771141874310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d52d4e1ac19514b08b776eb5dbdeaeae, type: 3}
+  m_Name: RETROSCALE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.RETROSCALE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: c62a2d1eaad7640a1ab18ae1b7cc17c7, type: 3}
+  Event: 550
+--- !u!114 &199041509203730755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1eec00481afe2a4db6836d80f57b340, type: 3}
+  m_Name: BLEED3PHASE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.BLEED3PHASE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: ef8ab5e6c8d168049bf1b7a9e08b46a9, type: 3}
+  Event: 550
+--- !u!114 &478294410600511720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d951085bd8f5804582bb7fe032ca6c2, type: 3}
+  m_Name: TAPE_DISTORTION_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.TAPE_DISTORTION_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 04416859eca8e4a4dbc9a76fa7037f08, type: 3}
+  Event: 550
+--- !u!114 &583249884472541614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19acb7dde677b04f8eb358ebcbe908e, type: 3}
+  m_Name: LINE_NOISE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.LINE_NOISE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 053bf69998a47f94faed90ffe3828180, type: 3}
+  Event: 550
+--- !u!114 &1079579870808644664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69c592e7ac1e1a4db66088d430eea16, type: 3}
+  m_Name: BLEEDOLD3PHASE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.BLEEDOLD3PHASE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 7ffe2e9635fd94f06a0570f5c165cd7c, type: 3}
+  Event: 550
+--- !u!114 &3686994858487317653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6475bcf746a02a84c98804cdd4d9ffc4, type: 3}
+  m_Name: AnalogFrameFeedbackFX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.AnalogFrameFeedbackFX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: ade5fffe2ca072b45b5f22e934a026df, type: 3}
+  m_Material: {fileID: 0}
+  Event: 550
+--- !u!114 &4907265661062132108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4b56c4489e7452c9b8a62543a66430, type: 3}
+  m_Name: ANALOG_NOISE_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.ANALOG_NOISE_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: ee40868cdc5664dad8e122e49f079352, type: 3}
+  Event: 550
+--- !u!114 &7170140736857226936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11440710593dd0341b8ccb4780424af7, type: 3}
+  m_Name: VCRGHOSTING_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VCRGHOSTING_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 3fc489a6c93206847a50d2232d1303dc, type: 3}
+  Event: 550
 --- !u!114 &7833122117494664109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,12 +435,18 @@ MonoBehaviour:
     BlurQuality: 0
     Falloff: 100
     SampleCount: -1
-  m_BlueNoise256Textures:
-  - {fileID: 2800000, guid: 36f118343fc974119bee3d09e2111500, type: 3}
-  - {fileID: 2800000, guid: 4b7b083e6b6734e8bb2838b0b50a0bc8, type: 3}
-  - {fileID: 2800000, guid: c06cc21c692f94f5fb5206247191eeee, type: 3}
-  - {fileID: 2800000, guid: cb76dd40fa7654f9587f6a344f125c9a, type: 3}
-  - {fileID: 2800000, guid: e32226222ff144b24bf3a5a451de54bc, type: 3}
-  - {fileID: 2800000, guid: 3302065f671a8450b82c9ddf07426f3a, type: 3}
-  - {fileID: 2800000, guid: 56a77a3e8d64f47b6afe9e3c95cb57d5, type: 3}
-  m_Shader: {fileID: 4800000, guid: 0849e84e3d62649e8882e9d6f056a017, type: 3}
+--- !u!114 &8473461952633596896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b66763eec44e84fbffb152b15a8738, type: 3}
+  m_Name: VHSSCANLINES_FX
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHSSCANLINES_FX
+  m_Active: 1
+  m_Shader: {fileID: 4800000, guid: 7d2a21d506dae48d1a60373253f44acc, type: 3}
+  Event: 550

@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalGhost
   playerTarget: {fileID: 0}
-  timeToReach: 30
-  catchDistance: 0.5
+  timeToReach: 23
+  catchDistance: 1.5
   startDelay: 7
 --- !u!1 &2086568888663668880
 GameObject:

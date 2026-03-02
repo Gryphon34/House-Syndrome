@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   BleedAmount:
     m_OverrideState: 1
-    m_Value: 1.38
+    m_Value: 0.248
   mask:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -25,7 +25,7 @@ MonoBehaviour:
     m_Value: 0
   maskEdgeFineTuning:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.082
   GlobalPostProcessingSettings:
     m_OverrideState: 1
     m_Value: 0
@@ -231,16 +231,16 @@ MonoBehaviour:
     m_Value: 2.5
   contrast:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2.7
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -3
   saturation:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -95.9
 --- !u!114 &-4760564010567229870
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -395,12 +395,12 @@ MonoBehaviour:
   m_Name: ArtefactsEffectVolume
   m_EditorClassIdentifier: 
   active: 1
-  cutOff:
-    m_OverrideState: 1
-    m_Value: 0.419
   amount:
     m_OverrideState: 1
     m_Value: 1.59
+  cutOff:
+    m_OverrideState: 1
+    m_Value: 0.419
   fade:
     m_OverrideState: 1
     m_Value: 1
@@ -571,10 +571,10 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: -23.1
+    m_Value: 76.4
   tint:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -8.2
 --- !u!114 &3651448254608044295
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -666,16 +666,16 @@ MonoBehaviour:
   active: 1
   Amount:
     m_OverrideState: 1
-    m_Value: 0.492
+    m_Value: 0.428
   LineScanTimeOffset:
     m_OverrideState: 1
-    m_Value: 9.5
+    m_Value: 0.7
   LinePhaseRandomness:
     m_OverrideState: 1
     m_Value: {x: 0.25, y: 0.5}
   LumaGain:
     m_OverrideState: 1
-    m_Value: -0.1
+    m_Value: 0.2
   ChromaSaturation:
     m_OverrideState: 1
     m_Value: -0.2
@@ -854,13 +854,13 @@ MonoBehaviour:
   active: 1
   Fade:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.521
   HaloStrength:
     m_OverrideState: 1
-    m_Value: 2.91
+    m_Value: 0
   GlowDiffusion:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1.452
   MaskColorCount:
     m_OverrideState: 1
     m_Value: 5
@@ -913,7 +913,7 @@ MonoBehaviour:
     m_Value: 0.58
   Speed:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.09
   EnableHorizontal:
     m_OverrideState: 1
     m_Value: 1
@@ -922,7 +922,7 @@ MonoBehaviour:
     m_Value: 0
   FisheyeSpherical:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.01
   FisheyeBarrel:
     m_OverrideState: 1
     m_Value: 0
@@ -938,7 +938,7 @@ MonoBehaviour:
     m_Value: 0
   maskEdgeFineTuning:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.132
   unscaledTime:
     m_OverrideState: 1
     m_Value: 0

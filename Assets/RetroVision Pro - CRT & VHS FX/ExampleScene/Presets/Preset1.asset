@@ -638,7 +638,7 @@ MonoBehaviour:
     m_Value: 0
   speed:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 5
   StretchMode:
     m_OverrideState: 1
     m_Value: 8
@@ -679,25 +679,25 @@ MonoBehaviour:
     m_Value: 1
   HaloStrength:
     m_OverrideState: 1
-    m_Value: 4.27
+    m_Value: 0
   GlowDiffusion:
     m_OverrideState: 1
-    m_Value: 0.83
+    m_Value: 0.164
   MaskColorCount:
     m_OverrideState: 1
-    m_Value: 0.57
+    m_Value: 4.11
   MaskStrength:
     m_OverrideState: 1
-    m_Value: 0.318
+    m_Value: 0.429
   InputGamma:
     m_OverrideState: 1
-    m_Value: 1.12
+    m_Value: 2.12
   OutputGamma:
     m_OverrideState: 1
-    m_Value: 0.89
+    m_Value: 0.92
   OutputBrightness:
     m_OverrideState: 1
-    m_Value: 0.85
+    m_Value: 2.5
   mask:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -726,19 +726,19 @@ MonoBehaviour:
   active: 1
   Amount:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0
   LineScanTimeOffset:
     m_OverrideState: 1
-    m_Value: 20
+    m_Value: -20
   LinePhaseRandomness:
     m_OverrideState: 1
     m_Value: {x: 0.25, y: 0}
   LumaGain:
     m_OverrideState: 1
-    m_Value: 1.7
+    m_Value: 20
   ChromaSaturation:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 5.7
   LumaBlurWidth:
     m_OverrideState: 1
     m_Value: 0

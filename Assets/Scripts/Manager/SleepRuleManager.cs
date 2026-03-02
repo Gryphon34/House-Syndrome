@@ -8,11 +8,12 @@ public class SleepRuleManager : MonoBehaviour
     public static SleepRuleManager Instance { get; private set; }
 
     /// <summary> 이번 밤에 handle으로 오브젝트를 한 번이라도 켰는지 </summary>
-    bool handleShownThisNight;
+    [Header("Debug Status (Read Only)")]
+    [SerializeField] bool handleShownThisNight;
     /// <summary> 켠 뒤 다시 끈 적 있는지 </summary>
-    bool handleHiddenAfterShow;
+    [SerializeField] bool handleHiddenAfterShow;
     /// <summary> bathroom_handle을 E키로 한 번이라도 상호작용한 적 있는지 (리셋 안 함, CameraLookDown 등에서 사용) </summary>
-    bool hasEverUsedBathroomHandle;
+   [SerializeField] bool hasEverUsedBathroomHandle;
 
     void Awake()
     {

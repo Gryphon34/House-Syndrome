@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StalkerGhost
   playerTarget: {fileID: 0}
   timeToReach: 15
-  catchDistance: 0.5
+  catchDistance: 1.5
   animator: {fileID: 6678286698377359781}
   lookThreshold: 0.114
   ghostHeightOffset: 1.5
