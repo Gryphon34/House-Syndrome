@@ -35,8 +35,20 @@ public class ItemInteraction : MonoBehaviour
         public Sprite sprite;
     }
 
+    [Header("Diary UI")]
+    [Tooltip("diary 아이템 E키 시 화면 전체에 띄울 일기 UI 루트 (Canvas 하위 Panel 등)")]
+    public GameObject diaryUIRoot;
+    [Tooltip("일기 페이지 이미지를 표시할 Image. 순서대로 diaryPages[0]=첫 페이지(일기_1), [1]=두 번째(일기_2)")]
+    public Image diaryImage;
+    [Tooltip("일기 페이지 스프라이트 순서. [0]=일기_1, [1]=일기_2 …")]
+    public List<Sprite> diaryPages = new List<Sprite>();
+    [Tooltip("오른쪽으로 넘기라는 안내 문구를 표시할 Text. 비워두면 표시 안 함.")]
+    public TextMeshProUGUI diaryPageHintText;
+
     bool _isNewspaperOpen = false;
     bool _isClueViewerOpen = false;
+    bool _isDiaryOpen = false;
+    int _diaryCurrentPage = 0;
 
     void Update()
     {
@@ -50,6 +62,14 @@ public class ItemInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
                 CloseClueViewer();
+            return;
+        }
+        if (_isDiaryOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+                CloseDiary();
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+                DiaryNextPage();
             return;
         }
 
@@ -89,6 +109,8 @@ public class ItemInteraction : MonoBehaviour
                     OpenNewspaper(item);
                 else if (HasClueImageFor(item.itemName))
                     OpenClueViewer(item);
+                else if (item.itemName == "diary")
+                    OpenDiary(item);
                 else if (IsHandleItem(item.itemName))
                 {
                     if (!_hasDoneBathroomHandleFadeOnce)
@@ -117,7 +139,7 @@ public class ItemInteraction : MonoBehaviour
 
     /// <summary>E키 상호작용 후에도 씬에 남겨둘 아이템 이름 (사라지지 않음)</summary>
     /// <summary>clueImages에 등록된 아이템은 자동으로 씬에 남음. 여기에는 그 외 남겨둘 아이템만.</summary>
-    public static readonly string[] PersistentItemNames = { "bathroom_handle", "newspaper" };
+    public static readonly string[] PersistentItemNames = { "bathroom_handle", "newspaper", "diary" };
 
     /// <summary>이름이 handle(또는 bathroom_handle)인 아이템은 E키로 지정 오브젝트 활성/비활성 토글.</summary>
     public const string BathroomHandleItemName = "bathroom_handle";
@@ -292,6 +314,44 @@ public class ItemInteraction : MonoBehaviour
             clueViewerUIRoot.SetActive(false);
 
         _isClueViewerOpen = false;
+    }
+
+    void OpenDiary(Item item)
+    {
+        _diaryCurrentPage = 0;
+        if (diaryUIRoot != null)
+            diaryUIRoot.SetActive(true);
+        if (diaryImage != null && diaryPages != null && diaryPages.Count > 0)
+        {
+            diaryImage.sprite = diaryPages[0];
+            diaryImage.enabled = true;
+        }
+        if (diaryPageHintText != null)
+            diaryPageHintText.gameObject.SetActive(true);
+        _isDiaryOpen = true;
+        Collect(item);
+    }
+
+    void DiaryNextPage()
+    {
+        if (diaryPages == null || diaryPages.Count == 0) return;
+        _diaryCurrentPage++;
+        if (_diaryCurrentPage >= diaryPages.Count)
+            _diaryCurrentPage = diaryPages.Count - 1;
+        if (diaryImage != null && _diaryCurrentPage < diaryPages.Count && diaryPages[_diaryCurrentPage] != null)
+            diaryImage.sprite = diaryPages[_diaryCurrentPage];
+        if (diaryPageHintText != null && _diaryCurrentPage >= diaryPages.Count - 1)
+            diaryPageHintText.gameObject.SetActive(false);
+    }
+
+    void CloseDiary()
+    {
+        if (diaryUIRoot != null)
+            diaryUIRoot.SetActive(false);
+        if (diaryPageHintText != null)
+            diaryPageHintText.gameObject.SetActive(false);
+
+        _isDiaryOpen = false;
     }
 
     void Collect(Item item)
