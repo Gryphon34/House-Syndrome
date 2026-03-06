@@ -32,9 +32,9 @@ public class AudioManager : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float masterVolume = 1f;
 
-    [Header("키별 재생 지연 (AudioEmitter)")]
-    [Tooltip("'door' 키: AudioEmitter가 활성화된 후 이 시간(초) 뒤에 재생합니다. 0이면 지연 없음.")]
-    [SerializeField] private float doorSoundDelaySeconds = 120f;
+    [Header("Door Sound")]
+    [Tooltip("\"door\" 키의 효과음을 재생할 때 적용할 지연 시간(초). 0 이하면 지연 없음.")]
+    [SerializeField] private float doorSoundDelaySeconds = 0f;
 
     private readonly Dictionary<string, AudioClip> _clipByKey = new Dictionary<string, AudioClip>();
     private readonly Dictionary<string, float> _volumeByKey = new Dictionary<string, float>();

@@ -16,8 +16,43 @@ public class ItemInteraction : MonoBehaviour
     [Header("Inventory")]
     public List<string> collectedItems = new List<string>();
 
+    [Header("Newspaper UI")]
+    [Tooltip("E키로 newspaper 아이템과 상호작용했을 때 화면 전체에 띄울 신문 UI 루트 오브젝트 (Canvas 하위 Panel 등)")]
+    public GameObject newspaperUIRoot;
+
+    [Header("Clue Viewer UI")]
+    [Tooltip("clue_1 등 클루 아이템 E키 상호작용 시 화면 전체에 띄울 UI 루트 (Canvas 하위 Panel 등)")]
+    public GameObject clueViewerUIRoot;
+    [Tooltip("클루 이미지를 표시할 Image. clueViewerUIRoot 하위에 두거나 동일 패널에 붙이면 됨.")]
+    public Image clueViewerImage;
+    [Tooltip("아이템 이름별로 표시할 스프라이트. 예: clue_1 → clue_1 스프라이트")]
+    public List<ClueImageEntry> clueImages = new List<ClueImageEntry>();
+
+    [System.Serializable]
+    public class ClueImageEntry
+    {
+        public string itemName;
+        public Sprite sprite;
+    }
+
+    bool _isNewspaperOpen = false;
+    bool _isClueViewerOpen = false;
+
     void Update()
     {
+        if (_isNewspaperOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+                CloseNewspaper();
+            return;
+        }
+        if (_isClueViewerOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+                CloseClueViewer();
+            return;
+        }
+
         // ???????? ????? ??? ?? ??
         if (DifficultyManager.Instance == null || walkingCamera == null || !walkingCamera.gameObject.activeInHierarchy)
         {
@@ -50,6 +85,10 @@ public class ItemInteraction : MonoBehaviour
                     HidePhone(item);
                 else if (item.itemName == "box")
                     InteractWithBox(item);
+                else if (item.itemName == "newspaper")
+                    OpenNewspaper(item);
+                else if (HasClueImageFor(item.itemName))
+                    OpenClueViewer(item);
                 else if (IsHandleItem(item.itemName))
                 {
                     if (!_hasDoneBathroomHandleFadeOnce)
@@ -77,7 +116,8 @@ public class ItemInteraction : MonoBehaviour
     }
 
     /// <summary>E키 상호작용 후에도 씬에 남겨둘 아이템 이름 (사라지지 않음)</summary>
-    public static readonly string[] PersistentItemNames = { "bathroom_handle"};
+    /// <summary>clueImages에 등록된 아이템은 자동으로 씬에 남음. 여기에는 그 외 남겨둘 아이템만.</summary>
+    public static readonly string[] PersistentItemNames = { "bathroom_handle", "newspaper" };
 
     /// <summary>이름이 handle(또는 bathroom_handle)인 아이템은 E키로 지정 오브젝트 활성/비활성 토글.</summary>
     public const string BathroomHandleItemName = "bathroom_handle";
@@ -199,6 +239,61 @@ public class ItemInteraction : MonoBehaviour
         _isHandleFading = false;
     }
 
+    void OpenNewspaper(Item item)
+    {
+        if (newspaperUIRoot != null)
+            newspaperUIRoot.SetActive(true);
+
+        _isNewspaperOpen = true;
+        Collect(item);
+    }
+
+    void CloseNewspaper()
+    {
+        if (newspaperUIRoot != null)
+            newspaperUIRoot.SetActive(false);
+
+        _isNewspaperOpen = false;
+    }
+
+    /// <summary>clueImages에 해당 itemName이 있으면 true (clue_1, clue_2, clue_3 등 추가 시 여기만 등록하면 됨)</summary>
+    bool HasClueImageFor(string itemName)
+    {
+        if (string.IsNullOrEmpty(itemName) || clueImages == null) return false;
+        foreach (var entry in clueImages)
+            if (entry != null && entry.itemName == itemName) return true;
+        return false;
+    }
+
+    void OpenClueViewer(Item item)
+    {
+        if (clueViewerImage != null && clueImages != null)
+        {
+            foreach (var entry in clueImages)
+            {
+                if (entry != null && entry.itemName == item.itemName && entry.sprite != null)
+                {
+                    clueViewerImage.sprite = entry.sprite;
+                    clueViewerImage.enabled = true;
+                    break;
+                }
+            }
+        }
+        if (clueViewerUIRoot != null)
+            clueViewerUIRoot.SetActive(true);
+
+        _isClueViewerOpen = true;
+        Collect(item);
+    }
+
+    void CloseClueViewer()
+    {
+        if (clueViewerUIRoot != null)
+            clueViewerUIRoot.SetActive(false);
+
+        _isClueViewerOpen = false;
+    }
+
     void Collect(Item item)
     {
         collectedItems.Add(item.itemName);
@@ -218,6 +313,8 @@ public class ItemInteraction : MonoBehaviour
                 break;
             }
         }
+        if (!keepInScene && HasClueImageFor(item.itemName))
+            keepInScene = true;
         if (!keepInScene)
             Destroy(item.gameObject);
     }
