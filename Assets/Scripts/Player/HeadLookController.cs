@@ -3,28 +3,32 @@ using UnityEngine;
 public class HeadLookController : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
-    public Transform playerHead; // mixamorig:Head ÇÒ´ç
+    public Transform playerHead; // mixamorig:Head ï¿½Ò´ï¿½
+    public bool isLocked = false; // [ì¶”ê°€] ì‹œì„  ì ê¸ˆ í”Œë˜ê·¸
 
     float xRotation = 0f;
     float yRotation = 0f;
 
     void Start()
     {
-        // ¸¶¿ì½º Ä¿¼­¸¦ È­¸é Áß¾Ó¿¡ °íÁ¤
+        // ï¿½ï¿½ï¿½ì½º Ä¿ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ß¾Ó¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        // ì‹œì„ ì´ ì ê²¨ìˆìœ¼ë©´ ë§ˆìš°ìŠ¤ ì…ë ¥ì„ ë°›ì§€ ì•ŠìŠµë‹ˆë‹¤.
+        if (isLocked) return; 
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         yRotation += mouseX;
         xRotation -= mouseY;
 
-        // °í°³°¡ µ¹¾Æ°¡´Â °¢µµ Á¦ÇÑ (´©¿öÀÖ´Â ½ÃÁ¡ ÃÖÀûÈ­)
-        xRotation = Mathf.Clamp(xRotation, -30f, 30f); // À§¾Æ·¡
-        yRotation = Mathf.Clamp(yRotation, -60f, 60f); // ÁÂ¿ì (¼ÕÀ» º¸±â À§ÇØ)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­)
+        xRotation = Mathf.Clamp(xRotation, -30f, 30f); // ï¿½ï¿½ï¿½Æ·ï¿½
+        yRotation = Mathf.Clamp(yRotation, -60f, 60f); // ï¿½Â¿ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
         playerHead.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
