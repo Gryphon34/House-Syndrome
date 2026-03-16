@@ -8,13 +8,14 @@ public class GhostManager : MonoBehaviour
     [System.Serializable]
     public class DayGhostSettings
     {
-        public string dayName;
-        public GameObject ghostPrefab;
-        public Transform[] movePath;
-        public Transform spawnPoint;
+        public string dayName;           // ìš”ì¼ ì´ë¦„ (í™•ì¸ìš©)
+        public GameObject ghostPrefab;   // ì†Œí™˜í•  ê·€ì‹  í”„ë¦¬íŒ¹
+        public Transform spawnPoint;     // ì†Œí™˜ë  ìœ„ì¹˜
     }
 
+    [Header("Day-by-Day Ghost Settings")]
     public DayGhostSettings[] daySettings = new DayGhostSettings[7];
+
     private GameObject currentActiveGhost;
     private bool isSpawning = false;
 
@@ -26,17 +27,15 @@ public class GhostManager : MonoBehaviour
 
     void Update()
     {
-        // [ÇÙ½É ¼öÁ¤] NightMarePlayer ¿ÀºêÁ§Æ®°¡ È°¼ºÈ­µÇ¾ú´ÂÁö Á÷Á¢ È®ÀÎÇÕ´Ï´Ù.
+        // ë°¤ëª½ í”Œë ˆì´ì–´ê°€ í™œì„±í™”ë˜ì–´ ìˆì„ ë•Œë§Œ ì†Œí™˜ ì²´í¬
         GameObject nightmarePlayer = GameObject.Find("NightMarePlayer");
         bool isNightmareActive = nightmarePlayer != null && nightmarePlayer.activeInHierarchy;
 
-        // ¹ãÀÌ°í, NightMarePlayer°¡ ÄÑÁ³À¸¸ç, ¾ÆÁ÷ ±Í½ÅÀÌ ¾øÀ» ¶§ 7ÃÊ ´ë±â ½ÃÀÛ
         if (isNightmareActive && currentActiveGhost == null && !isSpawning)
         {
             StartCoroutine(SpawnAfterSevenSeconds(nightmarePlayer.transform));
         }
 
-        // °¡À§¿¡¼­ ±ú¾î³ª¸é(NightMarePlayer°¡ ²¨Áö¸é) »óÅÂ ¸®¼Â
         if (!isNightmareActive)
         {
             isSpawning = false;
@@ -46,11 +45,10 @@ public class GhostManager : MonoBehaviour
     IEnumerator SpawnAfterSevenSeconds(Transform target)
     {
         isSpawning = true;
-        Debug.Log("<color=orange>NightMarePlayer È°¼ºÈ­ °¨Áö! 7ÃÊ µÚ ±Í½ÅÀÌ ³ªÅ¸³³´Ï´Ù.</color>");
+        Debug.Log("<color=orange>[GhostManager] ê°€ìœ„ëˆŒë¦¼ ì‹œì‘: 7ì´ˆ í›„ ê·€ì‹ ì´ ìƒì„±ë©ë‹ˆë‹¤.</color>");
 
-        yield return new WaitForSeconds(7f); // [ÇÙ½É] 7ÃÊ ´ë±â
+        yield return new WaitForSeconds(7f);
 
-        // 7ÃÊ ÈÄ¿¡µµ ¿©ÀüÈ÷ ÇÃ·¹ÀÌ¾î°¡ °¡À§´­¸² »óÅÂÀÎÁö ÀçÈ®ÀÎ
         if (target != null && target.gameObject.activeInHierarchy)
         {
             SpawnGhostForCurrentDay(target);
@@ -59,36 +57,35 @@ public class GhostManager : MonoBehaviour
 
     void SpawnGhostForCurrentDay(Transform target)
     {
+        // SpawnManagerì˜ í˜„ì¬ ë‚ ì§œë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì„¤ì • ê°€ì ¸ì˜¤ê¸°
         int dayIndex = Mathf.Clamp(SpawnManager.Instance.currentDay - 1, 0, daySettings.Length - 1);
         DayGhostSettings settings = daySettings[dayIndex];
 
         if (settings.ghostPrefab != null && settings.spawnPoint != null)
         {
+            // ê·€ì‹  ìƒì„±
             currentActiveGhost = Instantiate(settings.ghostPrefab, settings.spawnPoint.position, settings.spawnPoint.rotation);
 
-            // 1. ÀÏ¹İ ±Í½ÅÀÎ °æ¿ì Ã³¸®
-            var normalGhost = currentActiveGhost.GetComponent<NormalGhost>();
-            if (normalGhost != null)
+            // [NavMesh ë°©ì‹] íƒ€ê²Ÿë§Œ ì„¤ì •í•´ì£¼ë©´ ê·€ì‹ ì´ ìŠ¤ìŠ¤ë¡œ ê¸¸ì„ ì°¾ì•„ê°‘ë‹ˆë‹¤.
+            var ghostLogic = currentActiveGhost.GetComponent<NavMeshGhostBase>();
+            if (ghostLogic != null)
             {
-                normalGhost.SetPath(settings.movePath);
-                normalGhost.SetTarget(target);
-                normalGhost.startDelay = 0f;
+                ghostLogic.SetTarget(target);
             }
-
-            // 2. [Ãß°¡] Á¤Áö ±Í½Å(StalkerGhost)ÀÎ °æ¿ì Ã³¸®
-            var stalkerGhost = currentActiveGhost.GetComponent<StalkerGhost>();
-            if (stalkerGhost != null)
+            else
             {
-                stalkerGhost.SetPath(settings.movePath);
-                stalkerGhost.SetTarget(target);
-                // StalkerGhost¿¡´Â startDelay°¡ ¾øÀ¸¹Ç·Î ÀÌ ÁÙÀº »ı·«ÇÕ´Ï´Ù.
+                Debug.LogWarning($"{settings.ghostPrefab.name}ì— NavMeshGhostBase ìŠ¤í¬ë¦½íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤!");
             }
         }
     }
 
     public void ClearGhost()
     {
-        if (currentActiveGhost != null) { Destroy(currentActiveGhost); currentActiveGhost = null; }
+        if (currentActiveGhost != null) 
+        { 
+            Destroy(currentActiveGhost); 
+            currentActiveGhost = null; 
+        }
         isSpawning = false;
     }
 }

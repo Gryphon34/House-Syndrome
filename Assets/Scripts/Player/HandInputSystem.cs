@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class HandInputSystem : MonoBehaviour
 {
@@ -38,9 +37,11 @@ public class HandInputSystem : MonoBehaviour
     public float maxGaugePerHand = 100f;
     public float individualWinThreshold = 80f;
 
+    [Header("Reflector Ghost Effect")]
+    public bool isVisualMirrored = false; // [핵심] 반사체 귀신이 이 값을 켭니다.
+
     public Slider individualGaugeUI;
 
-    // ��ġ �������� ���� DifficultyManager���� �����ɴϴ�.
     private float cycleIncreaseAmount;
     private float failPenaltyAmount;
     private float constantDecayRate;
@@ -57,18 +58,21 @@ public class HandInputSystem : MonoBehaviour
     private Camera mainCam;
 
     private EyeBlinkController eyeController;
+
+    public bool didJustFail = false; // 이번 프레임에 실패했는지 여부
+    public bool didJustSucceed = false; // 이번 사이클을 성공했는지 여부
+
+    public bool isTwinMode = false; // 쌍둥이 귀신 등장 시 true로 설정
+
     void Start()
     {
-        // [�߰�] ���� ���۵ǰų� ��ε�� �� static �������� 0���� �����մϴ�.
         leftGauge = 0f;
         rightGauge = 0f;
 
-        // DifficultyManager�� �ִ��� Ȯ���ϰ� ��ġ ��������
         UpdateDifficultyFromManager();
-
         mainCam = Camera.main;
+        eyeController = FindFirstObjectByType<EyeBlinkController>();
 
-        eyeController=FindFirstObjectByType<EyeBlinkController>();
         if (thumbBone != null) initialThumbRotation = thumbBone.localRotation;
         initialFingerRotations = new Quaternion[fingerBones.Length];
         for (int i = 0; i < fingerBones.Length; i++)
@@ -129,34 +133,62 @@ public class HandInputSystem : MonoBehaviour
         currentIndex++;
         if (currentIndex >= currentSequence.Count)
         {
-            if (handSide == HandSide.Left)
-                leftGauge = Mathf.Min(maxGaugePerHand, leftGauge + cycleIncreaseAmount);
-            else
-                rightGauge = Mathf.Min(maxGaugePerHand, rightGauge + cycleIncreaseAmount);
+        // [수정] 시계 귀신 효과를 위해 성공 플래그 세우기
+            didJustSucceed = true; 
+        
+            // 기존 게이지 상승 로직...
+            float accelerationMultiplier = 1f + ( (leftGauge + rightGauge) / (maxGaugePerHand * 2f) );
+            float finalGain = cycleIncreaseAmount * accelerationMultiplier; // 성공할수록 더 많이 참
 
-            StartCoroutine(ShowCycleFeedback());
+            if (handSide == HandSide.Left)
+                leftGauge = Mathf.Min(maxGaugePerHand, leftGauge + finalGain);
+            else
+                rightGauge = Mathf.Min(maxGaugePerHand, rightGauge + finalGain);
+
+            StartCoroutine(ResetSuccessFlag());
             GenerateNewSequence();
         }
     }
-
     void FailInput()
+{
+    didJustFail = true; 
+    StartCoroutine(ResetFailFlag());
+
+    // [특징 반영] 실패 시 게이지 대폭 고갈 (기본 패널티의 3배 등) 
+    float heavyPenalty = failPenaltyAmount * 3f; 
+
+    if (handSide == HandSide.Left)
+        leftGauge = Mathf.Max(0, leftGauge - heavyPenalty);
+    else
+        rightGauge = Mathf.Max(0, rightGauge - heavyPenalty);
+
+    GenerateNewSequence();
+}
+
+    IEnumerator ResetFailFlag() { yield return new WaitForEndOfFrame(); didJustFail = false; }
+    IEnumerator ResetSuccessFlag() { yield return new WaitForEndOfFrame(); didJustSucceed = false; }
+
+    public void GenerateNewSequence()
+{
+    currentSequence.Clear();
+    currentIndex = 0;
+
+    for (int i = 0; i < sequenceLength; i++)
     {
-        if (handSide == HandSide.Left)
-            leftGauge = Mathf.Max(0, leftGauge - failPenaltyAmount);
+        KeyCode targetKey = fingerKeys[Random.Range(0, fingerKeys.Length)];
+        
+        // [핵심] 쌍둥이 모드라면 같은 키를 리스트에 두 번 연속 추가
+        if (isTwinMode)
+        {
+            currentSequence.Add(targetKey);
+            currentSequence.Add(targetKey);
+        }
         else
-            rightGauge = Mathf.Max(0, rightGauge - failPenaltyAmount);
-
-        GenerateNewSequence();
+        {
+            currentSequence.Add(targetKey);
+        }
     }
-
-    void GenerateNewSequence()
-    {
-        currentSequence.Clear();
-        currentIndex = 0;
-        // �Ŵ������� �޾ƿ� ���̸� ����մϴ�.
-        for (int i = 0; i < sequenceLength; i++)
-            currentSequence.Add(fingerKeys[Random.Range(0, fingerKeys.Length)]);
-    }
+}
 
     // HandInputSystem.cs�� WakeUp �Լ� ����
 
@@ -190,22 +222,27 @@ public class HandInputSystem : MonoBehaviour
 
 
     void CheckInput()
+{
+    if (Input.GetKey(thumbKey))
     {
-        if (Input.GetKey(thumbKey))
+        RotateBone(thumbBone, initialThumbRotation, bendAngle);
+        for (int i = 0; i < fingerKeys.Length; i++)
         {
-            RotateBone(thumbBone, initialThumbRotation, bendAngle);
-            for (int i = 0; i < fingerKeys.Length; i++)
+            if (Input.GetKeyDown(fingerKeys[i]))
             {
-                if (Input.GetKeyDown(fingerKeys[i]))
-                {
-                    StartCoroutine(FingerTapRoutine(i));
-                    if (fingerKeys[i] == currentSequence[currentIndex]) SuccessInput();
-                    else FailInput();
-                }
+                // [기획 반영] 반사체 귀신 효과: 실제 누른 키와 상관없이 '시각적 손가락 까딱임'만 반전
+                int visualIndex = isVisualMirrored ? (fingerKeys.Length - 1 - i) : i;
+                StartCoroutine(FingerTapRoutine(visualIndex));
+
+                // [중요] 입력 판정은 반전 없이 물리적인 키(i)를 그대로 사용
+                // 결과적으로 ASDF를 누르면 게이지는 정상적으로 올라갑니다.
+                if (fingerKeys[i] == currentSequence[currentIndex]) SuccessInput();
+                else FailInput();
             }
         }
-        else if (thumbBone != null) thumbBone.localRotation = initialThumbRotation;
     }
+    else if (thumbBone != null) thumbBone.localRotation = initialThumbRotation;
+}
 
 
     IEnumerator ShowCycleFeedback()
@@ -267,53 +304,58 @@ public class HandInputSystem : MonoBehaviour
     }
 
     // ... (���� ��ƿ��Ƽ �Լ� FingerTapRoutine, RotateBone, SetupUI, UpdateUIPositions, FollowTarget, GenerateNewSequence ����)
-    IEnumerator FingerTapRoutine(int index)
-    {
+    IEnumerator FingerTapRoutine(int index) {
         if (index >= fingerBones.Length || fingerBones[index] == null) yield break;
         RotateBone(fingerBones[index], initialFingerRotations[index], bendAngle);
         yield return new WaitForSeconds(0.1f);
         fingerBones[index].localRotation = initialFingerRotations[index];
     }
 
-    void RotateBone(Transform bone, Quaternion baseRot, float angle)
-    {
+    void RotateBone(Transform bone, Quaternion baseRot, float angle) {
         if (bone != null) bone.localRotation = baseRot * Quaternion.Euler(rotationAxis * angle);
     }
 
-    void SetupUI()
-    {
+    void SetupUI() {
         if (thumbUI != null) thumbUI.GetComponent<TextMeshProUGUI>().text = thumbKey.ToString();
-        for (int i = 0; i < fingerUIs.Length; i++)
-        {
+        for (int i = 0; i < fingerUIs.Length; i++) {
             if (fingerUIs[i] != null) fingerUIs[i].GetComponent<TextMeshProUGUI>().text = fingerKeys[i].ToString();
         }
     }
 
     void UpdateUIPositions()
+{
+    if (mainCam == null || !uiParentGroup.activeSelf) return;
+
+    FollowTarget(thumbUITarget, thumbUI);
+
+    // [기획 반영] UI 강조(노란색)는 귀신 효과와 상관없이 항상 현재 눌러야 할 키를 올바르게 가리킴
+    int targetKeyIndex = -1;
+    if (currentSequence.Count > currentIndex)
     {
-        if (mainCam == null || !uiParentGroup.activeSelf) return;
-        FollowTarget(thumbUITarget, thumbUI);
-        for (int i = 0; i < fingerUITargets.Length; i++)
-        {
-            if (i >= fingerUIs.Length || fingerUIs[i] == null || fingerUITargets[i] == null) continue;
-            FollowTarget(fingerUITargets[i], fingerUIs[i]);
-            var t = fingerUIs[i].GetComponent<TextMeshProUGUI>();
-            if (t != null && currentSequence.Count > currentIndex)
-            {
-                t.color = (fingerKeys[i] == currentSequence[currentIndex]) ? targetColor : normalColor;
-            }
-        }
+        targetKeyIndex = System.Array.IndexOf(fingerKeys, currentSequence[currentIndex]);
     }
 
-    void FollowTarget(Transform target, RectTransform ui)
+    for (int i = 0; i < fingerUITargets.Length; i++)
     {
+        if (i >= fingerUIs.Length || fingerUIs[i] == null || fingerUITargets[i] == null) continue;
+        FollowTarget(fingerUITargets[i], fingerUIs[i]);
+        
+        var t = fingerUIs[i].GetComponent<TextMeshProUGUI>();
+        if (t != null)
+        {
+            // UI 텍스트(A, S, D, F)도 항상 정방향으로 유지
+            t.text = fingerKeys[i].ToString();
+            
+            // 노란색 강조 표시도 실제 타겟 인덱스에 맞춰 정직하게 표시
+            t.color = (i == targetKeyIndex) ? targetColor : normalColor;
+        }
+    }
+}
+
+    void FollowTarget(Transform target, RectTransform ui) {
         if (target == null || ui == null) return;
         Vector3 screenPos = mainCam.WorldToScreenPoint(target.position);
-        if (screenPos.z > 0)
-        {
-            ui.gameObject.SetActive(true);
-            ui.position = screenPos;
-        }
+        if (screenPos.z > 0) { ui.gameObject.SetActive(true); ui.position = screenPos; }
         else ui.gameObject.SetActive(false);
     }
 }
