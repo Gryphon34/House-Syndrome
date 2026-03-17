@@ -52,10 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MimicGhost
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: b439209090a50d543be30774dfcecb26, type: 3}
-      propertyPath: m_TagString
-      value: Ghost
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -90,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1f43632b6556f4094225f6be445d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::MimicGhost
-  speed: 0.4
+  speed: 0.7
   catchDistance: 1.5
   voiceSource: {fileID: 4486129246297779145}
   sighClip: {fileID: 8300000, guid: e9613d1b4245b41b1b4eb8805de8738d, type: 3}

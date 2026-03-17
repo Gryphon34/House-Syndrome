@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4994002287456537257}
   m_Layer: 0
   m_Name: TwinPair
-  m_TagString: Ghost
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a760aab34e6027b439e94c51340a5740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::TwinGhostGroup
-  speed: 0.4
+  speed: 1
   catchDistance: 1.5
 --- !u!1001 &3678389159014043507
 PrefabInstance:

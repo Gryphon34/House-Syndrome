@@ -6,7 +6,6 @@ using UnityEngine;
 public class ReflectionGhost : NavMeshGhostBase
 {
     [Header("Animation & Components")]
-
     public Animator animator;
 
     protected override void Start()
@@ -39,12 +38,7 @@ public class ReflectionGhost : NavMeshGhostBase
         HandInputSystem[] allHands = FindObjectsByType<HandInputSystem>(FindObjectsSortMode.None);
         foreach (var hand in allHands)
         {
-            if (hand != null)
-            {
-                hand.isVisualMirrored = active;
-                // [추가] 키 세트가 변경되었으므로 시퀀스를 즉시 갱신합니다.
-                hand.GenerateNewSequence(); 
-            }
+            if (hand != null) hand.isVisualMirrored = active;
         }
     }
 
