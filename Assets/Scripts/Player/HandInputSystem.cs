@@ -51,6 +51,10 @@ public class HandInputSystem : MonoBehaviour
     public LayerMask handLayer;
     public float rayDistance = 10f;
 
+    [Header("Reflector Ghost Keys")]
+    public KeyCode mirroredThumbKey;//반전 시 엄지 키
+    public KeyCode[] mirroredFingerKeys;// 반전 시 각 손가락 키
+
     private Quaternion initialThumbRotation;
     private Quaternion[] initialFingerRotations;
     private List<KeyCode> currentSequence = new List<KeyCode>();
@@ -173,11 +177,17 @@ public class HandInputSystem : MonoBehaviour
     currentSequence.Clear();
     currentIndex = 0;
 
+    // [핵심 수정] 현재 반사체 효과 유무에 따라 시퀀스 생성에 사용할 키 풀을 선택합니다.
+    KeyCode[] activePool = isVisualMirrored ? mirroredFingerKeys : fingerKeys;
+
+    // 에러 방지: 키 풀이 비어있으면 중단
+    if (activePool == null || activePool.Length == 0) return;
+
     for (int i = 0; i < sequenceLength; i++)
     {
-        KeyCode targetKey = fingerKeys[Random.Range(0, fingerKeys.Length)];
+        // 이제 activePool(반전 시에는 mirroredFingerKeys)에서 키를 뽑습니다.
+        KeyCode targetKey = activePool[Random.Range(0, activePool.Length)];
         
-        // [핵심] 쌍둥이 모드라면 같은 키를 리스트에 두 번 연속 추가
         if (isTwinMode)
         {
             currentSequence.Add(targetKey);
@@ -223,20 +233,23 @@ public class HandInputSystem : MonoBehaviour
 
     void CheckInput()
 {
-    if (Input.GetKey(thumbKey))
+    // [핵심] 현재 귀신 효과 유무에 따라 사용할 키 세트를 결정 (왼손/오른손 개별 적용)
+    KeyCode activeThumb = isVisualMirrored ? mirroredThumbKey : thumbKey;
+    KeyCode[] activeFingers = isVisualMirrored ? mirroredFingerKeys : fingerKeys;
+
+    if (Input.GetKey(activeThumb))
     {
         RotateBone(thumbBone, initialThumbRotation, bendAngle);
-        for (int i = 0; i < fingerKeys.Length; i++)
+        for (int i = 0; i < activeFingers.Length; i++)
         {
-            if (Input.GetKeyDown(fingerKeys[i]))
+            if (Input.GetKeyDown(activeFingers[i]))
             {
-                // [기획 반영] 반사체 귀신 효과: 실제 누른 키와 상관없이 '시각적 손가락 까딱임'만 반전
-                int visualIndex = isVisualMirrored ? (fingerKeys.Length - 1 - i) : i;
+                // 손가락 애니메이션 반전 (시각적 기괴함 유지)
+                int visualIndex = isVisualMirrored ? (activeFingers.Length - 1 - i) : i;
                 StartCoroutine(FingerTapRoutine(visualIndex));
 
-                // [중요] 입력 판정은 반전 없이 물리적인 키(i)를 그대로 사용
-                // 결과적으로 ASDF를 누르면 게이지는 정상적으로 올라갑니다.
-                if (fingerKeys[i] == currentSequence[currentIndex]) SuccessInput();
+                // 현재 활성화된 키(activeFingers)로 정직하게 입력 판정
+                if (activeFingers[i] == currentSequence[currentIndex]) SuccessInput();
                 else FailInput();
             }
         }
@@ -328,11 +341,18 @@ public class HandInputSystem : MonoBehaviour
 
     FollowTarget(thumbUITarget, thumbUI);
 
-    // [기획 반영] UI 강조(노란색)는 귀신 효과와 상관없이 항상 현재 눌러야 할 키를 올바르게 가리킴
+    // 현재 모드에 맞는 키 세트 참조
+    KeyCode activeThumb = isVisualMirrored ? mirroredThumbKey : thumbKey;
+    KeyCode[] activeFingers = isVisualMirrored ? mirroredFingerKeys : fingerKeys;
+
+    // 엄지 UI 텍스트 업데이트
+    var thumbText = thumbUI.GetComponent<TextMeshProUGUI>();
+    if (thumbText != null) thumbText.text = activeThumb.ToString();
+
     int targetKeyIndex = -1;
     if (currentSequence.Count > currentIndex)
     {
-        targetKeyIndex = System.Array.IndexOf(fingerKeys, currentSequence[currentIndex]);
+        targetKeyIndex = System.Array.IndexOf(activeFingers, currentSequence[currentIndex]);
     }
 
     for (int i = 0; i < fingerUITargets.Length; i++)
@@ -343,10 +363,8 @@ public class HandInputSystem : MonoBehaviour
         var t = fingerUIs[i].GetComponent<TextMeshProUGUI>();
         if (t != null)
         {
-            // UI 텍스트(A, S, D, F)도 항상 정방향으로 유지
-            t.text = fingerKeys[i].ToString();
-            
-            // 노란색 강조 표시도 실제 타겟 인덱스에 맞춰 정직하게 표시
+            // UI에 현재 눌러야 할 실제 키(반전된 키 포함)를 표시
+            t.text = activeFingers[i].ToString();
             t.color = (i == targetKeyIndex) ? targetColor : normalColor;
         }
     }

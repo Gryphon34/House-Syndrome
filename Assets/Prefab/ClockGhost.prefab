@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClockGhost
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6385cbdf05c1bd348867d065fc9c80c0, type: 3}
+      propertyPath: m_TagString
+      value: Ghost
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -105,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c59769ec2c2fde4ebe80b22ca9d4bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::ClockGhost
-  speed: 0.7
+  speed: 0.4
   catchDistance: 1.5
   failSpeedBoost: 0.8
   maxPossibleSpeed: 15
