@@ -101,6 +101,14 @@ public class ItemInteraction : MonoBehaviour
             interactPromptUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
+                // 범용 대사 상호작용(오브젝트에 DialogueOnInteract만 붙이면 동작)
+                DialogueOnInteract dialogue = hit.transform.GetComponentInParent<DialogueOnInteract>();
+                if (dialogue != null)
+                {
+                    bool consumed = dialogue.TryInteract();
+                    if (consumed) return;
+                }
+
                 if (item.itemName == PhonePlace.PhoneItemName)
                     HidePhone(item);
                 else if (item.itemName == "box")
@@ -130,7 +138,13 @@ public class ItemInteraction : MonoBehaviour
         {
             interactPromptUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
+            {
                 ShowPhone(phonePlace);
+
+                // PhonePlace(또는 그 부모)에 DialogueOnInteract가 붙어있으면 같이 대사 출력
+                DialogueOnInteract dialogue = hit.transform.GetComponentInParent<DialogueOnInteract>();
+                if (dialogue != null) dialogue.TryInteract();
+            }
             return;
         }
 
