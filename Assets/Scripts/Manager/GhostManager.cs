@@ -8,15 +8,18 @@ public class GhostManager : MonoBehaviour
     [System.Serializable]
     public class DayGhostSettings
     {
-        public string dayName;           // 요일 이름 (확인용)
-        public GameObject ghostPrefab;   // 소환할 귀신 프리팹
-        public Transform spawnPoint;     // 소환될 위치
+        public string dayName;
+        public GameObject ghostPrefab;
+        public Transform spawnPoint;
     }
 
     [Header("Day-by-Day Ghost Settings")]
     public DayGhostSettings[] daySettings = new DayGhostSettings[7];
 
+    // 수정된 부분: 실제 값을 담는 변수는 private으로, 외부에 보여주는 통로는 public으로 만듭니다.
     private GameObject currentActiveGhost;
+    public GameObject CurrentActiveGhost => currentActiveGhost;
+
     private bool isSpawning = false;
 
     void Awake()
@@ -27,7 +30,6 @@ public class GhostManager : MonoBehaviour
 
     void Update()
     {
-        // 밤몽 플레이어가 활성화되어 있을 때만 소환 체크
         GameObject nightmarePlayer = GameObject.Find("NightMarePlayer");
         bool isNightmareActive = nightmarePlayer != null && nightmarePlayer.activeInHierarchy;
 
@@ -57,16 +59,14 @@ public class GhostManager : MonoBehaviour
 
     void SpawnGhostForCurrentDay(Transform target)
     {
-        // SpawnManager의 현재 날짜를 기준으로 설정 가져오기
         int dayIndex = Mathf.Clamp(SpawnManager.Instance.currentDay - 1, 0, daySettings.Length - 1);
         DayGhostSettings settings = daySettings[dayIndex];
 
         if (settings.ghostPrefab != null && settings.spawnPoint != null)
         {
-            // 귀신 생성
+            // 이제 currentActiveGhost 변수에 정상적으로 값을 할당할 수 있습니다.
             currentActiveGhost = Instantiate(settings.ghostPrefab, settings.spawnPoint.position, settings.spawnPoint.rotation);
 
-            // [NavMesh 방식] 타겟만 설정해주면 귀신이 스스로 길을 찾아갑니다.
             var ghostLogic = currentActiveGhost.GetComponent<NavMeshGhostBase>();
             if (ghostLogic != null)
             {
