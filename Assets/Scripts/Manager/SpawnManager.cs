@@ -38,7 +38,8 @@ public class SpawnManager : MonoBehaviour
     public DayMapManager dayMapManager;
 
     [Header("Spawn Dialogue")]
-    [Tooltip("스폰 시 검정·Day UI 인트로가 끝난 뒤 DialogueOnInteract.TryInteract()로 대사를 띄웁니다. 빈 오브젝트에 DialogueOnInteract만 붙여 메시지·표시 시간을 설정하고 여기에 연결하세요.")]
+    [Tooltip("비우면: 현재 일차 spawnPoints[Day-1] 오브젝트(또는 자식)에 붙은 DialogueOnInteract를 사용합니다.\n" +
+             "연결해 두면: 스폰 포인트에 컴포넌트가 없을 때만 이 대사를 씁니다.")]
     public DialogueOnInteract spawnDialogue;
 
     [Header("Spawn Audio")]
@@ -197,6 +198,28 @@ public class SpawnManager : MonoBehaviour
         Debug.Log($"<color=green>Day {currentDay}: {target.name}으로 스폰</color>");
     }
 
+    /// <summary>
+    /// 현재 일차 스폰 포인트(또는 비활성 자식 포함)의 DialogueOnInteract, 없으면 spawnDialogue 폴백.
+    /// </summary>
+    DialogueOnInteract ResolveSpawnDialogue()
+    {
+        if (spawnPoints != null && spawnPoints.Length > 0)
+        {
+            int idx = Mathf.Clamp(currentDay - 1, 0, spawnPoints.Length - 1);
+            Transform t = spawnPoints[idx];
+            if (t != null)
+            {
+                DialogueOnInteract onPoint = t.GetComponent<DialogueOnInteract>();
+                if (onPoint == null)
+                    onPoint = t.GetComponentInChildren<DialogueOnInteract>(true);
+                if (onPoint != null)
+                    return onPoint;
+            }
+        }
+
+        return spawnDialogue;
+    }
+
     void PlaySpawnAudioIfConfigured()
     {
         if (string.IsNullOrWhiteSpace(spawnAudioKey) || AudioManager.Instance == null)
@@ -231,7 +254,7 @@ public class SpawnManager : MonoBehaviour
             spawnIntroRoutine = null;
         }
 
-        if (dayText == null && screenFadeImage == null && spawnDialogue == null && string.IsNullOrWhiteSpace(spawnAudioKey))
+        if (dayText == null && screenFadeImage == null && ResolveSpawnDialogue() == null && string.IsNullOrWhiteSpace(spawnAudioKey))
             return;
 
         spawnIntroRoutine = StartCoroutine(SpawnIntroRoutine());
@@ -261,8 +284,9 @@ public class SpawnManager : MonoBehaviour
 
         if (useDay)
             PrepareDayTextForIntro();
-        if (spawnDialogue != null)
-            spawnDialogue.TryInteract();
+        DialogueOnInteract dialogue = ResolveSpawnDialogue();
+        if (dialogue != null)
+            dialogue.TryInteract();
         if (useDay)
             yield return DayTextFadeInHoldFadeOutRoutine();
 
