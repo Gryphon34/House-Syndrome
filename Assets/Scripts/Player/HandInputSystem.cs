@@ -55,6 +55,12 @@ public class HandInputSystem : MonoBehaviour
     public KeyCode mirroredThumbKey;//반전 시 엄지 키
     public KeyCode[] mirroredFingerKeys;// 반전 시 각 손가락 키
 
+    [Header("Audio Settings")]
+    public AudioSource audioSource;
+    public AudioClip correctKeyClip;    // 개별 키 성공
+    public AudioClip cycleSuccessClip; // 사이클 완료
+    public AudioClip failClip; //입력 실패
+
     private Quaternion initialThumbRotation;
     private Quaternion[] initialFingerRotations;
     private List<KeyCode> currentSequence = new List<KeyCode>();
@@ -133,34 +139,41 @@ public class HandInputSystem : MonoBehaviour
     }
 
     void SuccessInput()
+{
+    // [추가] 개별 키 입력 성공 사운드 재생
+    if (audioSource != null && correctKeyClip != null)
+        audioSource.PlayOneShot(correctKeyClip);
+
+    currentIndex++;
+    if (currentIndex >= currentSequence.Count)
     {
-        currentIndex++;
-        if (currentIndex >= currentSequence.Count)
-        {
-        // [수정] 시계 귀신 효과를 위해 성공 플래그 세우기
-            didJustSucceed = true; 
-        
-            // 기존 게이지 상승 로직...
-            float accelerationMultiplier = 1f + ( (leftGauge + rightGauge) / (maxGaugePerHand * 2f) );
-            float finalGain = cycleIncreaseAmount * accelerationMultiplier; // 성공할수록 더 많이 참
+        // [추가] 한 사이클 전체 성공 사운드 재생
+        if (audioSource != null && cycleSuccessClip != null)
+            audioSource.PlayOneShot(cycleSuccessClip);
 
-            if (handSide == HandSide.Left)
-                leftGauge = Mathf.Min(maxGaugePerHand, leftGauge + finalGain);
-            else
-                rightGauge = Mathf.Min(maxGaugePerHand, rightGauge + finalGain);
+        didJustSucceed = true; 
+        float accelerationMultiplier = 1f + ( (leftGauge + rightGauge) / (maxGaugePerHand * 2f) );
+        float finalGain = cycleIncreaseAmount * accelerationMultiplier;
 
-            StartCoroutine(ResetSuccessFlag());
-            GenerateNewSequence();
-        }
+        if (handSide == HandSide.Left)
+            leftGauge = Mathf.Min(maxGaugePerHand, leftGauge + finalGain);
+        else
+            rightGauge = Mathf.Min(maxGaugePerHand, rightGauge + finalGain);
+
+        StartCoroutine(ResetSuccessFlag());
+        GenerateNewSequence();
     }
+}
     void FailInput()
 {
+    // [추가] 입력 실패 사운드 재생
+    if (audioSource != null && failClip != null)
+        audioSource.PlayOneShot(failClip);
+
     didJustFail = true; 
     StartCoroutine(ResetFailFlag());
 
-    // [특징 반영] 실패 시 게이지 대폭 고갈 (기본 패널티의 3배 등) 
     float heavyPenalty = failPenaltyAmount * 3f; 
-
     if (handSide == HandSide.Left)
         leftGauge = Mathf.Max(0, leftGauge - heavyPenalty);
     else

@@ -11,12 +11,16 @@ public class GhostManager : MonoBehaviour
         public string dayName;
         public GameObject ghostPrefab;
         public Transform spawnPoint;
+        // [추가] 각 귀신별 등장 사운드 (GDC 번들의 Jumpscare나 Sting 소스 추천)
+        public AudioClip spawnSound; 
     }
 
     [Header("Day-by-Day Ghost Settings")]
     public DayGhostSettings[] daySettings = new DayGhostSettings[7];
 
-    // 수정된 부분: 실제 값을 담는 변수는 private으로, 외부에 보여주는 통로는 public으로 만듭니다.
+    [Header("Audio")]
+    public AudioSource audioSource; // 등장 소리를 재생할 오디오 소스
+
     private GameObject currentActiveGhost;
     public GameObject CurrentActiveGhost => currentActiveGhost;
 
@@ -26,6 +30,8 @@ public class GhostManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -38,16 +44,13 @@ public class GhostManager : MonoBehaviour
             StartCoroutine(SpawnAfterSevenSeconds(nightmarePlayer.transform));
         }
 
-        if (!isNightmareActive)
-        {
-            isSpawning = false;
-        }
+        if (!isNightmareActive) isSpawning = false;
     }
 
     IEnumerator SpawnAfterSevenSeconds(Transform target)
     {
         isSpawning = true;
-        Debug.Log("<color=orange>[GhostManager] 가위눌림 시작: 7초 후 귀신이 생성됩니다.</color>");
+        Debug.Log("<color=orange>[GhostManager] 7초 후 귀신 생성 예정...</color>");
 
         yield return new WaitForSeconds(7f);
 
@@ -64,18 +67,16 @@ public class GhostManager : MonoBehaviour
 
         if (settings.ghostPrefab != null && settings.spawnPoint != null)
         {
-            // 이제 currentActiveGhost 변수에 정상적으로 값을 할당할 수 있습니다.
             currentActiveGhost = Instantiate(settings.ghostPrefab, settings.spawnPoint.position, settings.spawnPoint.rotation);
 
+            // [핵심] 귀신 등장 사운드 재생
+            if (audioSource != null && settings.spawnSound != null)
+            {
+                audioSource.PlayOneShot(settings.spawnSound);
+            }
+
             var ghostLogic = currentActiveGhost.GetComponent<NavMeshGhostBase>();
-            if (ghostLogic != null)
-            {
-                ghostLogic.SetTarget(target);
-            }
-            else
-            {
-                Debug.LogWarning($"{settings.ghostPrefab.name}에 NavMeshGhostBase 스크립트가 없습니다!");
-            }
+            if (ghostLogic != null) ghostLogic.SetTarget(target);
         }
     }
 

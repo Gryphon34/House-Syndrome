@@ -15,6 +15,8 @@ public class SleepRuleManager : MonoBehaviour
     /// <summary> bathroom_handle을 E키로 한 번이라도 상호작용한 적 있는지 (리셋 안 함, CameraLookDown 등에서 사용) </summary>
    [SerializeField] bool hasEverUsedBathroomHandle;
 
+   public bool IsHandleTurnedOff => handleHiddenAfterShow;
+
     void Awake()
     {
         if (Instance == null)
