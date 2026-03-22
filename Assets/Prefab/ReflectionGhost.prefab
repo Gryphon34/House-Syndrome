@@ -89,6 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::ReflectorGhost
   speed: 0.4
   catchDistance: 1.5
+  myGhostType: 3
   animator: {fileID: 6177685305367629434}
 --- !u!95 &6177685305367629434
 Animator:

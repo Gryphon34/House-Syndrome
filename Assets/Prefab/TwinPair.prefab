@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::TwinGhostGroup
   speed: 0.4
   catchDistance: 1.5
+  myGhostType: 5
 --- !u!1001 &3678389159014043507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::TwinGhost
   speed: 1
   catchDistance: 1.5
+  myGhostType: 0
   targetArrivalTime: 20
   amplitude: 0.5
   frequency: 2
@@ -317,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::TwinGhost
   speed: 1
   catchDistance: 1.5
+  myGhostType: 0
   targetArrivalTime: 20
   amplitude: 0.5
   frequency: 2

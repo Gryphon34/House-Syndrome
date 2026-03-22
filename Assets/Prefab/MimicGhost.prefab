@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::MimicGhost
   speed: 0.4
   catchDistance: 1.5
+  myGhostType: 2
   voiceSource: {fileID: 4486129246297779145}
   sighClip: {fileID: 8300000, guid: e9613d1b4245b41b1b4eb8805de8738d, type: 3}
   mimicClips:
