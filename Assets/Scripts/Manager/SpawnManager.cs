@@ -37,6 +37,10 @@ public class SpawnManager : MonoBehaviour
     [Header("Day Map (1~7일차별 맵 활성화)")]
     public DayMapManager dayMapManager;
 
+    [Header("Spawn Dialogue")]
+    [Tooltip("스폰 시 검정·Day UI 인트로가 끝난 뒤 DialogueOnInteract.TryInteract()로 대사를 띄웁니다. 빈 오브젝트에 DialogueOnInteract만 붙여 메시지·표시 시간을 설정하고 여기에 연결하세요.")]
+    public DialogueOnInteract spawnDialogue;
+
     /// <summary> 현재 밤인지. DayNightCycle에서 조회. </summary>
     public bool IsNightTime => dayNightCycle != null && dayNightCycle.IsNightTime;
 
@@ -212,7 +216,7 @@ public class SpawnManager : MonoBehaviour
             spawnIntroRoutine = null;
         }
 
-        if (dayText == null && screenFadeImage == null)
+        if (dayText == null && screenFadeImage == null && spawnDialogue == null)
             return;
 
         spawnIntroRoutine = StartCoroutine(SpawnIntroRoutine());
@@ -239,19 +243,29 @@ public class SpawnManager : MonoBehaviour
         }
 
         if (useDay)
-            yield return DayTextIntroSequence();
+            PrepareDayTextForIntro();
+        if (spawnDialogue != null)
+            spawnDialogue.TryInteract();
+        if (useDay)
+            yield return DayTextFadeInHoldFadeOutRoutine();
 
         spawnIntroRoutine = null;
     }
 
-    IEnumerator DayTextIntroSequence()
+    void PrepareDayTextForIntro()
     {
-        bool canFade = dayTextCanvasGroup != null;
-
+        if (dayText == null) return;
         dayText.text = $"Day {currentDay}";
         dayText.gameObject.SetActive(true);
-        if (canFade)
+        if (dayTextCanvasGroup != null)
             dayTextCanvasGroup.alpha = 0f;
+    }
+
+    IEnumerator DayTextFadeInHoldFadeOutRoutine()
+    {
+        if (dayText == null) yield break;
+
+        bool canFade = dayTextCanvasGroup != null;
 
         if (canFade)
         {

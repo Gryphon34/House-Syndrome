@@ -39375,9 +39375,10 @@ MonoBehaviour:
   displayDuration: 2
   fadeSpeed: 1
   screenFadeImage: {fileID: 472859603}
-  spawnBlackHoldDuration: 5
+  spawnBlackHoldDuration: 3
   dayNightCycle: {fileID: 0}
   dayMapManager: {fileID: 1866498419}
+  spawnDialogue: {fileID: 661159423}
 --- !u!114 &661159423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39390,8 +39391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a51a9237cd580354a88dc37fbed5f637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::DialogueOnInteract
-  message: hi
-  durationSeconds: 5
+  message: It's the first day of moving
+  durationSeconds: 3
   consumeInteraction: 0
 --- !u!1 &663626133
 GameObject:
