@@ -2,11 +2,13 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// 침대에서 깨어났을 때의 스폰 위치·날짜 진행·Day UI만 담당.
 /// 침대 상호작용(레이캐스트, E/I키)은 BedInteraction이 담당.
 /// </summary>
+[DefaultExecutionOrder(100)]
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { get; private set; }
@@ -23,6 +25,12 @@ public class SpawnManager : MonoBehaviour
     public float displayDuration = 2f;
     public float fadeSpeed = 1f;
 
+    [Header("Spawn Fullscreen Fade")]
+    [Tooltip("스폰·게임 시작 시 화면 전체 검정 페이드. BedInteraction의 fadeImage와 동일 오브젝트를 연결해도 됩니다.")]
+    public Image screenFadeImage;
+    [Tooltip("검정 화면을 유지한 뒤, 이 시간(초)이 지나면 검정이 걷힙니다.")]
+    public float spawnBlackHoldDuration = 5f;
+
     [Header("Day-Night Cycle")]
     public DayNightCycle dayNightCycle;
 
@@ -34,6 +42,7 @@ public class SpawnManager : MonoBehaviour
 
     private CanvasGroup dayTextCanvasGroup;
     private bool isSleeping = false;
+    private Coroutine spawnIntroRoutine;
 
     void Awake()
     {
@@ -56,9 +65,11 @@ public class SpawnManager : MonoBehaviour
         // UI 및 맵 초기화
         if (dayText != null) dayTextCanvasGroup = dayText.GetComponent<CanvasGroup>();
 
+        PrepareSpawnScreenBlack();
+
         OnDayChanged(); // 현재 날짜에 맞는 맵 활성화
-        ShowDayUI();    // "Day X" UI 표시
-        TeleportPlayerToSpawn(); // 침대 위치로 플레이어 이동
+        TeleportPlayerToSpawn(); // 검정 유지 중 이동 (위치 스냅 가림)
+        ShowDayUI();    // Day 텍스트 + 화면 페이드
     }
 
     /// <summary>
@@ -105,6 +116,7 @@ public class SpawnManager : MonoBehaviour
         if (DifficultyManager.Instance != null)
             DifficultyManager.Instance.currentDay = currentDay;
 
+        PrepareSpawnScreenBlack();
         TeleportPlayerToSpawn();
         ShowDayUI();
         OnDayChanged();
@@ -128,6 +140,7 @@ public class SpawnManager : MonoBehaviour
         if (DifficultyManager.Instance != null)
             DifficultyManager.Instance.currentDay = currentDay;
 
+        PrepareSpawnScreenBlack();
         TeleportPlayerToSpawn();
         ShowDayUI();
         OnDayChanged();
@@ -174,37 +187,93 @@ public class SpawnManager : MonoBehaviour
         Debug.Log($"<color=green>Day {currentDay}: {target.name}으로 스폰</color>");
     }
 
-    void ShowDayUI()
+    void PrepareSpawnScreenBlack()
     {
-        if (dayText == null) return;
-        dayText.text = $"Day {currentDay}";
-        StartCoroutine(ShowDayTextRoutine());
+        if (screenFadeImage == null) return;
+        screenFadeImage.gameObject.SetActive(true);
+        Color c = screenFadeImage.color;
+        c.a = 1f;
+        screenFadeImage.color = c;
     }
 
-    IEnumerator ShowDayTextRoutine()
+    static void SetImageAlpha(Image img, float a)
     {
-        dayText.gameObject.SetActive(true);
+        if (img == null) return;
+        Color c = img.color;
+        c.a = a;
+        img.color = c;
+    }
 
-        if (dayTextCanvasGroup != null)
+    void ShowDayUI()
+    {
+        if (spawnIntroRoutine != null)
         {
+            StopCoroutine(spawnIntroRoutine);
+            spawnIntroRoutine = null;
+        }
+
+        if (dayText == null && screenFadeImage == null)
+            return;
+
+        spawnIntroRoutine = StartCoroutine(SpawnIntroRoutine());
+    }
+
+    IEnumerator SpawnIntroRoutine()
+    {
+        bool useScreen = screenFadeImage != null;
+        bool useDay = dayText != null;
+
+        if (useScreen)
+        {
+            screenFadeImage.gameObject.SetActive(true);
+            SetImageAlpha(screenFadeImage, 1f);
+            yield return new WaitForSeconds(spawnBlackHoldDuration);
+            while (screenFadeImage.color.a > 0f)
+            {
+                SetImageAlpha(screenFadeImage, Mathf.Max(0f, screenFadeImage.color.a - Time.deltaTime * fadeSpeed));
+                yield return null;
+            }
+
+            SetImageAlpha(screenFadeImage, 0f);
+            screenFadeImage.gameObject.SetActive(false);
+        }
+
+        if (useDay)
+            yield return DayTextIntroSequence();
+
+        spawnIntroRoutine = null;
+    }
+
+    IEnumerator DayTextIntroSequence()
+    {
+        bool canFade = dayTextCanvasGroup != null;
+
+        dayText.text = $"Day {currentDay}";
+        dayText.gameObject.SetActive(true);
+        if (canFade)
             dayTextCanvasGroup.alpha = 0f;
+
+        if (canFade)
+        {
             while (dayTextCanvasGroup.alpha < 1f)
             {
                 dayTextCanvasGroup.alpha += Time.deltaTime * fadeSpeed;
                 yield return null;
             }
+
             dayTextCanvasGroup.alpha = 1f;
         }
 
         yield return new WaitForSeconds(displayDuration);
 
-        if (dayTextCanvasGroup != null)
+        if (canFade)
         {
             while (dayTextCanvasGroup.alpha > 0f)
             {
                 dayTextCanvasGroup.alpha -= Time.deltaTime * fadeSpeed;
                 yield return null;
             }
+
             dayTextCanvasGroup.alpha = 0f;
         }
 
