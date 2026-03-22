@@ -41,6 +41,12 @@ public class SpawnManager : MonoBehaviour
     [Tooltip("스폰 시 검정·Day UI 인트로가 끝난 뒤 DialogueOnInteract.TryInteract()로 대사를 띄웁니다. 빈 오브젝트에 DialogueOnInteract만 붙여 메시지·표시 시간을 설정하고 여기에 연결하세요.")]
     public DialogueOnInteract spawnDialogue;
 
+    [Header("Spawn Audio")]
+    [Tooltip("비우지 않으면 매 스폰마다 AudioManager 키로 1회 재생합니다. 스폰 직후(검정 유지 중 포함) 바로 재생됩니다.")]
+    public string spawnAudioKey;
+    [Range(0f, 1f)]
+    public float spawnAudioVolume = 1f;
+
     /// <summary> 현재 밤인지. DayNightCycle에서 조회. </summary>
     public bool IsNightTime => dayNightCycle != null && dayNightCycle.IsNightTime;
 
@@ -191,6 +197,15 @@ public class SpawnManager : MonoBehaviour
         Debug.Log($"<color=green>Day {currentDay}: {target.name}으로 스폰</color>");
     }
 
+    void PlaySpawnAudioIfConfigured()
+    {
+        if (string.IsNullOrWhiteSpace(spawnAudioKey) || AudioManager.Instance == null)
+            return;
+
+        Vector3 pos = player != null ? player.position : transform.position;
+        AudioManager.Instance.PlayOneShotAt(spawnAudioKey, pos, spawnAudioVolume);
+    }
+
     void PrepareSpawnScreenBlack()
     {
         if (screenFadeImage == null) return;
@@ -216,7 +231,7 @@ public class SpawnManager : MonoBehaviour
             spawnIntroRoutine = null;
         }
 
-        if (dayText == null && screenFadeImage == null && spawnDialogue == null)
+        if (dayText == null && screenFadeImage == null && spawnDialogue == null && string.IsNullOrWhiteSpace(spawnAudioKey))
             return;
 
         spawnIntroRoutine = StartCoroutine(SpawnIntroRoutine());
@@ -226,6 +241,8 @@ public class SpawnManager : MonoBehaviour
     {
         bool useScreen = screenFadeImage != null;
         bool useDay = dayText != null;
+
+        PlaySpawnAudioIfConfigured();
 
         if (useScreen)
         {
