@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StalkerGhost
   speed: 0.4
   catchDistance: 1.5
+  myGhostType: 4
   animator: {fileID: 4996687281688751304}
   lookThreshold: 0.114
   ghostHeightOffset: 1.5

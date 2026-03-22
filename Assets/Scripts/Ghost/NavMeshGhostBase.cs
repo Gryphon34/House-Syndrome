@@ -12,6 +12,9 @@ public abstract class NavMeshGhostBase : MonoBehaviour
     protected Transform playerTarget;
     protected bool isPlayerAwake = false;
 
+    [Header("Jump Scare Setting")]
+    // [추가] 각 귀신 프리팹에서 어떤 귀신인지 인스펙터에서 설정합니다.
+    public GhostType myGhostType;
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,15 +48,28 @@ public abstract class NavMeshGhostBase : MonoBehaviour
     }
 
     protected void CatchPlayer()
+{
+    if (isPlayerAwake) return;
+
+    // 모든 손 입력 중지
+    HandInputSystem[] allHands = FindObjectsByType<HandInputSystem>(FindObjectsSortMode.None);
+    foreach (var hand in allHands) hand.StopAllCoroutines();
+
+    // 이미지 방식 매니저 호출
+    if (JumpScareManager.Instance != null)
     {
-        if (isPlayerAwake) return;
+        JumpScareManager.Instance.TriggerJumpScare(myGhostType);
+    }
+    else
+    {
         if (SpawnManager.Instance != null) SpawnManager.Instance.ReturnToPreviousDay();
     }
+}
 
     public virtual void OnPlayerWakeUp()
     {
-        isPlayerAwake = true;
-        if (agent != null) agent.isStopped = true;
-        Destroy(gameObject, 0.5f);
+    // 자식 클래스에서 별도로 정의하지 않았을 때 실행될 기본 로직입니다.
+    // 가위눌림에서 깨어났을 때 귀신 오브젝트를 제거하는 코드를 넣는 것이 일반적입니다.
+    Destroy(gameObject);
     }
 }

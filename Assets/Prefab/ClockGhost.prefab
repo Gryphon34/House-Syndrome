@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameScripts::ClockGhost
   speed: 0.4
   catchDistance: 1.5
+  myGhostType: 1
   failSpeedBoost: 0.8
   maxPossibleSpeed: 15
   animator: {fileID: 2577124262639428316}
