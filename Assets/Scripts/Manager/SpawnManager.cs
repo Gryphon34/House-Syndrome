@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
     [Header("Day-Night Cycle")]
     public DayNightCycle dayNightCycle;
 
-    [Header("Day Map (1~7일차별 맵 활성화)")]
+    [Header("Day Map (일차별 맵 활성화 — DayMapManager)")]
     public DayMapManager dayMapManager;
 
     [Header("Spawn Dialogue")]

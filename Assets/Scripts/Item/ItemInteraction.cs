@@ -50,6 +50,15 @@ public class ItemInteraction : MonoBehaviour
     bool _isDiaryOpen = false;
     int _diaryCurrentPage = 0;
 
+    /// <summary> amulet 수집 후 BedPillow를 E키로 상호작용했을 때만 true (순서 강제). 오브젝트는 유지. </summary>
+    bool _bedPillowTrueEndingDone;
+
+    /// <summary>
+    /// BedPillow를 E로 한 번이라도 눌렀는지 여부(아뮬릿 유무와 무관).
+    /// Bad Ending 조건에서 "아무 아이템도 안 건드렸는지" 판별에 사용.
+    /// </summary>
+    bool _bedPillowInteracted;
+
     void Update()
     {
         if (_isNewspaperOpen)
@@ -119,6 +128,10 @@ public class ItemInteraction : MonoBehaviour
                     OpenClueViewer(item);
                 else if (item.itemName == "diary")
                     OpenDiary(item);
+                else if (item.itemName == "amulet")
+                    Collect(item);
+                else if (item.itemName == "BedPillow")
+                    InteractBedPillowForTrueEnding(item);
                 else if (IsHandleItem(item.itemName))
                 {
                     if (!_hasDoneBathroomHandleFadeOnce)
@@ -273,6 +286,25 @@ public class ItemInteraction : MonoBehaviour
         // 일차가 바뀔 때마다 bathroom_handle 첫 상호작용에서 다시 페이드 인/아웃이 재생되도록 리셋
         _hasDoneBathroomHandleFadeOnce = false;
         _isHandleFading = false;
+        _bedPillowTrueEndingDone = false;
+        _bedPillowInteracted = false;
+    }
+
+    void InteractBedPillowForTrueEnding(Item item)
+    {
+        // Bad ending 조건 판별용: 아뮬릿을 가지고 있든 없든 베개를 E로 누르면 상호작용한 것으로 간주
+        _bedPillowInteracted = true;
+
+        if (collectedItems == null || !collectedItems.Contains("amulet"))
+            return;
+        if (_bedPillowTrueEndingDone)
+            return;
+        _bedPillowTrueEndingDone = true;
+        if (logText != null)
+        {
+            logText.text = $"'{item.itemName}'와(과) 상호작용했습니다.\n{item.description}";
+            Invoke("ClearLog", 4f);
+        }
     }
 
     void OpenNewspaper(Item item)
@@ -434,4 +466,24 @@ public class ItemInteraction : MonoBehaviour
     }
 
     void ClearLog() { if (logText != null) logText.text = ""; }
+
+    /// <summary> amulet을 먼저 E키로 줍고, 이어서 BedPillow를 E키로 상호작용했을 때만 true. </summary>
+    public bool IsTrueEndingSpawnReady()
+    {
+        return collectedItems != null
+            && collectedItems.Contains("amulet")
+            && _bedPillowTrueEndingDone;
+    }
+
+    /// <summary>amulet을 E로 상호작용(수집)했는지 여부</summary>
+    public bool HasInteractedAmulet()
+    {
+        return collectedItems != null && collectedItems.Contains("amulet");
+    }
+
+    /// <summary>BedPillow를 E로 상호작용했는지 여부</summary>
+    public bool HasInteractedBedPillow()
+    {
+        return _bedPillowInteracted;
+    }
 }
