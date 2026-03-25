@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 public class TriggerFadeOut : MonoBehaviour
@@ -14,8 +15,12 @@ public class TriggerFadeOut : MonoBehaviour
     public GameObject walkingPlayer;
 
     [Header("Fade Settings")]
-    [Tooltip("트리거 진입 시 fadeout 걸리는 시간(초)")]
+    [Tooltip("트리거 진입 시 페이드 걸리는 시간(초)")]
     public float fadeDuration = 0.5f;
+
+    [Header("UI Fade (Black Screen)")]
+    [Tooltip("지정하면 '페이드인'만 실행합니다. (까만 화면 유지). 비우면 기존처럼 오브젝트 알파 fadeout을 실행합니다.")]
+    public Image fadeImage;
 
     [Tooltip("fadeout이 끝나면 오브젝트를 비활성화합니다.")]
     public bool disableAfterFade = true;
@@ -51,8 +56,12 @@ public class TriggerFadeOut : MonoBehaviour
             if (p != null) walkingPlayer = p;
         }
 
-        _renderers = GetComponentsInChildren<Renderer>(true);
-        CacheMaterialAlphaInfos();
+        // UI 페이드만 쓸 거면 렌더러/머티리얼 캐시는 생략(가벼움).
+        if (fadeImage == null)
+        {
+            _renderers = GetComponentsInChildren<Renderer>(true);
+            CacheMaterialAlphaInfos();
+        }
     }
 
     private void CacheMaterialAlphaInfos()
@@ -99,7 +108,47 @@ public class TriggerFadeOut : MonoBehaviour
         if (!IsTargetPlayer(other)) return;
 
         if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
-        _fadeRoutine = StartCoroutine(FadeOutRoutine());
+
+        // UI가 지정되어 있으면 "fadein only"로 전환합니다.
+        if (fadeImage != null)
+            _fadeRoutine = StartCoroutine(FadeInOnlyToBlackRoutine());
+        else
+            _fadeRoutine = StartCoroutine(FadeOutRoutine());
+    }
+
+    IEnumerator FadeInOnlyToBlackRoutine()
+    {
+        _hasFaded = true;
+
+        fadeImage.gameObject.SetActive(true);
+        Color c = fadeImage.color;
+        c.a = 0f;
+        fadeImage.color = c;
+
+        float timer = 0f;
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float a = Mathf.Clamp01(fadeDuration <= 0f ? 1f : timer / fadeDuration);
+            c = fadeImage.color;
+            c.a = a;
+            fadeImage.color = c;
+            yield return null;
+        }
+
+        c = fadeImage.color;
+        c.a = 1f;
+        fadeImage.color = c;
+
+        // 요구사항: fadein 됐을 뿐 fadeout은 하지 않습니다.
+        if (disableColliderAfterFade)
+        {
+            var col = GetComponent<Collider>();
+            if (col != null) col.enabled = false;
+        }
+
+        if (disableAfterFade)
+            gameObject.SetActive(false);
     }
 
     private bool IsTargetPlayer(Collider other)
