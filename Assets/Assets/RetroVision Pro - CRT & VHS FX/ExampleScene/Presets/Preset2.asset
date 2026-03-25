@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   postExposure:
     m_OverrideState: 1
     m_Value: 0.56
@@ -854,10 +854,10 @@ MonoBehaviour:
   active: 1
   Fade:
     m_OverrideState: 1
-    m_Value: 0.521
+    m_Value: 1
   HaloStrength:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.44
   GlowDiffusion:
     m_OverrideState: 1
     m_Value: 1.452
@@ -913,7 +913,7 @@ MonoBehaviour:
     m_Value: 0.58
   Speed:
     m_OverrideState: 1
-    m_Value: 0.09
+    m_Value: 0.46
   EnableHorizontal:
     m_OverrideState: 1
     m_Value: 1
