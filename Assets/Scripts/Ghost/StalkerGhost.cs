@@ -16,6 +16,8 @@ public class StalkerGhost : NavMeshGhostBase
     public float ghostHeightOffset = 1.5f; // 귀신의 가슴/얼굴 높이 (판정 기준)
     public LayerMask obstacleLayer;        // 벽, 가구 등이 포함된 레이어
 
+    [Header("Audio")]
+    public AudioSource audioSource;
     protected override void Start()
     {
         base.Start(); // 부모 클래스의 타겟 설정 및 기본 초기화 수행
@@ -29,28 +31,30 @@ public class StalkerGhost : NavMeshGhostBase
     }
 
     protected override void Update()
+{
+    if (isPlayerAwake || playerTarget == null) return;
+
+    bool isBeingWatched = IsPlayerLookingAtMe();
+
+    if (isBeingWatched)
     {
-        if (isPlayerAwake || playerTarget == null) return;
-
-        // [핵심] 플레이어가 나를 보고 있는지(눈 감음/시야 밖/장애물 체크) 판단
-        bool isBeingWatched = IsPlayerLookingAtMe();
-
-        if (isBeingWatched)
-        {
-            // 시야에 들어오면 애니메이션과 NavMesh 이동을 즉시 멈춤
-            if (animator != null) animator.speed = 0f;
-            if (agent != null) agent.isStopped = true;
-        }
-        else
-        {
-            // 시야에서 벗어나면 다시 움직임 시작
-            if (animator != null) animator.speed = 1f;
-            if (agent != null) agent.isStopped = false;
-        }
-
-        // 거리 기반 잡기 판정 및 기본 속도 업데이트 (NavMeshGhostBase 기능 호출)
-        base.Update();
+        if (animator != null) animator.speed = 0f;
+        if (agent != null) agent.isStopped = true;
+        
+        // 쳐다보고 있으면 소리 일시정지
+        if (audioSource != null && audioSource.isPlaying) audioSource.Pause();
     }
+    else
+    {
+        if (animator != null) animator.speed = 1f;
+        if (agent != null) agent.isStopped = false;
+        
+        // 시선을 돌리면 다시 소리 재생
+        if (audioSource != null && !audioSource.isPlaying) audioSource.UnPause();
+    }
+
+    base.Update();
+}
 
     bool IsPlayerLookingAtMe()
     {

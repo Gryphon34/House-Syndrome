@@ -7,10 +7,10 @@ public class NightmareBGMManager : MonoBehaviour
     public AudioClip nightmareBgmClip;
     
     [Header("Volume Settings")]
-    public float maxVolume = 0.5f; // 목표 최대 볼륨 (0.5로 제한)
-    public float fadeSpeed = 0.2f; // 볼륨이 커지는 속도 (낮을수록 천천히 커짐)
+    public float maxVolume = 0.5f; // 목표 최대 볼륨
+    public float fadeSpeed = 0.2f; // 볼륨이 커지는 속도
     
-    private bool wasNightmareActive = false;
+    private bool isBgmPlaying = false; // 현재 BGM이 재생 중인지 확인하는 플래그
     private Coroutine fadeCoroutine;
 
     void Start()
@@ -20,28 +20,40 @@ public class NightmareBGMManager : MonoBehaviour
         {
             bgmSource.loop = true;
             bgmSource.playOnAwake = false;
-            bgmSource.volume = 0f; // 시작 시 볼륨을 0으로 설정
+            bgmSource.volume = 0f; 
         }
     }
 
     void Update()
     {
-        // NightMarePlayer 오브젝트의 활성화 상태를 감시합니다.
+        // 1. 가위눌림 플레이어의 활성화 상태 확인
         GameObject nightmarePlayer = GameObject.Find("NightMarePlayer");
         bool isNightmareActive = nightmarePlayer != null && nightmarePlayer.activeInHierarchy;
 
-        // 가위눌림이 시작되는 순간 (잠에 들 때)
-        if (isNightmareActive && !wasNightmareActive)
+        // 2. GhostManager에 의해 귀신이 소환되었는지 확인
+        bool isGhostActive = GhostManager.Instance != null && GhostManager.Instance.CurrentActiveGhost != null;
+        
+        // 3. 현재 날짜 확인
+        int currentDay = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 1;
+
+        // 1일차라면 가위눌림이 켜지자마자 재생하고, 2일차부터는 귀신이 나타났을 때만 재생합니다.
+        bool playCondition = false;
+        if (isNightmareActive)
         {
-            PlayBGM();
-        }
-        // 가위눌림이 끝나는 순간 (잠에서 깰 때)
-        else if (!isNightmareActive && wasNightmareActive)
-        {
-            StopBGM();
+            if (currentDay == 1) playCondition = true;
+            else if (isGhostActive) playCondition = true;
         }
 
-        wasNightmareActive = isNightmareActive;
+        if (playCondition && !isBgmPlaying)
+        {
+            isBgmPlaying = true;
+            PlayBGM();
+        }
+        else if (!playCondition && isBgmPlaying)
+        {
+            isBgmPlaying = false;
+            StopBGM();
+        }
     }
 
     void PlayBGM()
@@ -49,10 +61,9 @@ public class NightmareBGMManager : MonoBehaviour
         if (bgmSource != null && nightmareBgmClip != null)
         {
             bgmSource.clip = nightmareBgmClip;
-            bgmSource.volume = 0f; 
+            bgmSource.volume = 0f; // 0부터 시작
             bgmSource.Play();
             
-            // 이미 실행 중인 페이드 코루틴이 있다면 중지하고 새로 시작합니다.
             if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
             fadeCoroutine = StartCoroutine(FadeInRoutine()); 
         }
@@ -60,7 +71,7 @@ public class NightmareBGMManager : MonoBehaviour
 
     IEnumerator FadeInRoutine()
     {
-        // 현재 볼륨이 maxVolume(0.5)에 도달할 때까지 서서히 증가시킵니다.
+        // 볼륨이 maxVolume(0.5)까지 서서히 커집니다.
         while (bgmSource.volume < maxVolume)
         {
             bgmSource.volume += fadeSpeed * Time.deltaTime; 
@@ -75,7 +86,7 @@ public class NightmareBGMManager : MonoBehaviour
         {
             if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
             bgmSource.Stop();
-            bgmSource.volume = 0f; // 볼륨 초기화
+            bgmSource.volume = 0f; 
         }
     }
 }

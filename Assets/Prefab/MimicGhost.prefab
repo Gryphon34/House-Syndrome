@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b439209090a50d543be30774dfcecb26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2138035
+      value: -0.73326427
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b439209090a50d543be30774dfcecb26, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b439209090a50d543be30774dfcecb26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.124414
+      value: -0.9754838
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b439209090a50d543be30774dfcecb26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -94,14 +94,10 @@ MonoBehaviour:
   catchDistance: 1.5
   myGhostType: 2
   voiceSource: {fileID: 4486129246297779145}
-  sighClip: {fileID: 8300000, guid: e9613d1b4245b41b1b4eb8805de8738d, type: 3}
+  sighClip: {fileID: 8300000, guid: af6edb08e1f686041a968120f681aff9, type: 3}
   mimicClips:
-  - {fileID: 8300000, guid: fbb8c45c07bbd40d0bbfe635195a40c3, type: 3}
-  - {fileID: 8300000, guid: cbbf4c7f27f084b7cbc921131bc00cce, type: 3}
-  - {fileID: 8300000, guid: d5970bf7b03e349a99b05713f69b1302, type: 3}
-  - {fileID: 8300000, guid: 761b470989336403b8c3a5be294faf2c, type: 3}
-  - {fileID: 8300000, guid: 4c4dd5bc578ab4811be63e05d77855e9, type: 3}
-  - {fileID: 8300000, guid: 325d0bf14a769429cbc21f2417001c78, type: 3}
+  - {fileID: 8300000, guid: 539e54c3a324c7341a61c6edde66d718, type: 3}
+  - {fileID: 8300000, guid: 727c90cef4c97c545a8860dda29b53b1, type: 3}
   mimicDuration: 5
   warningTime: 2
 --- !u!82 &4486129246297779145
