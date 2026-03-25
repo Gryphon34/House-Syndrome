@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 19d77c43105953f46b2767b4e6e1b804, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.65768164
+      value: -0.7194708
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19d77c43105953f46b2767b4e6e1b804, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19d77c43105953f46b2767b4e6e1b804, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.049782
+      value: 0.3022476
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19d77c43105953f46b2767b4e6e1b804, type: 3}
       propertyPath: m_LocalRotation.w
@@ -115,12 +115,17 @@ MonoBehaviour:
   speed: 0.4
   catchDistance: 1.5
   myGhostType: 4
+  ghostAudioSource: {fileID: 0}
+  ghostSoundClip: {fileID: 0}
+  minSoundInterval: 5
+  maxSoundInterval: 10
   animator: {fileID: 4996687281688751304}
   lookThreshold: 0.114
   ghostHeightOffset: 1.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
+  audioSource: {fileID: 0}
 --- !u!136 &971726654435788607
 CapsuleCollider:
   m_ObjectHideFlags: 0
