@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// bathroom_handle을 E키로 상호작용했을 때만 자동으로 카메라가 아래를 보았다가 원래대로 돌아오는 동작을 수행.
@@ -7,7 +8,15 @@ using System.Collections;
 /// </summary>
 public class CameraDownLook : MonoBehaviour
 {
-    public float downAngle = 60f; // 아래로 볼 각도
+    [Header("Bad_Ending Only")]
+    [Tooltip("체크 시: Bad_Ending 맵에서만 동작합니다.")]
+    public bool onlyInBadEndingMap = true;
+
+    [Tooltip("Bad_Ending 맵 루트 오브젝트 이름(씬 안에서 활성화된 GameObject 기준).")]
+    public string badEndingMapRootName = "Bad_Ending";
+
+    [Header("Look Down")]
+    public float downAngle = 45f; // 정면 대비 아래로 볼 각도
     public float speed = 2f;      // 움직임 속도
 
     /// <summary> 아래 보기 애니메이션 중이면 true. PlayerController가 이 동안 카메라 피치를 건드리지 않도록 사용. </summary>
@@ -27,8 +36,28 @@ public class CameraDownLook : MonoBehaviour
 
     void TriggerLookDown()
     {
+        if (onlyInBadEndingMap && !IsInBadEndingMap())
+            return;
+
         if (!isLookingDown)
             StartCoroutine(LookDownAndBack());
+    }
+
+    bool IsInBadEndingMap()
+    {
+        // 1) 맵을 씬으로 나눠 쓰는 경우 대비(씬 이름이 Bad_Ending이면 true)
+        if (SceneManager.GetActiveScene().name == badEndingMapRootName)
+            return true;
+
+        // 2) 하나의 씬 내부에서 맵 루트 오브젝트(예: Bad_Ending)를 토글하는 경우
+        if (!string.IsNullOrEmpty(badEndingMapRootName))
+        {
+            GameObject root = GameObject.Find(badEndingMapRootName);
+            if (root != null && root.activeInHierarchy)
+                return true;
+        }
+
+        return false;
     }
 
     IEnumerator LookDownAndBack()
