@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ItemInteraction : MonoBehaviour
 {
@@ -49,6 +50,15 @@ public class ItemInteraction : MonoBehaviour
     bool _isClueViewerOpen = false;
     bool _isDiaryOpen = false;
     int _diaryCurrentPage = 0;
+
+    /// <summary> amulet 수집 후 BedPillow를 E키로 상호작용했을 때만 true (순서 강제). 오브젝트는 유지. </summary>
+    bool _bedPillowTrueEndingDone;
+
+    /// <summary>
+    /// BedPillow를 E로 한 번이라도 눌렀는지 여부(아뮬릿 유무와 무관).
+    /// Bad Ending 조건에서 "아무 아이템도 안 건드렸는지" 판별에 사용.
+    /// </summary>
+    bool _bedPillowInteracted;
 
     void Update()
     {
@@ -119,8 +129,18 @@ public class ItemInteraction : MonoBehaviour
                     OpenClueViewer(item);
                 else if (item.itemName == "diary")
                     OpenDiary(item);
+                else if (item.itemName == "amulet")
+                    Collect(item);
+                else if (item.itemName == "BedPillow")
+                    InteractBedPillowForTrueEnding(item);
                 else if (IsHandleItem(item.itemName))
                 {
+                    if (item.itemName == BathroomHandleBadItemName && IsInBadEndingMap())
+                    {
+                        StartCoroutine(BadEndingBathroomHandleFadeAndResetToDay1());
+                        return;
+                    }
+
                     if (!_hasDoneBathroomHandleFadeOnce)
                         StartCoroutine(ToggleHandleObjectWithFade());
                     else
@@ -153,10 +173,11 @@ public class ItemInteraction : MonoBehaviour
 
     /// <summary>E키 상호작용 후에도 씬에 남겨둘 아이템 이름 (사라지지 않음)</summary>
     /// <summary>clueImages에 등록된 아이템은 자동으로 씬에 남음. 여기에는 그 외 남겨둘 아이템만.</summary>
-    public static readonly string[] PersistentItemNames = { "bathroom_handle", "newspaper", "diary" };
+    public static readonly string[] PersistentItemNames = { "bathroom_handle", "bathroom_handle_bad", "newspaper", "diary" };
 
     /// <summary>이름이 handle(또는 bathroom_handle)인 아이템은 E키로 지정 오브젝트 활성/비활성 토글.</summary>
     public const string BathroomHandleItemName = "bathroom_handle";
+    public const string BathroomHandleBadItemName = "bathroom_handle_bad";
 
     [Header("Box - E키 상호작용 시 box 사라지고 box_glitch 활성화")]
     [Tooltip("box 아이템과 E키 상호작용 시 활성화할 오브젝트 (box_glitch)")]
@@ -176,8 +197,19 @@ public class ItemInteraction : MonoBehaviour
     [Tooltip("페이드 인/아웃에 걸리는 시간(초)")]
     public float bathroomHandleFadeTransitionDuration = 0.5f;
 
+    [Header("Bad Ending - bathroom_handle 리셋")]
+    [Tooltip("Bad Ending 맵으로 판정할 루트 오브젝트/씬 이름. (기본은 HouseSyndromeScene의 root 이름 'Bad_Ending')")]
+    public string badEndingMapRootName = "Bad_Ending";
+    [Tooltip("Bad Ending에서 day1 스폰으로 이동하기 전 검정 유지 시간(초)")]
+    public float badEndingResetBlackHoldDuration = 0.2f;
+    [Tooltip("Day1으로 스폰(텔레포트)된 뒤, 이 시간(초) 후에 다시 검정 화면(페이드아웃)을 띄웁니다.")]
+    public float badEndingBlackoutDelayAfterSpawn = 5f;
+    [Tooltip("Day1 스폰 후 2차 검정 화면을 유지하는 시간(초)")]
+    public float badEndingBlackoutHoldDuration = 0.2f;
+
     private bool _isHandleFading = false;
     private bool _hasDoneBathroomHandleFadeOnce = false;
+    private bool _isBadEndingBathroomHandleResetting = false;
 
     IEnumerator ToggleHandleObjectWithFade()
     {
@@ -218,7 +250,119 @@ public class ItemInteraction : MonoBehaviour
 
     static bool IsHandleItem(string itemName)
     {
-        return itemName == BathroomHandleItemName;
+        return itemName == BathroomHandleItemName || itemName == BathroomHandleBadItemName;
+    }
+
+    bool IsInBadEndingMap()
+    {
+        if (string.IsNullOrEmpty(badEndingMapRootName))
+            return false;
+
+        // 1) 씬 이름으로 나누는 경우
+        if (SceneManager.GetActiveScene().name == badEndingMapRootName)
+            return true;
+
+        // 2) 동일 씬 안에서 Bad_Ending 오브젝트를 활성/비활성으로 나누는 경우
+        GameObject root = GameObject.Find(badEndingMapRootName);
+        return root != null && root.activeInHierarchy;
+    }
+
+    static void SetImageAlpha(Image img, float alpha)
+    {
+        if (img == null) return;
+        Color c = img.color;
+        c.a = alpha;
+        img.color = c;
+    }
+
+    IEnumerator BadEndingBathroomHandleFadeAndResetToDay1()
+    {
+        if (_isBadEndingBathroomHandleResetting)
+            yield break;
+
+        _isBadEndingBathroomHandleResetting = true;
+
+        var spawnManager = SpawnManager.Instance;
+        Image fadeImg = spawnManager != null ? spawnManager.screenFadeImage : null;
+        if (fadeImg == null)
+            fadeImg = bathroomHandleFadeImage;
+
+        float duration = Mathf.Max(0.0001f, bathroomHandleFadeTransitionDuration);
+
+        // 1) Fade to black
+        if (fadeImg != null)
+        {
+            fadeImg.gameObject.SetActive(true);
+            SetImageAlpha(fadeImg, 0f);
+
+            float elapsed = 0f;
+            while (elapsed < 1f)
+            {
+                elapsed += Time.deltaTime / duration;
+                SetImageAlpha(fadeImg, Mathf.Clamp01(elapsed));
+                yield return null;
+            }
+
+            SetImageAlpha(fadeImg, 1f);
+        }
+
+        yield return new WaitForSeconds(badEndingResetBlackHoldDuration);
+
+        // 2) Teleport to Day1 spawn (no screen fade from SpawnManager side)
+        if (spawnManager != null)
+            spawnManager.ResetToDay1TeleportOnly(showDayText: true);
+        else
+            Debug.LogWarning("SpawnManager.Instance를 찾지 못해 Day1 리셋 teleport을 수행하지 못했습니다.");
+
+        // 3) Fade back in (immediately after teleport)
+        if (fadeImg != null)
+        {
+            float elapsed = 0f;
+            while (elapsed < 1f)
+            {
+                elapsed += Time.deltaTime / duration;
+                SetImageAlpha(fadeImg, Mathf.Lerp(1f, 0f, Mathf.Clamp01(elapsed)));
+                yield return null;
+            }
+
+            SetImageAlpha(fadeImg, 0f);
+            fadeImg.gameObject.SetActive(false);
+        }
+
+        // 4) After spawn: wait, then fade to black again, then fade back in
+        if (fadeImg != null && badEndingBlackoutDelayAfterSpawn > 0f)
+        {
+            yield return new WaitForSeconds(badEndingBlackoutDelayAfterSpawn);
+
+            fadeImg.gameObject.SetActive(true);
+            SetImageAlpha(fadeImg, 0f);
+
+            float elapsed = 0f;
+            while (elapsed < 1f)
+            {
+                elapsed += Time.deltaTime / duration;
+                SetImageAlpha(fadeImg, Mathf.Clamp01(elapsed));
+                yield return null;
+            }
+
+            SetImageAlpha(fadeImg, 1f);
+
+            if (badEndingBlackoutHoldDuration > 0f)
+                yield return new WaitForSeconds(badEndingBlackoutHoldDuration);
+
+            elapsed = 0f;
+            while (elapsed < 1f)
+            {
+                elapsed += Time.deltaTime / duration;
+                SetImageAlpha(fadeImg, Mathf.Lerp(1f, 0f, Mathf.Clamp01(elapsed)));
+                yield return null;
+            }
+
+            SetImageAlpha(fadeImg, 0f);
+            fadeImg.gameObject.SetActive(false);
+        }
+
+        _isBadEndingBathroomHandleResetting = false;
     }
 
     void ToggleHandleObject()
@@ -273,6 +417,25 @@ public class ItemInteraction : MonoBehaviour
         // 일차가 바뀔 때마다 bathroom_handle 첫 상호작용에서 다시 페이드 인/아웃이 재생되도록 리셋
         _hasDoneBathroomHandleFadeOnce = false;
         _isHandleFading = false;
+        _bedPillowTrueEndingDone = false;
+        _bedPillowInteracted = false;
+    }
+
+    void InteractBedPillowForTrueEnding(Item item)
+    {
+        // Bad ending 조건 판별용: 아뮬릿을 가지고 있든 없든 베개를 E로 누르면 상호작용한 것으로 간주
+        _bedPillowInteracted = true;
+
+        if (collectedItems == null || !collectedItems.Contains("amulet"))
+            return;
+        if (_bedPillowTrueEndingDone)
+            return;
+        _bedPillowTrueEndingDone = true;
+        if (logText != null)
+        {
+            logText.text = $"'{item.itemName}'와(과) 상호작용했습니다.\n{item.description}";
+            Invoke("ClearLog", 4f);
+        }
     }
 
     void OpenNewspaper(Item item)
@@ -434,4 +597,24 @@ public class ItemInteraction : MonoBehaviour
     }
 
     void ClearLog() { if (logText != null) logText.text = ""; }
+
+    /// <summary> amulet을 먼저 E키로 줍고, 이어서 BedPillow를 E키로 상호작용했을 때만 true. </summary>
+    public bool IsTrueEndingSpawnReady()
+    {
+        return collectedItems != null
+            && collectedItems.Contains("amulet")
+            && _bedPillowTrueEndingDone;
+    }
+
+    /// <summary>amulet을 E로 상호작용(수집)했는지 여부</summary>
+    public bool HasInteractedAmulet()
+    {
+        return collectedItems != null && collectedItems.Contains("amulet");
+    }
+
+    /// <summary>BedPillow를 E로 상호작용했는지 여부</summary>
+    public bool HasInteractedBedPillow()
+    {
+        return _bedPillowInteracted;
+    }
 }

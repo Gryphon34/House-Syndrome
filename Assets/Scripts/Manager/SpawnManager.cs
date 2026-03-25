@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
     [Header("Day-Night Cycle")]
     public DayNightCycle dayNightCycle;
 
-    [Header("Day Map (1~7일차별 맵 활성화)")]
+    [Header("Day Map (일차별 맵 활성화 — DayMapManager)")]
     public DayMapManager dayMapManager;
 
     [Header("Spawn Dialogue")]
@@ -160,6 +160,48 @@ public class SpawnManager : MonoBehaviour
 
         isSleeping = false;
         Debug.Log("<color=cyan>Day 1로 리셋</color>");
+    }
+
+    /// <summary>
+    /// Day1 스폰으로 "위치/데이터만" 리셋합니다. 화면 페이드/Day UI는 호출하지 않습니다.
+    /// (ItemInteraction 등에서 별도 페이드 코루틴을 사용하고 싶을 때 용도)
+    /// </summary>
+    public void ResetToDay1TeleportOnly(bool showDayText = true)
+    {
+        if (isSleeping) return;
+
+        isSleeping = true;
+        currentDay = 1;
+
+        if (DifficultyManager.Instance != null)
+            DifficultyManager.Instance.currentDay = currentDay;
+
+        TeleportPlayerToSpawn();
+
+        // Day 1 맵/이벤트 갱신 + 낮 리셋 + sleep rule 리셋
+        OnDayChanged();
+        if (dayNightCycle != null) dayNightCycle.ResetToDay();
+        if (SleepRuleManager.Instance != null) SleepRuleManager.Instance.ResetRule();
+
+        if (showDayText && dayText != null)
+        {
+            // SpawnIntroRoutine이 떠있던 경우 DayText 페이드와 충돌 방지
+            if (spawnIntroRoutine != null)
+            {
+                StopCoroutine(spawnIntroRoutine);
+                spawnIntroRoutine = null;
+            }
+
+            dayText.text = $"Day {currentDay}";
+            dayText.gameObject.SetActive(true);
+            if (dayTextCanvasGroup != null)
+                dayTextCanvasGroup.alpha = 0f;
+
+            StartCoroutine(DayTextFadeInHoldFadeOutRoutine());
+        }
+
+        isSleeping = false;
+        Debug.Log("<color=cyan>Day 1로 리셋(teleport only)</color>");
     }
 
     /// <summary>
