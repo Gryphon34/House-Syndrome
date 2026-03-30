@@ -10966,6 +10966,11 @@ Transform:
   - {fileID: 478062553}
   m_Father: {fileID: 389245507}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &150554017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+  m_PrefabInstance: {fileID: 8011168955008479659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &151927872
 GameObject:
   m_ObjectHideFlags: 0
@@ -13699,6 +13704,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13709,6 +13722,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 192809962}
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 192809966}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!4 &192809960 stripped
 Transform:
@@ -13834,6 +13850,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &192809966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192809961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &194589055
 GameObject:
   m_ObjectHideFlags: 0
@@ -31545,6 +31588,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31555,6 +31606,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1165236782}
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1165236786}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!4 &411606386 stripped
 Transform:
@@ -33434,6 +33488,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33444,6 +33506,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 731276485}
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 731276489}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!4 &434659251 stripped
 Transform:
@@ -50903,6 +50968,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50913,6 +50986,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 769752633}
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 769752637}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!4 &647964440 stripped
 Transform:
@@ -55679,6 +55755,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9469670e6db654dafa07295c971a3b53, type: 3}
+--- !u!1 &714076965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+  m_PrefabInstance: {fileID: 1861981722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &714203969
 GameObject:
   m_ObjectHideFlags: 0
@@ -57569,6 +57650,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &731276489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731276482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &732722169 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c6b7268779f886d4a8f7a3b9077766e2, type: 3}
@@ -59857,6 +59965,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &769752637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769752630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &771793513
 GameObject:
   m_ObjectHideFlags: 0
@@ -65416,10 +65551,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1316966018}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!4 &843380279 stripped
 Transform:
@@ -90584,6 +90730,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1165236786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165236779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &1165686483
 GameObject:
   m_ObjectHideFlags: 0
@@ -103017,6 +103190,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316634420}
   m_Mesh: {fileID: 4300000, guid: 22ec64bba89e94704b5b0eeee5767c9c, type: 3}
+--- !u!1 &1316966015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+  m_PrefabInstance: {fileID: 843380278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1316966018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316966015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &1319155100
 GameObject:
   m_ObjectHideFlags: 0
@@ -146733,16 +146938,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1861981726}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!4 &1861981723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 383210777120059011, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
   m_PrefabInstance: {fileID: 1861981722}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1861981726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714076965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &1863123772
 GameObject:
   m_ObjectHideFlags: 0
@@ -169448,6 +169691,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 383210777120059011, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
   m_PrefabInstance: {fileID: 8011168955008479659}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2457523139130239300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150554017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d715d2118aee069408ace708f569933f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::DoorLookToggle
+  walkingCamera: {fileID: 372142028}
+  player: {fileID: 1858440981}
+  viewportRayOrigin: {x: 0.5, y: 0.5, z: 0}
+  interactDistance: 3
+  ignoreDistanceLimit: 0
+  closeDistance: 3
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  triggerInteraction: 2
+  interactKey: 101
+  openBoolName: Door_Ani
+  startOpen: 0
+  logToggle: 0
+  logLookDebug: 0
 --- !u!1 &2619162789701034086
 GameObject:
   m_ObjectHideFlags: 0
@@ -170541,7 +170811,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 383210777120059011, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.35
+      value: 1.346
       objectReference: {fileID: 0}
     - target: {fileID: 383210777120059011, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -170549,7 +170819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 383210777120059011, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.058
+      value: 2.068
       objectReference: {fileID: 0}
     - target: {fileID: 383210777120059011, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -170583,10 +170853,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorV2
       objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378416477558000226, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ddfb378c7e11fb9498937d814a07778e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4827790656621896460, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2457523139130239300}
   m_SourcePrefab: {fileID: 100100000, guid: 1ae0bc06a8608ca41bedb8c28fedf9c3, type: 3}
 --- !u!1 &8312289481596896656
 GameObject:
