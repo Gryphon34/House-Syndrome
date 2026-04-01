@@ -37992,6 +37992,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b66fd9c07507e6e448a9bb5b69ba8721, type: 3}
       insertIndex: -1
       addedObject: {fileID: 478086245}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b66fd9c07507e6e448a9bb5b69ba8721, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 478086248}
   m_SourcePrefab: {fileID: 100100000, guid: b66fd9c07507e6e448a9bb5b69ba8721, type: 3}
 --- !u!4 &478086243 stripped
 Transform:
@@ -38015,8 +38018,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33149334df3842546b3758657958bc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::Item
-  itemName: voice_recorder
+  itemName: voice recorder
   description: 
+--- !u!64 &478086248
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478086244}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5461320835613783329, guid: b66fd9c07507e6e448a9bb5b69ba8721, type: 3}
 --- !u!1 &478336669
 GameObject:
   m_ObjectHideFlags: 0
@@ -61535,7 +61560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &786602688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -77511,6 +77536,7 @@ GameObject:
   - component: {fileID: 989236121}
   - component: {fileID: 989236123}
   - component: {fileID: 989236122}
+  - component: {fileID: 989236126}
   m_Layer: 5
   m_Name: voice_recorder
   m_TagString: Untagged
@@ -77527,7 +77553,7 @@ RectTransform:
   m_GameObject: {fileID: 989236120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8235068, y: 3.742372, z: 5.2375298}
+  m_LocalScale: {x: 1.9684756, y: 4.3428826, z: 5.653913}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 902561945}
@@ -77575,6 +77601,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989236120}
   m_CullTransparentMesh: 1
+--- !u!114 &989236126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989236120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3619f68db7ab24ea35d33debe9dd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::VoiceRecorderPhotoClick
+  itemInteraction: {fileID: 1761765672}
 --- !u!1 &989870894
 GameObject:
   m_ObjectHideFlags: 0
@@ -140150,6 +140189,13 @@ MonoBehaviour:
     sprite: {fileID: 773391654, guid: fd72540484df54841b0f943367c0cb24, type: 3}
   - itemName: clue_ghost_clock
     sprite: {fileID: 1297434491, guid: 288bbb790212ec848be0aeadd1e20351, type: 3}
+  voiceRecorderUIRoot: {fileID: 989236120}
+  voiceRecorderImage: {fileID: 989236122}
+  voiceRecorderImages:
+  - itemName: voice recorder
+    sprite: {fileID: 1988442359, guid: 42e4633df1a71c84bab17c60d15416ce, type: 3}
+    clickSound: {fileID: 8300000, guid: 3f150adcf7f97b74ab69a138f91be30e, type: 3}
+  voiceRecorderAudioSource: {fileID: 0}
   diaryUIRoot: {fileID: 1251368373}
   diaryImage: {fileID: 1251368375}
   diaryPages:

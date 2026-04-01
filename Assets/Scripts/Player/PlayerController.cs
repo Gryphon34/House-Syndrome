@@ -68,6 +68,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleCursorLockToggle()
     {
+        if (ItemInteraction.IsVoiceRecorderUiOpen)
+            return;
+
         // Escape unlocks cursor, left click re-locks (same behavior as PlayerLook.cs).
         if (Input.GetKeyUp(KeyCode.Escape))
         {
@@ -88,6 +91,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLook()
     {
+        if (ItemInteraction.IsVoiceRecorderUiOpen)
+            return;
+
         if (cameraTransform == null) return;
 
         float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
@@ -104,6 +110,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementAndAnimation()
     {
+        if (ItemInteraction.IsVoiceRecorderUiOpen)
+            return;
+
         if (controller == null) return;
 
         float x = Input.GetAxis(horizontalInputName);

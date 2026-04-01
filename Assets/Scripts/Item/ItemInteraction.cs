@@ -36,6 +36,26 @@ public class ItemInteraction : MonoBehaviour
         public Sprite sprite;
     }
 
+    [Header("Voice Recorder UI")]
+    [Tooltip("voice_recorder 등 E키 상호작용 시 화면에 띄울 UI 루트 (Clue Viewer와 동일하게 X로 닫기)")]
+    public GameObject voiceRecorderUIRoot;
+    [Tooltip("녹음기 UI에 표시할 Image. voiceRecorderUIRoot 하위에 두면 됨.")]
+    public Image voiceRecorderImage;
+    [Tooltip("아이템 이름별 스프라이트. 예: voice_recorder → UI용 스프라이트")]
+    public List<VoiceRecorderImageEntry> voiceRecorderImages = new List<VoiceRecorderImageEntry>();
+
+    [System.Serializable]
+    public class VoiceRecorderImageEntry
+    {
+        public string itemName;
+        public Sprite sprite;
+        [Tooltip("사진을 클릭했을 때 재생할 소리 (VoiceRecorderPhotoClick 컴포넌트가 Image에 있어야 함)")]
+        public AudioClip clickSound;
+    }
+
+    [Tooltip("녹음기 UI에서 클릭 사운드 재생용. 비우면 PlayClipAtPoint로 재생합니다.")]
+    public AudioSource voiceRecorderAudioSource;
+
     [Header("Diary UI")]
     [Tooltip("diary 아이템 E키 시 화면 전체에 띄울 일기 UI 루트 (Canvas 하위 Panel 등)")]
     public GameObject diaryUIRoot;
@@ -48,7 +68,13 @@ public class ItemInteraction : MonoBehaviour
 
     bool _isNewspaperOpen = false;
     bool _isClueViewerOpen = false;
+    bool _isVoiceRecorderOpen = false;
     bool _isDiaryOpen = false;
+
+    /// <summary>PlayerController 등에서 UI 열림 중 커서 잠금/카메라 회전을 막기 위해 사용합니다.</summary>
+    public static bool IsVoiceRecorderUiOpen { get; private set; }
+
+    AudioClip _voiceRecorderClickClip;
     int _diaryCurrentPage = 0;
 
     /// <summary> amulet 수집 후 BedPillow를 E키로 상호작용했을 때만 true (순서 강제). 오브젝트는 유지. </summary>
@@ -72,6 +98,12 @@ public class ItemInteraction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
                 CloseClueViewer();
+            return;
+        }
+        if (_isVoiceRecorderOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+                CloseVoiceRecorder();
             return;
         }
         if (_isDiaryOpen)
@@ -127,6 +159,8 @@ public class ItemInteraction : MonoBehaviour
                     OpenNewspaper(item);
                 else if (HasClueImageFor(item.itemName))
                     OpenClueViewer(item);
+                else if (HasVoiceRecorderImageFor(item.itemName))
+                    OpenVoiceRecorder(item);
                 else if (item.itemName == "diary")
                     OpenDiary(item);
                 else if (item.itemName == "amulet")
@@ -172,7 +206,7 @@ public class ItemInteraction : MonoBehaviour
     }
 
     /// <summary>E키 상호작용 후에도 씬에 남겨둘 아이템 이름 (사라지지 않음)</summary>
-    /// <summary>clueImages에 등록된 아이템은 자동으로 씬에 남음. 여기에는 그 외 남겨둘 아이템만.</summary>
+    /// <summary>clueImages / voiceRecorderImages에 등록된 아이템은 자동으로 씬에 남음. 여기에는 그 외 남겨둘 아이템만.</summary>
     public static readonly string[] PersistentItemNames = { "bathroom_handle", "bathroom_handle_bad", "newspaper", "diary" };
 
     /// <summary>이름이 handle(또는 bathroom_handle)인 아이템은 E키로 지정 오브젝트 활성/비활성 토글.</summary>
@@ -493,6 +527,73 @@ public class ItemInteraction : MonoBehaviour
         _isClueViewerOpen = false;
     }
 
+    bool HasVoiceRecorderImageFor(string itemName)
+    {
+        if (string.IsNullOrEmpty(itemName) || voiceRecorderImages == null) return false;
+        foreach (var entry in voiceRecorderImages)
+            if (entry != null && entry.itemName == itemName) return true;
+        return false;
+    }
+
+    void OpenVoiceRecorder(Item item)
+    {
+        _voiceRecorderClickClip = null;
+        if (voiceRecorderImages != null)
+        {
+            foreach (var entry in voiceRecorderImages)
+            {
+                if (entry != null && entry.itemName == item.itemName)
+                {
+                    _voiceRecorderClickClip = entry.clickSound;
+                    if (voiceRecorderImage != null && entry.sprite != null)
+                    {
+                        voiceRecorderImage.sprite = entry.sprite;
+                        voiceRecorderImage.enabled = true;
+                    }
+                    break;
+                }
+            }
+        }
+        if (voiceRecorderImage != null)
+            voiceRecorderImage.raycastTarget = true;
+        if (voiceRecorderUIRoot != null)
+            voiceRecorderUIRoot.SetActive(true);
+
+        _isVoiceRecorderOpen = true;
+        IsVoiceRecorderUiOpen = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Collect(item);
+    }
+
+    void CloseVoiceRecorder()
+    {
+        if (voiceRecorderUIRoot != null)
+            voiceRecorderUIRoot.SetActive(false);
+
+        _isVoiceRecorderOpen = false;
+        IsVoiceRecorderUiOpen = false;
+        _voiceRecorderClickClip = null;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    /// <summary>VoiceRecorderPhotoClick(Image)에서 호출합니다.</summary>
+    public void OnVoiceRecorderPhotoClicked()
+    {
+        if (!_isVoiceRecorderOpen || _voiceRecorderClickClip == null)
+            return;
+
+        if (voiceRecorderAudioSource != null)
+        {
+            voiceRecorderAudioSource.PlayOneShot(_voiceRecorderClickClip);
+            return;
+        }
+
+        Vector3 pos = walkingCamera != null ? walkingCamera.transform.position : Vector3.zero;
+        AudioSource.PlayClipAtPoint(_voiceRecorderClickClip, pos);
+    }
+
     void OpenDiary(Item item)
     {
         _diaryCurrentPage = 0;
@@ -551,6 +652,8 @@ public class ItemInteraction : MonoBehaviour
             }
         }
         if (!keepInScene && HasClueImageFor(item.itemName))
+            keepInScene = true;
+        if (!keepInScene && HasVoiceRecorderImageFor(item.itemName))
             keepInScene = true;
         if (!keepInScene)
             Destroy(item.gameObject);
