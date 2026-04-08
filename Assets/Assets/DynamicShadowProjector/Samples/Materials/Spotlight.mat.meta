@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a8e2ca754f9584cb497b6cb5f2299221
+timeCreated: 1428893132
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/Materials/Spotlight.mat
+  uploadId: 496135

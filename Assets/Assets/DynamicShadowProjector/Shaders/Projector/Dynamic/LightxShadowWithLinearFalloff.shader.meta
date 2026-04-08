@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b0715ea47448240c29716f8c7e30f363
+timeCreated: 1429149206
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Projector/Dynamic/LightxShadowWithLinearFalloff.shader
+  uploadId: 496135

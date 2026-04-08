@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 668edce20a9a746fabc1de1b0bc8cdde
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/FPSCheck.prefab
+  uploadId: 496135

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 28e556afc64954978b8d3a82a2ca9ae0
+timeCreated: 1428891348
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/Materials/BlobShadowProjector.mat
+  uploadId: 496135

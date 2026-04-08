@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 32a367787ae804a1796822e50ccbc354
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/EnableCbuffer.cginc
+  uploadId: 496135

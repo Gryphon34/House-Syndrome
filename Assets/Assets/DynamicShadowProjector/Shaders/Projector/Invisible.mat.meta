@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 64b184296aca74bd4b6514fecb30b579
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Projector/Invisible.mat
+  uploadId: 496135

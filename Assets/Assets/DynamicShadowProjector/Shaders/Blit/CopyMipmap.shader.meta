@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 895f2eedd4ef1455b8b3380b122531bc
+timeCreated: 1428420643
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Blit/CopyMipmap.shader
+  uploadId: 496135

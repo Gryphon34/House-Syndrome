@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f812e886bbe294f6bb1fe0caead69815
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Projector/SimpleShadowWithoutFalloff.shader
+  uploadId: 496135

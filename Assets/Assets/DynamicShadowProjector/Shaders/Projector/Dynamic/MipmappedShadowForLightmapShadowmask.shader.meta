@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cd0af82e621444955be5e2bc69dd0241
+timeCreated: 1564977173
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Projector/Dynamic/MipmappedShadowForLightmapShadowmask.shader
+  uploadId: 496135

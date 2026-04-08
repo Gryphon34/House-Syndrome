@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 288faeea2920f417690a4a09843c66a8
+timeCreated: 1428767494
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Shadow/ShadowForReplacement.shader
+  uploadId: 496135

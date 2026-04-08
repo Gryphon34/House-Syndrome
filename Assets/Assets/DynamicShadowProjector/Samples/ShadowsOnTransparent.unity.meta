@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0dbaebadc0b454a2cb4834d0d52efa9c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/ShadowsOnTransparent.unity
+  uploadId: 496135

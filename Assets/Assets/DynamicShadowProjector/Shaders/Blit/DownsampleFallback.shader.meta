@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b7fcbec293b0f4479aa08d690d610b42
+timeCreated: 1448965546
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Blit/DownsampleFallback.shader
+  uploadId: 496135

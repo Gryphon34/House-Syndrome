@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 05c36bd30e3d84ef9bbf0d6fefd5d84b
+timeCreated: 1428890817
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/Materials/HardShadowProjector.mat
+  uploadId: 496135

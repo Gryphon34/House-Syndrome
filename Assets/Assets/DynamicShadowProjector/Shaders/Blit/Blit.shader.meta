@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a339cdf369a35482d87ffd8667fe36f7
+timeCreated: 1428935694
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Blit/Blit.shader
+  uploadId: 496135

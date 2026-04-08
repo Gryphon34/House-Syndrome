@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8e120911da58a4745b43ccedfb1f8dfc
+timeCreated: 1428386252
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Blit/Downsample.shader
+  uploadId: 496135

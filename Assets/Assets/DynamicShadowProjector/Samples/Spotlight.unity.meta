@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 49801ac6b02614acabd41d9a1d281bcf
+timeCreated: 1428892718
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/Spotlight.unity
+  uploadId: 496135

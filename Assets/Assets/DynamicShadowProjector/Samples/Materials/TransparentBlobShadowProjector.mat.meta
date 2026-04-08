@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6a160bade8f9a4be4a8209fc9eeff35a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Samples/Materials/TransparentBlobShadowProjector.mat
+  uploadId: 496135

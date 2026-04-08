@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 899f4f0ea29ba4b15b537f00954e9fc5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Scripts/Editor/PropertyBlockForTransparentReceiverEditor.cs
+  uploadId: 496135

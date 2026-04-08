@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a81f972eacc064190876c5a3d379ed72
+timeCreated: 1428985255
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Blit/Downsample.mat
+  uploadId: 496135

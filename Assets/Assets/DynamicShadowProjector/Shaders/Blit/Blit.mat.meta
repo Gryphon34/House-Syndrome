@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b2a371cc75ab40938e2d118b317ef85
+timeCreated: 1430056708
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 35558
+  packageName: Dynamic Shadow Projector
+  packageVersion: 1.2.2
+  assetPath: Assets/DynamicShadowProjector/Shaders/Blit/Blit.mat
+  uploadId: 496135
