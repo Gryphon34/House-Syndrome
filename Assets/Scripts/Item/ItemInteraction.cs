@@ -175,6 +175,21 @@ public class ItemInteraction : MonoBehaviour
                         return;
                     }
 
+                    if (item.itemName == BathroomHandleItemName)
+                    {
+                        // Day 6: 첫 상호작용에서만 오브젝트 활성화, 이후엔 완전 무반응(페이드/토글 포함)
+                        if (ShouldBlockDay6BathroomHandleInteraction())
+                            return;
+
+                        // Day 6: bathroom_handle 페이드 기능 제거(즉시 토글만)
+                        int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+                        if (day == 6)
+                        {
+                            ToggleHandleObject();
+                            return;
+                        }
+                    }
+
                     if (!_hasDoneBathroomHandleFadeOnce)
                         StartCoroutine(ToggleHandleObjectWithFade());
                     else
@@ -223,6 +238,10 @@ public class ItemInteraction : MonoBehaviour
     [Tooltip("이름이 handle인 아이템과 E키 상호작용 시 켜졌다 꺼졌다 할 오브젝트들 (복제한 prefab 인스턴스 등 모두 추가)")]
     public List<GameObject> objectsToToggleWithHandle = new List<GameObject>();
 
+    [Header("Handle - 6일차 bathroom_handle 상호작용 시 활성화")]
+    [Tooltip("6일차에 bathroom_handle과 E키 상호작용 시 활성화할 오브젝트 (상호작용 전까지 비활성화 상태여야 함)")]
+    public GameObject objectToActivateOnDay6Handle;
+
     [Header("Handle - 화면 페이드 (bathroom_handle E키 시)")]
     [Tooltip("bathroom_handle 상호작용 시 까매졌다 풀리는 효과에 쓸 풀스크린 검정 Image. BedInteraction의 fadeImage와 동일 오브젝트 지정 가능.")]
     public Image bathroomHandleFadeImage;
@@ -244,6 +263,7 @@ public class ItemInteraction : MonoBehaviour
     private bool _isHandleFading = false;
     private bool _hasDoneBathroomHandleFadeOnce = false;
     private bool _isBadEndingBathroomHandleResetting = false;
+    private bool _hasConsumedDay6BathroomHandleInteraction = false;
 
     IEnumerator ToggleHandleObjectWithFade()
     {
@@ -421,6 +441,21 @@ public class ItemInteraction : MonoBehaviour
             SleepRuleManager.Instance.RecordBathroomHandleToggle(setActive);
     }
 
+    bool ShouldBlockDay6BathroomHandleInteraction()
+    {
+        int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+        if (day != 6) return false;
+
+        if (_hasConsumedDay6BathroomHandleInteraction)
+            return true;
+
+        _hasConsumedDay6BathroomHandleInteraction = true;
+        if (objectToActivateOnDay6Handle != null)
+            objectToActivateOnDay6Handle.SetActive(true);
+        // 첫 상호작용은 water만 켜고 기존 handle 기능(페이드/토글)은 그대로 진행
+        return false;
+    }
+
     void InteractWithBox(Item item)
     {
         _interactedBoxObject = item.gameObject;
@@ -451,6 +486,7 @@ public class ItemInteraction : MonoBehaviour
         // 일차가 바뀔 때마다 bathroom_handle 첫 상호작용에서 다시 페이드 인/아웃이 재생되도록 리셋
         _hasDoneBathroomHandleFadeOnce = false;
         _isHandleFading = false;
+        _hasConsumedDay6BathroomHandleInteraction = false;
         _bedPillowTrueEndingDone = false;
         _bedPillowInteracted = false;
     }
