@@ -1,7 +1,11 @@
 {
     "name": "GameScripts",
     "rootNamespace": "",
-    "references": ["Unity.TextMeshPro"],
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
