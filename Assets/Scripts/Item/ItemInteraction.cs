@@ -178,7 +178,19 @@ public class ItemInteraction : MonoBehaviour
                     }
 
                     if (item.itemName == BathroomHandleItemName)
-                        _bathroomHandleInteractCount++;
+                    {
+                        // Day 6: 첫 상호작용에서만 오브젝트 활성화, 이후엔 완전 무반응(페이드/토글 포함)
+                        if (ShouldBlockDay6BathroomHandleInteraction())
+                            return;
+
+                        // Day 6: bathroom_handle 페이드 기능 제거(즉시 토글만)
+                        int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+                        if (day == 6)
+                        {
+                            ToggleHandleObject();
+                            return;
+                        }
+                    }
 
                     if (!_hasDoneBathroomHandleFadeOnce)
                         StartCoroutine(ToggleHandleObjectWithFade());
@@ -238,6 +250,10 @@ public class ItemInteraction : MonoBehaviour
     [Tooltip("이름이 handle인 아이템과 E키 상호작용 시 켜졌다 꺼졌다 할 오브젝트들 (복제한 prefab 인스턴스 등 모두 추가)")]
     public List<GameObject> objectsToToggleWithHandle = new List<GameObject>();
 
+    [Header("Handle - 6일차 bathroom_handle 상호작용 시 활성화")]
+    [Tooltip("6일차에 bathroom_handle과 E키 상호작용 시 활성화할 오브젝트 (상호작용 전까지 비활성화 상태여야 함)")]
+    public GameObject objectToActivateOnDay6Handle;
+
     [Header("Handle - 화면 페이드 (bathroom_handle E키 시)")]
     [Tooltip("bathroom_handle 상호작용 시 까매졌다 풀리는 효과에 쓸 풀스크린 검정 Image. BedInteraction의 fadeImage와 동일 오브젝트 지정 가능.")]
     public Image bathroomHandleFadeImage;
@@ -259,82 +275,7 @@ public class ItemInteraction : MonoBehaviour
     private bool _isHandleFading = false;
     private bool _hasDoneBathroomHandleFadeOnce = false;
     private bool _isBadEndingBathroomHandleResetting = false;
-
-    [Header("Handle - 2nd interaction dim (bathroom_handle)")]
-    [Tooltip("bathroom_handle을 두 번째로 E키 상호작용했을 때 씬 밝기를 줄일지 여부")]
-    public bool dimOnSecondBathroomHandleInteraction = true;
-    [Tooltip("두 번째 상호작용 시 Post Exposure를 이 값만큼 내림 (EV 단위, 음수일수록 어두움). 예: -3")]
-    public float secondHandleTargetExposure = -3f;
-    [Tooltip("이 기능이 작동할 맵의 루트 오브젝트 이름 (이 오브젝트가 활성 상태일 때만 dim 발동)")]
-    public string dimActiveMapRootName = "House_Day4";
-
-    private bool _hasDimmedAfterSecondHandle = false;
-    private int _bathroomHandleInteractCount = 0;
-
-    private struct VolumeSnapshot
-    {
-        public ColorAdjustments colorAdjustments;
-        public float originalPostExposure;
-    }
-    private readonly List<VolumeSnapshot> _volumeSnapshots = new List<VolumeSnapshot>();
-
-    void Start()
-    {
-        CacheAllVolumeColorAdjustments();
-    }
-
-    void CacheAllVolumeColorAdjustments()
-    {
-        _volumeSnapshots.Clear();
-
-#if UNITY_2023_1_OR_NEWER
-        var allVolumes = FindObjectsByType<Volume>(FindObjectsSortMode.None);
-#else
-        var allVolumes = FindObjectsOfType<Volume>(true);
-#endif
-        if (allVolumes == null) return;
-
-        foreach (var vol in allVolumes)
-        {
-            if (vol == null || vol.profile == null) continue;
-
-            ColorAdjustments ca;
-            if (!vol.profile.TryGet(out ca))
-            {
-                ca = vol.profile.Add<ColorAdjustments>(overrides: false);
-            }
-            ca.postExposure.overrideState = true;
-
-            _volumeSnapshots.Add(new VolumeSnapshot
-            {
-                colorAdjustments = ca,
-                originalPostExposure = ca.postExposure.value
-            });
-        }
-    }
-
-    bool IsInDimActiveMap()
-    {
-        if (string.IsNullOrEmpty(dimActiveMapRootName))
-            return false;
-        GameObject root = GameObject.Find(dimActiveMapRootName);
-        return root != null && root.activeInHierarchy;
-    }
-
-    void ApplyDimImmediate(float exposureOffset)
-    {
-        if (_volumeSnapshots.Count == 0)
-            CacheAllVolumeColorAdjustments();
-
-        for (int i = 0; i < _volumeSnapshots.Count; i++)
-        {
-            var snap = _volumeSnapshots[i];
-            if (snap.colorAdjustments == null) continue;
-            snap.colorAdjustments.postExposure.value = snap.originalPostExposure + exposureOffset;
-        }
-
-        Debug.Log($"[ItemInteraction] ApplyDimImmediate — {_volumeSnapshots.Count}개 Volume에 offset {exposureOffset} 즉시 적용");
-    }
+    private bool _hasConsumedDay6BathroomHandleInteraction = false;
 
     IEnumerator ToggleHandleObjectWithFade()
     {
@@ -528,6 +469,21 @@ public class ItemInteraction : MonoBehaviour
             SleepRuleManager.Instance.RecordBathroomHandleToggle(setActive);
     }
 
+    bool ShouldBlockDay6BathroomHandleInteraction()
+    {
+        int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+        if (day != 6) return false;
+
+        if (_hasConsumedDay6BathroomHandleInteraction)
+            return true;
+
+        _hasConsumedDay6BathroomHandleInteraction = true;
+        if (objectToActivateOnDay6Handle != null)
+            objectToActivateOnDay6Handle.SetActive(true);
+        // 첫 상호작용은 water만 켜고 기존 handle 기능(페이드/토글)은 그대로 진행
+        return false;
+    }
+
     void InteractWithBox(Item item)
     {
         _interactedBoxObject = item.gameObject;
@@ -558,15 +514,7 @@ public class ItemInteraction : MonoBehaviour
         // 일차가 바뀔 때마다 bathroom_handle 첫 상호작용에서 다시 페이드 인/아웃이 재생되도록 리셋
         _hasDoneBathroomHandleFadeOnce = false;
         _isHandleFading = false;
-        _hasDimmedAfterSecondHandle = false;
-        _bathroomHandleInteractCount = 0;
-        for (int i = 0; i < _volumeSnapshots.Count; i++)
-        {
-            var snap = _volumeSnapshots[i];
-            if (snap.colorAdjustments != null)
-                snap.colorAdjustments.postExposure.value = snap.originalPostExposure;
-        }
-        CacheAllVolumeColorAdjustments();
+        _hasConsumedDay6BathroomHandleInteraction = false;
         _bedPillowTrueEndingDone = false;
         _bedPillowInteracted = false;
     }
