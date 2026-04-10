@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ItemInteraction : MonoBehaviour
 {
@@ -194,6 +196,16 @@ public class ItemInteraction : MonoBehaviour
                         StartCoroutine(ToggleHandleObjectWithFade());
                     else
                         ToggleHandleObject();
+
+                    if (dimOnSecondBathroomHandleInteraction
+                        && !_hasDimmedAfterSecondHandle
+                        && item.itemName == BathroomHandleItemName
+                        && _bathroomHandleInteractCount >= 2
+                        && IsInDimActiveMap())
+                    {
+                        _hasDimmedAfterSecondHandle = true;
+                        ApplyDimImmediate(secondHandleTargetExposure);
+                    }
                 }
                 else
                     Collect(item);
@@ -312,13 +324,29 @@ public class ItemInteraction : MonoBehaviour
         if (string.IsNullOrEmpty(badEndingMapRootName))
             return false;
 
-        // 1) 씬 이름으로 나누는 경우
         if (SceneManager.GetActiveScene().name == badEndingMapRootName)
             return true;
 
-        // 2) 동일 씬 안에서 Bad_Ending 오브젝트를 활성/비활성으로 나누는 경우
-        GameObject root = GameObject.Find(badEndingMapRootName);
-        return root != null && root.activeInHierarchy;
+        Transform current = transform;
+        while (current != null)
+        {
+            if (current.name == badEndingMapRootName)
+                return true;
+            current = current.parent;
+        }
+
+        if (walkingCamera != null)
+        {
+            current = walkingCamera.transform;
+            while (current != null)
+            {
+                if (current.name == badEndingMapRootName)
+                    return true;
+                current = current.parent;
+            }
+        }
+
+        return false;
     }
 
     static void SetImageAlpha(Image img, float alpha)
