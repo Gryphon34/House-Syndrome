@@ -225,22 +225,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.56
+    m_Value: 0.33
   contrast:
     m_OverrideState: 1
-    m_Value: -29.2
+    m_Value: 14
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.0705882, g: 0.7079191, b: 0.98039216, a: 1}
+    m_Value: {r: 0.6509434, g: 0.60488605, b: 0.60488605, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 52
   saturation:
     m_OverrideState: 1
-    m_Value: -91.8
+    m_Value: -86
 --- !u!114 &-4760564010567229870
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4388191585ea44bb892b7a3954c42607, type: 3}
   m_Name: DOT_CRAWL
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   Amount:
     m_OverrideState: 1
     m_Value: 1
@@ -425,10 +425,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c26ccf3b3d21d741a97b824ff06db2b, type: 3}
   m_Name: BLEED_2PHASE
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   BleedAmount:
     m_OverrideState: 1
-    m_Value: 1.228
+    m_Value: 1.15
   mask:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -568,13 +568,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 44
   tint:
     m_OverrideState: 1
-    m_Value: -40.6
+    m_Value: -32
 --- !u!114 &3651448254608044295
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -634,10 +634,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4a1a48c0e9d524b8f3cbac79170fcf, type: 3}
   m_Name: BLEED_3PHASE
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   BleedAmount:
     m_OverrideState: 1
-    m_Value: 1.033
+    m_Value: 1.3
   mask:
     m_OverrideState: 1
     m_Value: {fileID: 0}
@@ -754,10 +754,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10fea1c97e07f47e9bd7f60f0e75e2fe, type: 3}
   m_Name: ANALOG_NOISE
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   fade:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.066
   staticNoise:
     m_OverrideState: 1
     m_Value: 0
@@ -766,22 +766,22 @@ MonoBehaviour:
     m_Value: 1
   barWidth:
     m_OverrideState: 1
-    m_Value: 12
+    m_Value: 60
   tile:
     m_OverrideState: 1
-    m_Value: {x: 10, y: 1}
+    m_Value: {x: 9.76, y: 9.1}
   textureAngle:
     m_OverrideState: 1
     m_Value: 0
   edgeCutOff:
     m_OverrideState: 1
-    m_Value: 63.9
+    m_Value: 75.6
   CutOff:
     m_OverrideState: 1
     m_Value: 1
   barSpeed:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: -60
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 2800000, guid: 1e309e54910b27849a5080e5bc19ff72, type: 3}
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7321846e3f41462a9ae9dabb9989e19, type: 3}
   m_Name: CRTAPERTURE
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   Fade:
     m_OverrideState: 1
     m_Value: 1
@@ -901,7 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188d5997694590c4e87f20d535a3895f, type: 3}
   m_Name: VHSSCANLINES
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   Fade:
     m_OverrideState: 1
     m_Value: 1
