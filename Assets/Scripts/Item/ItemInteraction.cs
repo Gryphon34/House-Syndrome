@@ -5,8 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 public class ItemInteraction : MonoBehaviour
 {
@@ -200,14 +198,13 @@ public class ItemInteraction : MonoBehaviour
                     if (item.itemName == BathroomHandleItemName)
                         _bathroomHandleInteractCount++;
 
-                    if (dimOnSecondBathroomHandleInteraction
-                        && !_hasDimmedAfterSecondHandle
+                    if (!_hasDimmedAfterSecondHandle
                         && item.itemName == BathroomHandleItemName
                         && _bathroomHandleInteractCount >= 2
                         && IsInDimActiveMap())
                     {
                         _hasDimmedAfterSecondHandle = true;
-                        ApplyDimImmediate(secondHandleTargetExposure);
+                        ApplyDimOverlay();
                     }
                 }
                 else
@@ -266,14 +263,14 @@ public class ItemInteraction : MonoBehaviour
     public float bathroomHandleFadeTransitionDuration = 0.5f;
 
     [Header("Handle - 2회 상호작용 시 화면 Dim")]
-    [Tooltip("bathroom_handle를 두 번째 상호작용했을 때 즉시 dim(노출 감소)을 적용할지 여부")]
-    public bool dimOnSecondBathroomHandleInteraction = false;
-    [Tooltip("두 번째 상호작용 시 적용할 목표 노출값(Color Adjustments Post Exposure)")]
-    public float secondHandleTargetExposure = -2f;
-    [Tooltip("dim 효과를 허용할 맵 루트/씬 이름. 비워두면 모든 맵에서 허용.")]
-    public string dimActiveMapRootName = "";
-    [Tooltip("dim 적용 대상 Volume. 비우면 씬의 Volume 중 ColorAdjustments가 있는 첫 대상을 사용.")]
-    public Volume dimTargetVolume;
+    [Header("Handle - 2nd interaction dim (bathroom_handle, Day4 only)")]
+    [Tooltip("bathroom_handle 두 번째 E키 상호작용 시 화면을 어둡게 할 Image. bathroomHandleFadeImage와 같은 오브젝트를 지정해도 됩니다.")]
+    public Image dimOverlayImage;
+    [Tooltip("어둡게 할 때 Image의 알파값 (0=투명, 1=완전 검정). 0.6 정도면 상당히 어두움")]
+    [Range(0f, 1f)]
+    public float dimOverlayAlpha = 0.6f;
+    [Tooltip("이 기능이 작동할 맵의 루트 오브젝트 이름 (이 오브젝트가 활성 상태일 때만 dim 발동)")]
+    public string dimActiveMapRootName = "House_Day4";
 
     [Header("Bad Ending - bathroom_handle 리셋")]
     [Tooltip("Bad Ending 맵으로 판정할 루트 오브젝트/씬 이름. (기본은 HouseSyndromeScene의 root 이름 'Bad_Ending')")]
@@ -532,6 +529,7 @@ public class ItemInteraction : MonoBehaviour
         _hasConsumedDay6BathroomHandleInteraction = false;
         _hasDimmedAfterSecondHandle = false;
         _bathroomHandleInteractCount = 0;
+        RemoveDimOverlay();
         _bedPillowTrueEndingDone = false;
         _bedPillowInteracted = false;
     }
@@ -539,68 +537,29 @@ public class ItemInteraction : MonoBehaviour
     bool IsInDimActiveMap()
     {
         if (string.IsNullOrEmpty(dimActiveMapRootName))
-            return true;
-
-        if (SceneManager.GetActiveScene().name == dimActiveMapRootName)
-            return true;
-
-        Transform current = transform;
-        while (current != null)
-        {
-            if (current.name == dimActiveMapRootName)
-                return true;
-            current = current.parent;
-        }
-
-        if (walkingCamera != null)
-        {
-            current = walkingCamera.transform;
-            while (current != null)
-            {
-                if (current.name == dimActiveMapRootName)
-                    return true;
-                current = current.parent;
-            }
-        }
-
-        return false;
+            return false;
+        GameObject root = GameObject.Find(dimActiveMapRootName);
+        return root != null && root.activeInHierarchy;
     }
 
-    void ApplyDimImmediate(float targetExposure)
+    void ApplyDimOverlay()
     {
-        ColorAdjustments colorAdjustments = null;
-        if (dimTargetVolume != null)
+        if (dimOverlayImage == null)
         {
-            var profile = dimTargetVolume.profile != null ? dimTargetVolume.profile : dimTargetVolume.sharedProfile;
-            if (profile != null)
-                profile.TryGet(out colorAdjustments);
-        }
-
-        if (colorAdjustments == null)
-        {
-            var volumes = FindObjectsOfType<Volume>(true);
-            for (int i = 0; i < volumes.Length; i++)
-            {
-                var volume = volumes[i];
-                if (volume == null) continue;
-
-                var profile = volume.profile != null ? volume.profile : volume.sharedProfile;
-                if (profile != null && profile.TryGet(out colorAdjustments))
-                {
-                    dimTargetVolume = volume;
-                    break;
-                }
-            }
-        }
-
-        if (colorAdjustments == null)
-        {
-            Debug.LogWarning("ColorAdjustments를 찾지 못해 dim 적용을 생략합니다.");
+            Debug.LogWarning("[ItemInteraction] dimOverlayImage가 지정되지 않아 화면을 어둡게 할 수 없습니다. Inspector에서 연결하세요.");
             return;
         }
+        dimOverlayImage.gameObject.SetActive(true);
+        dimOverlayImage.color = new Color(0f, 0f, 0f, dimOverlayAlpha);
+        dimOverlayImage.raycastTarget = false;
+        Debug.Log($"[ItemInteraction] ApplyDimOverlay — alpha={dimOverlayAlpha}로 화면 어둡게 적용 완료");
+    }
 
-        colorAdjustments.postExposure.overrideState = true;
-        colorAdjustments.postExposure.value = targetExposure;
+    void RemoveDimOverlay()
+    {
+        if (dimOverlayImage == null) return;
+        dimOverlayImage.color = new Color(0f, 0f, 0f, 0f);
+        dimOverlayImage.gameObject.SetActive(false);
     }
 
     void InteractBedPillowForTrueEnding(Item item)
@@ -812,6 +771,10 @@ public class ItemInteraction : MonoBehaviour
     [Tooltip("????? ? ?? ????. E? phone ?? ? 10? ? ????")]
     public GameObject capsuleToShowAfterPhone;
 
+    [Header("Phone - interact")]
+    [Tooltip("phone 아이템을 E키로 상호작용했을 때 활성화할 오브젝트들. 인스펙터에서 직접 지정.")]
+    public List<GameObject> objectsToEnableOnPhoneInteract = new List<GameObject>();
+
     Coroutine _phoneCapsuleRoutine;
 
     void HidePhone(Item phoneItem)
@@ -821,6 +784,15 @@ public class ItemInteraction : MonoBehaviour
             r.enabled = false;
         phoneItem.enabled = false;
         go.GetComponent<PhonePlace>().enabled = true;
+
+        if (objectsToEnableOnPhoneInteract != null)
+        {
+            for (int i = 0; i < objectsToEnableOnPhoneInteract.Count; i++)
+            {
+                if (objectsToEnableOnPhoneInteract[i] != null)
+                    objectsToEnableOnPhoneInteract[i].SetActive(true);
+            }
+        }
 
         if (capsuleToShowAfterPhone != null)
         {
