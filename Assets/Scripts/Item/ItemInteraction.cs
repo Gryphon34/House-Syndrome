@@ -5,8 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 public class ItemInteraction : MonoBehaviour
 {
@@ -179,15 +177,18 @@ public class ItemInteraction : MonoBehaviour
 
                     if (item.itemName == BathroomHandleItemName)
                     {
-                        // Day 6: 첫 상호작용에서만 오브젝트 활성화, 이후엔 완전 무반응(페이드/토글 포함)
-                        if (ShouldBlockDay6BathroomHandleInteraction())
-                            return;
-
-                        // Day 6: bathroom_handle 페이드 기능 제거(즉시 토글만)
                         int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+
                         if (day == 6)
                         {
-                            ToggleHandleObject();
+                            if (!_hasDay6FadeDone && IsInDay6DimActiveMap())
+                            {
+                                _hasDay6FadeDone = true;
+                                if (objectToActivateOnDay6Handle != null)
+                                    objectToActivateOnDay6Handle.SetActive(true);
+                                ToggleHandleObject();
+                                StartCoroutine(Day6FadeBlackAndBack());
+                            }
                             return;
                         }
                     }
@@ -200,14 +201,13 @@ public class ItemInteraction : MonoBehaviour
                     if (item.itemName == BathroomHandleItemName)
                         _bathroomHandleInteractCount++;
 
-                    if (dimOnSecondBathroomHandleInteraction
-                        && !_hasDimmedAfterSecondHandle
+                    if (!_hasDimmedAfterSecondHandle
                         && item.itemName == BathroomHandleItemName
                         && _bathroomHandleInteractCount >= 2
                         && IsInDimActiveMap())
                     {
                         _hasDimmedAfterSecondHandle = true;
-                        ApplyDimImmediate(secondHandleTargetExposure);
+                        ApplyDimOverlay();
                     }
                 }
                 else
@@ -265,15 +265,28 @@ public class ItemInteraction : MonoBehaviour
     [Tooltip("페이드 인/아웃에 걸리는 시간(초)")]
     public float bathroomHandleFadeTransitionDuration = 0.5f;
 
-    [Header("Handle - 2회 상호작용 시 화면 Dim")]
-    [Tooltip("bathroom_handle를 두 번째 상호작용했을 때 즉시 dim(노출 감소)을 적용할지 여부")]
-    public bool dimOnSecondBathroomHandleInteraction = false;
-    [Tooltip("두 번째 상호작용 시 적용할 목표 노출값(Color Adjustments Post Exposure)")]
-    public float secondHandleTargetExposure = -2f;
-    [Tooltip("dim 효과를 허용할 맵 루트/씬 이름. 비워두면 모든 맵에서 허용.")]
-    public string dimActiveMapRootName = "";
-    [Tooltip("dim 적용 대상 Volume. 비우면 씬의 Volume 중 ColorAdjustments가 있는 첫 대상을 사용.")]
-    public Volume dimTargetVolume;
+    [Header("Handle - 2회 상호작용 dim (Day4: 즉시 어둡게)")]
+    [Tooltip("bathroom_handle 두 번째 E키 상호작용 시 화면을 어둡게 할 Image")]
+    public Image dimOverlayImage;
+    [Tooltip("어둡게 할 때 Image의 알파값 (0=투명, 1=완전 검정). 0.6 정도면 상당히 어두움")]
+    [Range(0f, 1f)]
+    public float dimOverlayAlpha = 0.6f;
+    [Tooltip("Day4 dim이 작동할 맵의 루트 오브젝트 이름")]
+    public string dimActiveMapRootName = "House_Day4";
+
+    [Header("Handle - 2회 상호작용 페이드 (Day6: 서서히 까매짐 → 밝아짐)")]
+    [Tooltip("6일차 bathroom_handle 두 번째 상호작용 시 페이드에 사용할 풀스크린 검정 Image (dimOverlayImage 또는 bathroomHandleFadeImage와 같아도 됨)")]
+    public Image day6FadeImage;
+    [Tooltip("서서히 까매지는 데 걸리는 시간(초)")]
+    public float day6FadeInDuration = 1.0f;
+    [Tooltip("완전히 까맣게 유지되는 시간(초)")]
+    public float day6BlackHoldDuration = 2.0f;
+    [Tooltip("다시 밝아지는 데 걸리는 시간(초)")]
+    public float day6FadeOutDuration = 1.0f;
+    [Tooltip("까맣게 된 동안 비활성화할 오브젝트들")]
+    public List<GameObject> day6ObjectsToDeactivate = new List<GameObject>();
+    [Tooltip("Day6 dim이 작동할 맵의 루트 오브젝트 이름")]
+    public string day6DimActiveMapRootName = "House_Day6";
 
     [Header("Bad Ending - bathroom_handle 리셋")]
     [Tooltip("Bad Ending 맵으로 판정할 루트 오브젝트/씬 이름. (기본은 HouseSyndromeScene의 root 이름 'Bad_Ending')")]
@@ -290,7 +303,10 @@ public class ItemInteraction : MonoBehaviour
     private bool _isBadEndingBathroomHandleResetting = false;
     private bool _hasConsumedDay6BathroomHandleInteraction = false;
     private bool _hasDimmedAfterSecondHandle = false;
+    private bool _hasDay6FadeDone = false;
+    private bool _isDay6Fading = false;
     private int _bathroomHandleInteractCount = 0;
+    private int _day6HandleInteractCount = 0;
 
     IEnumerator ToggleHandleObjectWithFade()
     {
@@ -484,21 +500,6 @@ public class ItemInteraction : MonoBehaviour
             SleepRuleManager.Instance.RecordBathroomHandleToggle(setActive);
     }
 
-    bool ShouldBlockDay6BathroomHandleInteraction()
-    {
-        int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
-        if (day != 6) return false;
-
-        if (_hasConsumedDay6BathroomHandleInteraction)
-            return true;
-
-        _hasConsumedDay6BathroomHandleInteraction = true;
-        if (objectToActivateOnDay6Handle != null)
-            objectToActivateOnDay6Handle.SetActive(true);
-        // 첫 상호작용은 water만 켜고 기존 handle 기능(페이드/토글)은 그대로 진행
-        return false;
-    }
-
     void InteractWithBox(Item item)
     {
         _interactedBoxObject = item.gameObject;
@@ -532,6 +533,10 @@ public class ItemInteraction : MonoBehaviour
         _hasConsumedDay6BathroomHandleInteraction = false;
         _hasDimmedAfterSecondHandle = false;
         _bathroomHandleInteractCount = 0;
+        _day6HandleInteractCount = 0;
+        _hasDay6FadeDone = false;
+        _isDay6Fading = false;
+        RemoveDimOverlay();
         _bedPillowTrueEndingDone = false;
         _bedPillowInteracted = false;
     }
@@ -539,68 +544,86 @@ public class ItemInteraction : MonoBehaviour
     bool IsInDimActiveMap()
     {
         if (string.IsNullOrEmpty(dimActiveMapRootName))
-            return true;
-
-        if (SceneManager.GetActiveScene().name == dimActiveMapRootName)
-            return true;
-
-        Transform current = transform;
-        while (current != null)
-        {
-            if (current.name == dimActiveMapRootName)
-                return true;
-            current = current.parent;
-        }
-
-        if (walkingCamera != null)
-        {
-            current = walkingCamera.transform;
-            while (current != null)
-            {
-                if (current.name == dimActiveMapRootName)
-                    return true;
-                current = current.parent;
-            }
-        }
-
-        return false;
+            return false;
+        GameObject root = GameObject.Find(dimActiveMapRootName);
+        return root != null && root.activeInHierarchy;
     }
 
-    void ApplyDimImmediate(float targetExposure)
+    void ApplyDimOverlay()
     {
-        ColorAdjustments colorAdjustments = null;
-        if (dimTargetVolume != null)
+        if (dimOverlayImage == null)
         {
-            var profile = dimTargetVolume.profile != null ? dimTargetVolume.profile : dimTargetVolume.sharedProfile;
-            if (profile != null)
-                profile.TryGet(out colorAdjustments);
-        }
-
-        if (colorAdjustments == null)
-        {
-            var volumes = FindObjectsOfType<Volume>(true);
-            for (int i = 0; i < volumes.Length; i++)
-            {
-                var volume = volumes[i];
-                if (volume == null) continue;
-
-                var profile = volume.profile != null ? volume.profile : volume.sharedProfile;
-                if (profile != null && profile.TryGet(out colorAdjustments))
-                {
-                    dimTargetVolume = volume;
-                    break;
-                }
-            }
-        }
-
-        if (colorAdjustments == null)
-        {
-            Debug.LogWarning("ColorAdjustments를 찾지 못해 dim 적용을 생략합니다.");
+            Debug.LogWarning("[ItemInteraction] dimOverlayImage가 지정되지 않아 화면을 어둡게 할 수 없습니다. Inspector에서 연결하세요.");
             return;
         }
+        dimOverlayImage.gameObject.SetActive(true);
+        dimOverlayImage.color = new Color(0f, 0f, 0f, dimOverlayAlpha);
+        dimOverlayImage.raycastTarget = false;
+        Debug.Log($"[ItemInteraction] ApplyDimOverlay — alpha={dimOverlayAlpha}로 화면 어둡게 적용 완료");
+    }
 
-        colorAdjustments.postExposure.overrideState = true;
-        colorAdjustments.postExposure.value = targetExposure;
+    void RemoveDimOverlay()
+    {
+        if (dimOverlayImage == null) return;
+        dimOverlayImage.color = new Color(0f, 0f, 0f, 0f);
+        dimOverlayImage.gameObject.SetActive(false);
+    }
+
+    bool IsInDay6DimActiveMap()
+    {
+        if (string.IsNullOrEmpty(day6DimActiveMapRootName))
+            return false;
+        GameObject root = GameObject.Find(day6DimActiveMapRootName);
+        return root != null && root.activeInHierarchy;
+    }
+
+    IEnumerator Day6FadeBlackAndBack()
+    {
+        if (_isDay6Fading) yield break;
+        _isDay6Fading = true;
+
+        Image fadeImg = day6FadeImage;
+        if (fadeImg == null)
+        {
+            Debug.LogWarning("[ItemInteraction] day6FadeImage가 지정되지 않아 6일차 페이드를 실행할 수 없습니다.");
+            _isDay6Fading = false;
+            yield break;
+        }
+
+        fadeImg.gameObject.SetActive(true);
+        fadeImg.raycastTarget = false;
+        SetImageAlpha(fadeImg, 0f);
+
+        float fadeDur = Mathf.Max(0.001f, day6FadeInDuration);
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / fadeDur;
+            SetImageAlpha(fadeImg, Mathf.Clamp01(t));
+            yield return null;
+        }
+        SetImageAlpha(fadeImg, 1f);
+
+        for (int i = 0; i < day6ObjectsToDeactivate.Count; i++)
+        {
+            if (day6ObjectsToDeactivate[i] != null)
+                day6ObjectsToDeactivate[i].SetActive(false);
+        }
+
+        yield return new WaitForSeconds(day6BlackHoldDuration);
+
+        fadeDur = Mathf.Max(0.001f, day6FadeOutDuration);
+        t = 1f;
+        while (t > 0f)
+        {
+            t -= Time.deltaTime / fadeDur;
+            SetImageAlpha(fadeImg, Mathf.Clamp01(t));
+            yield return null;
+        }
+        SetImageAlpha(fadeImg, 0f);
+        fadeImg.gameObject.SetActive(false);
+
+        _isDay6Fading = false;
     }
 
     void InteractBedPillowForTrueEnding(Item item)
