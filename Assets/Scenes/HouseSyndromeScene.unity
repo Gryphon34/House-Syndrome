@@ -59980,6 +59980,15 @@ MonoBehaviour:
   - key: box
     clip: {fileID: 8300000, guid: ba78e470ecafb6c4ca49143006b78529, type: 3}
     volume: 1
+  - key: voicerecoder
+    clip: {fileID: 8300000, guid: 19a3d07bb91f5cc499d868457a81a15a, type: 3}
+    volume: 0.5
+  - key: noise
+    clip: {fileID: 8300000, guid: ec6dd70ca40df114e8a3fa43cee671eb, type: 3}
+    volume: 1
+  - key: noise_2
+    clip: {fileID: 8300000, guid: 5e9d1b27f821a114d9d0e975751bfe18, type: 3}
+    volume: 0.6
   masterVolume: 1
   doorSoundDelaySeconds: 0
 --- !u!1 &768489220
@@ -77751,6 +77760,8 @@ GameObject:
   - component: {fileID: 989236123}
   - component: {fileID: 989236122}
   - component: {fileID: 989236126}
+  - component: {fileID: 989236128}
+  - component: {fileID: 989236127}
   m_Layer: 5
   m_Name: voice_recorder
   m_TagString: Untagged
@@ -77828,6 +77839,120 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::VoiceRecorderPhotoClick
   itemInteraction: {fileID: 1761765672}
+--- !u!114 &989236127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989236120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842c8bd2e530a1b4bb3fb84a530973b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::AudioEmitter
+  soundKey: noise
+  playOnEnable: 1
+  loop: 1
+  volume: 1
+  playOnlyWhenActive: {fileID: 989236120}
+--- !u!82 &989236128
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989236120}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &989870894
 GameObject:
   m_ObjectHideFlags: 0
@@ -145802,7 +145927,7 @@ MonoBehaviour:
   - itemName: voice recorder
     sprite: {fileID: 1988442359, guid: 42e4633df1a71c84bab17c60d15416ce, type: 3}
     clickSound: {fileID: 8300000, guid: 3f150adcf7f97b74ab69a138f91be30e, type: 3}
-  voiceRecorderAudioSource: {fileID: 0}
+  voiceRecorderAudioSource: {fileID: 989236128}
   diaryUIRoot: {fileID: 1251368373}
   diaryImage: {fileID: 1251368375}
   diaryPages:
