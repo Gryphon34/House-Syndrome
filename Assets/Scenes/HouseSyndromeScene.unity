@@ -11192,6 +11192,7 @@ GameObject:
   - component: {fileID: 154837274}
   - component: {fileID: 154837278}
   - component: {fileID: 154837279}
+  - component: {fileID: 154837280}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -11333,6 +11334,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::CutsceneTrigger
   director: {fileID: 154837278}
+--- !u!114 &154837280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154837272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c756a389c31c5846958c27c1c5df7a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GameScripts::SimpleCinematicZoneTrigger
+  playerCamera: {fileID: 372142024}
+  cinematicRenderCam: {fileID: 0}
+  gameplayPlayer: {fileID: 1858440975}
+  cinematicCharacter: {fileID: 140883846}
+  director: {fileID: 154837278}
+  enableOnCinematicStart: []
+  enableOnCinematicFinished:
+  - {fileID: 1130828401}
 --- !u!1 &155624244
 GameObject:
   m_ObjectHideFlags: 0
@@ -88025,6 +88046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1130828402}
+  - component: {fileID: 1130828403}
   m_Layer: 0
   m_Name: glitch_hand
   m_TagString: Untagged
@@ -88056,6 +88078,28 @@ Transform:
   - {fileID: 1715130568}
   m_Father: {fileID: 1039463731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1130828403
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130828401}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebb803c3b9e0dd44d939639ef5d49d30, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1131676301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000010707776372, guid: 23d25b2e2d4364dd4b92c52ef40cd36e, type: 3}
@@ -146445,16 +146489,6 @@ MonoBehaviour:
   badEndingBlackoutHoldDuration: 60
   phoneCapsuleDelay: 5
   capsuleToShowAfterPhone: {fileID: 1669505765}
-  objectsToEnableOnPhoneInteract:
-  - {fileID: 1522002414}
-  - {fileID: 935423660}
-  - {fileID: 279236297}
-  - {fileID: 1704160778}
-  - {fileID: 344986445}
-  - {fileID: 605836257}
-  - {fileID: 813885457}
-  - {fileID: 1561016169}
-  - {fileID: 1715130567}
 --- !u!1 &1762608660
 GameObject:
   m_ObjectHideFlags: 0

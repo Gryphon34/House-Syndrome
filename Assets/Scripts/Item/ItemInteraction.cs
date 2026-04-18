@@ -771,10 +771,6 @@ public class ItemInteraction : MonoBehaviour
     [Tooltip("????? ? ?? ????. E? phone ?? ? 10? ? ????")]
     public GameObject capsuleToShowAfterPhone;
 
-    [Header("Phone - interact")]
-    [Tooltip("phone 아이템을 E키로 상호작용했을 때 활성화할 오브젝트들. 인스펙터에서 직접 지정.")]
-    public List<GameObject> objectsToEnableOnPhoneInteract = new List<GameObject>();
-
     Coroutine _phoneCapsuleRoutine;
 
     void HidePhone(Item phoneItem)
@@ -784,15 +780,6 @@ public class ItemInteraction : MonoBehaviour
             r.enabled = false;
         phoneItem.enabled = false;
         go.GetComponent<PhonePlace>().enabled = true;
-
-        if (objectsToEnableOnPhoneInteract != null)
-        {
-            for (int i = 0; i < objectsToEnableOnPhoneInteract.Count; i++)
-            {
-                if (objectsToEnableOnPhoneInteract[i] != null)
-                    objectsToEnableOnPhoneInteract[i].SetActive(true);
-            }
-        }
 
         if (capsuleToShowAfterPhone != null)
         {
