@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// 플레이어 시야(지정된 카메라의 화면 중앙 raycast)에서 바라보고 있는 동안
@@ -53,8 +54,13 @@ public class DoorLookToggle : MonoBehaviour
     [Tooltip("바라보는 대상/거리/히트 정보를 콘솔에 출력할지 여부")]
     public bool logLookDebug = false;
 
+    [Header("Physics Settings")]
+    [Tooltip("문이 움직이는 동안 콜라이더 비활성화 할 시간")]
+    public float colliderDisableDuration = 1.0f;
+
     private Animator _anim;
     private AudioEmitter _audioEmitter;
+    private Collider _collider;
     private bool _hasOpened = false;
     private bool _isClosed = false;
 
@@ -71,6 +77,7 @@ public class DoorLookToggle : MonoBehaviour
 
         _anim = GetComponent<Animator>();
         _audioEmitter = GetComponent<AudioEmitter>();
+        _collider=GetComponent<Collider>();
 
         // "씬에서는 닫혀 있는데 플레이하면 열려 보임" 문제를 막기 위해,
         // 런타임 시작 시점에 startOpen 값을 Animator 파라미터에 강제로 반영합니다.
@@ -152,6 +159,8 @@ public class DoorLookToggle : MonoBehaviour
         if (_audioEmitter != null)
             _audioEmitter.StartPlayback();
 
+        StartCoroutine(DisableColliderRoutine());
+
         if (logToggle)
             Debug.Log($"[DoorLookToggle] {name} -> OPEN");
     }
@@ -169,8 +178,20 @@ public class DoorLookToggle : MonoBehaviour
         if (_audioEmitter != null)
             _audioEmitter.StartPlayback();
 
+        StartCoroutine(DisableColliderRoutine());
+
         if (logToggle)
             Debug.Log($"[DoorLookToggle] {name} -> CLOSE");
+    }
+
+    private IEnumerator DisableColliderRoutine()
+    {
+        if(_collider != null)
+        {
+            _collider.enabled=false;
+            yield return new WaitForSeconds(colliderDisableDuration);
+            _collider.enabled=true;
+        }
     }
 }
 
