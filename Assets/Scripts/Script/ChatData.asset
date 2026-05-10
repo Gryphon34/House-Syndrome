@@ -15,7 +15,7 @@ MonoBehaviour:
   sheetURL: 14dkLJIVeW-uAt6FnxCFFnXCwnmybrKOIQSCm_LZd5UQ
   sheetName: "\uC2DC\uD2B81"
   startRowIndex: 2
-  endRowIndex: 4
+  endRowIndex: 5
   chatDataList:
   - id: 0
     content: "\uC624\uB298\uC740 \uC774\uC0AC \uCCAB\uB0A0"
@@ -24,3 +24,5 @@ MonoBehaviour:
   - id: 2
     content: "\uC5B4\uC81C \uC7A0\uC790\uB9AC\uAC00 \uB108\uBB34 \uBB34\uC11C\uC6E0\uC5B4.
       \uC5B4\uC81C \uBCF8 \uC2E0\uBB38 \uAE30\uC0AC\uAC00 \uC0DD\uAC01\uB098\uB124"
+  - id: 3
+    content: dddd
