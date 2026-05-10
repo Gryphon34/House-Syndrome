@@ -56,7 +56,7 @@ public class DoorLookToggle : MonoBehaviour
 
     [Header("Physics Settings")]
     [Tooltip("문이 움직이는 동안 콜라이더 비활성화 할 시간")]
-    public float colliderDisableDuration = 1.0f;
+    public float colliderDisableDuration = 2.0f;
 
     private Animator _anim;
     private AudioEmitter _audioEmitter;
