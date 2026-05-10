@@ -21646,7 +21646,7 @@ PlayableDirector:
   - key: {fileID: -2234032194057971803, guid: 38110de460f2e994e8caf38be2ebc9ac, type: 2}
     value: {fileID: 326044008}
   - key: {fileID: -5953639050416849411, guid: 38110de460f2e994e8caf38be2ebc9ac, type: 2}
-    value: {fileID: 1523047654}
+    value: {fileID: 0}
   - key: {fileID: -2276690857394658705, guid: 38110de460f2e994e8caf38be2ebc9ac, type: 2}
     value: {fileID: 1099169558}
   - key: {fileID: 5720994270515898257, guid: 38110de460f2e994e8caf38be2ebc9ac, type: 2}
@@ -35822,6 +35822,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  currentDay: 1
+  spawnPoints: []
+  player: {fileID: 0}
+  dayText: {fileID: 0}
+  displayDuration: 2
+  fadeSpeed: 1
+  screenFadeImage: {fileID: 0}
+  spawnBlackHoldDuration: 5
+  dayNightCycle: {fileID: 0}
+  dayMapManager: {fileID: 0}
+  spawnDialogue: {fileID: 0}
+  spawnAudioKey: 
+  spawnAudioVolume: 1
 --- !u!1 &486753505
 GameObject:
   m_ObjectHideFlags: 0
@@ -36383,22 +36396,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9911d97eb00ab4444accb315a4f0113a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameScripts::DayNightSystem.Clock
-  dayNightManager: {fileID: 5952752534756792571}
+  dayNightManager: {fileID: 0}
   clocksByDay:
-  - hourHand: {fileID: 634977885}
-    minuteHand: {fileID: 634977884}
-  - hourHand: {fileID: 1568103013}
-    minuteHand: {fileID: 1568103012}
-  - hourHand: {fileID: 1306522965}
-    minuteHand: {fileID: 1306522964}
-  - hourHand: {fileID: 250036602}
-    minuteHand: {fileID: 250036601}
-  - hourHand: {fileID: 1477707905}
-    minuteHand: {fileID: 1477707904}
-  - hourHand: {fileID: 1367881242}
-    minuteHand: {fileID: 1367881241}
-  - hourHand: {fileID: 810448552}
-    minuteHand: {fileID: 810448551}
+  - {hourHand: {fileID: 634977885}, minuteHand: {fileID: 634977884}}
+  - {hourHand: {fileID: 1568103013}, minuteHand: {fileID: 1568103012}}
+  - {hourHand: {fileID: 1306522965}, minuteHand: {fileID: 1306522964}}
+  - {hourHand: {fileID: 250036602}, minuteHand: {fileID: 250036601}}
+  - {hourHand: {fileID: 1477707905}, minuteHand: {fileID: 1477707904}}
+  - {hourHand: {fileID: 1367881242}, minuteHand: {fileID: 1367881241}}
+  - {hourHand: {fileID: 810448552}, minuteHand: {fileID: 810448551}}
   clockwise: 1
   hourOffset: 0
   useDayNightManagerTime: 0
@@ -54273,6 +54279,7 @@ MonoBehaviour:
   startOpen: 0
   logToggle: 0
   logLookDebug: 0
+  colliderDisableDuration: 1
 --- !u!1 &773462378
 GameObject:
   m_ObjectHideFlags: 0
@@ -57518,7 +57525,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813979748}
-  - component: {fileID: 813979749}
   - component: {fileID: 813979750}
   m_Layer: 5
   m_Name: Script
@@ -57548,23 +57554,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -168}
   m_SizeDelta: {x: 887.5, y: 276}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &813979749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813979747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e427c645623bad4093cc7af286dd4fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameScripts::DialogueUI
-  dialogueText: {fileID: 1506635825}
-  dialogueRoot: {fileID: 813979747}
-  hideOnStart: 1
-  defaultDurationSeconds: 3
-  overwriteExisting: 1
 --- !u!114 &813979750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57583,7 +57572,7 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 813979749}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: DialogueUI, GameScripts
           m_MethodName: Show
           m_Mode: 5
@@ -104259,7 +104248,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1735524902}
   - {fileID: 2008642785}
   - {fileID: 851145907}
   m_Father: {fileID: 399757189}
@@ -105900,6 +105888,7 @@ GameObject:
   - component: {fileID: 1506635824}
   - component: {fileID: 1506635826}
   - component: {fileID: 1506635825}
+  - component: {fileID: 1506635827}
   m_Layer: 5
   m_Name: script
   m_TagString: Untagged
@@ -105948,8 +105937,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: script
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 36313b19f4cf1ff41b0cbf97f165d906, type: 2}
+  m_sharedMaterial: {fileID: -3622836999720757686, guid: 36313b19f4cf1ff41b0cbf97f165d906, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -106026,6 +106015,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506635823}
   m_CullTransparentMesh: 1
+--- !u!114 &1506635827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506635823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22965bede7938eb4d9929a845b437625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptManager
+  chatData: {fileID: 11400000, guid: 9ab888ab3ad5fe0479bc23afee54265c, type: 2}
+  dialogueText: {fileID: 1506635825}
+  currentIndex: 0
 --- !u!1 &1506872488
 GameObject:
   m_ObjectHideFlags: 0
@@ -129241,16 +129245,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735266878}
   m_Mesh: {fileID: 4300042, guid: 14cf328cd0a9046e5a177954438c6a56, type: 3}
---- !u!1 &1735524901 stripped
+--- !u!1 &1735524901
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2586047315586559715, guid: 384076aea18d9f049bd9e050284c2000, type: 3}
-  m_PrefabInstance: {fileID: 8914265032862443399}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1735524902 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2929781745657312345, guid: 384076aea18d9f049bd9e050284c2000, type: 3}
-  m_PrefabInstance: {fileID: 8914265032862443399}
-  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1735524905}
+  - component: {fileID: 1735524903}
+  - component: {fileID: 1735524904}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!95 &1735524903
 Animator:
   serializedVersion: 7
@@ -129289,6 +129301,21 @@ MonoBehaviour:
   extraTargets:
   - target: {fileID: 2008642784}
     action: 0
+--- !u!4 &1735524905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735524901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1736659739
 GameObject:
   m_ObjectHideFlags: 0
@@ -152133,7 +152160,6 @@ Transform:
   - {fileID: 491000923}
   - {fileID: 766524036}
   - {fileID: 1970710534}
-  - {fileID: 6744507059521636963}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2080169114
@@ -163686,30 +163712,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2940039759739525862, guid: de1b4cc51638ea74fb77dd4fc7eb8aa4, type: 3}
   m_PrefabInstance: {fileID: 5493584527165956276}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5952752534756792571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8893943908490018554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f913291ec30689d4f940fc3f16f9a1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTime: 0
-  visualConfig: {fileID: 11400000, guid: 7c775b4d5f726fd49882cdcdd09a3588, type: 2}
-  directionalLight: {fileID: 0}
-  timeScale: 0
-  displayTimeFormat: '{0:00}:{1:00}'
-  currentTimeLimit: -1
-  OnHourChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTimeLimitReached:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &6044216351684755328
 Transform:
   m_ObjectHideFlags: 0
@@ -163756,21 +163758,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6744507059521636963
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8893943908490018554}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15728, y: -0.26784, z: 3.08267}
-  m_LocalScale: {x: 1, y: 0, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2079908563}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7227629550504722099
 GameObject:
   m_ObjectHideFlags: 0
@@ -164171,23 +164158,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &8893943908490018554
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6744507059521636963}
-  - component: {fileID: 5952752534756792571}
-  m_Layer: 0
-  m_Name: DayNightManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
 --- !u!4 &8951257038414061297
 Transform:
   m_ObjectHideFlags: 0
@@ -164223,6 +164193,7 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1735524905}
   - {fileID: 832575519}
   - {fileID: 1301771095}
   - {fileID: 902561945}
