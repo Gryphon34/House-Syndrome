@@ -53344,13 +53344,13 @@ MonoBehaviour:
     volume: 0
   - key: clock
     clip: {fileID: 8300000, guid: 7a79f3671187db447a49f5d9e3010d1b, type: 3}
-    volume: 0.533
+    volume: 0.2
   - key: knock_1
     clip: {fileID: 8300000, guid: 6a4561016e3f4124ba914adf37e6d4c6, type: 3}
-    volume: 1
+    volume: 0.4
   - key: knock_2
     clip: {fileID: 8300000, guid: 479665ea44552554ba542cf341ba1c7f, type: 3}
-    volume: 1
+    volume: 0.4
   - key: wall
     clip: {fileID: 8300000, guid: 0611b13f2ea6c3e4eadee5478aa309c8, type: 3}
     volume: 1
@@ -53372,12 +53372,6 @@ MonoBehaviour:
   - key: voicerecoder
     clip: {fileID: 8300000, guid: 19a3d07bb91f5cc499d868457a81a15a, type: 3}
     volume: 0.5
-  - key: noise
-    clip: {fileID: 8300000, guid: ec6dd70ca40df114e8a3fa43cee671eb, type: 3}
-    volume: 1
-  - key: noise_2
-    clip: {fileID: 8300000, guid: 5e9d1b27f821a114d9d0e975751bfe18, type: 3}
-    volume: 0.6
   masterVolume: 1
   doorSoundDelaySeconds: 0
 --- !u!1 &769599525
