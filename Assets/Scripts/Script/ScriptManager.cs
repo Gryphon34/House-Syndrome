@@ -26,6 +26,11 @@ public class ScriptManager : MonoBehaviour
     [SerializeField]
     private float dialogueDisplayDuration = 3f;
 
+    [Header("ID Settings")]
+    [Tooltip("구글 시트 id가 0부터 시작하면 true. Day1=id0, Day2=id1")]
+    [SerializeField]
+    private bool chatIdStartsFromZero = true;
+
     private Dictionary<int, string> chatDictionary = new Dictionary<int, string>();
 
     private Coroutine delayRoutine;
@@ -36,6 +41,7 @@ public class ScriptManager : MonoBehaviour
     private void Awake()
     {
         MakeChatDictionary();
+        HideDialogue();
     }
 
     private void OnEnable()
@@ -50,7 +56,7 @@ public class ScriptManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // SpawnManager가 currentDay를 세팅할 시간을 기다림
+        // SpawnManager가 currentDay를 세팅하고 스폰 처리할 시간을 기다림
         yield return null;
 
         ShowDialogueForCurrentDay();
@@ -62,17 +68,17 @@ public class ScriptManager : MonoBehaviour
 
         if (chatData == null)
         {
-            Debug.LogError("ChatData가 연결되지 않았습니다.");
+            Debug.LogError("ScriptManager: ChatData가 연결되지 않았습니다.");
             return;
         }
 
         foreach (Chat chat in chatData.chatDataList)
         {
-            if (!chatDictionary.ContainsKey(chat.id))
-            {
-                chatDictionary.Add(chat.id, chat.content);
-            }
+            // 같은 id가 있으면 마지막 값으로 덮어씀
+            chatDictionary[chat.id] = chat.content;
         }
+
+        Debug.Log($"ScriptManager: 대사 Dictionary 생성 완료 - {chatDictionary.Count}개");
     }
 
     private void OnDayChanged()
@@ -98,7 +104,7 @@ public class ScriptManager : MonoBehaviour
     {
         if (SpawnManager.Instance == null)
         {
-            Debug.LogError("SpawnManager.Instance를 찾을 수 없습니다.");
+            Debug.LogError("ScriptManager: SpawnManager.Instance를 찾을 수 없습니다.");
             return;
         }
 
@@ -109,7 +115,7 @@ public class ScriptManager : MonoBehaviour
             return;
         }
 
-        int id = currentDay - 1;
+        int id = GetChatIdByDay(currentDay);
 
         bool success = ShowDialogueById(id);
 
@@ -119,17 +125,27 @@ public class ScriptManager : MonoBehaviour
         }
     }
 
+    private int GetChatIdByDay(int currentDay)
+    {
+        if (chatIdStartsFromZero)
+        {
+            return currentDay - 1;
+        }
+
+        return currentDay;
+    }
+
     public bool ShowDialogueById(int id)
     {
         if (dialogueText == null)
         {
-            Debug.LogError("Dialogue Text가 연결되지 않았습니다.");
+            Debug.LogError("ScriptManager: Dialogue Text가 연결되지 않았습니다.");
             return false;
         }
 
         if (chatData == null)
         {
-            Debug.LogError("ChatData가 연결되지 않았습니다.");
+            Debug.LogError("ScriptManager: ChatData가 연결되지 않았습니다.");
             return false;
         }
 
@@ -138,9 +154,15 @@ public class ScriptManager : MonoBehaviour
             MakeChatDictionary();
         }
 
-        if (!chatDictionary.ContainsKey(id))
+        if (!chatDictionary.TryGetValue(id, out string content))
         {
-            Debug.LogWarning($"id {id}에 해당하는 대사가 없습니다.");
+            Debug.LogWarning($"ScriptManager: id {id}에 해당하는 대사가 없습니다.");
+            HideDialogue();
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(content))
+        {
             HideDialogue();
             return false;
         }
@@ -150,19 +172,17 @@ public class ScriptManager : MonoBehaviour
             StopCoroutine(displayRoutine);
         }
 
-        displayRoutine = StartCoroutine(DisplayDialogueRoutine(id));
+        displayRoutine = StartCoroutine(DisplayDialogueRoutine(id, content));
         return true;
     }
 
-    private IEnumerator DisplayDialogueRoutine(int id)
+    private IEnumerator DisplayDialogueRoutine(int id, string content)
     {
-        string content = chatDictionary[id];
-
         ShowDialogueUI();
 
         dialogueText.text = content;
 
-        Debug.Log($"currentDay: {id + 1}, ID: {id}, Content: {content}");
+        Debug.Log($"ScriptManager: Day {id + 1}, ID {id}, Content: {content}");
 
         yield return new WaitForSeconds(dialogueDisplayDuration);
 
