@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Bed
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -11,12 +13,21 @@ TagManager:
   - 
   - Water
   - UI
+<<<<<<< HEAD
   - Hand
   - 
   - 
   - 
   - 
   - 
+=======
+  - InteractRaycast
+  - Obstacle
+  - Player
+  - Hand
+  - PlayerMesh
+  - Item
+>>>>>>> 0104fc83ab2bf925c484404a26667b1999cb8e5f
   - 
   - 
   - 

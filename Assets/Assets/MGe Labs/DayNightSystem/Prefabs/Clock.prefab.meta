@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c7eceba84f4169f4c83e1aa1360347ce
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 331418
+  packageName: DayNight System
+  packageVersion: 1.0.2
+  assetPath: Assets/MGe Labs/DayNightSystem/Prefabs/Clock.prefab
+  uploadId: 803614

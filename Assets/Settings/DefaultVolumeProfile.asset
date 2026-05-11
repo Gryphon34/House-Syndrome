@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9196616037857122656
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d45bea469df2b49a6ee1ceb21d4343, type: 3}
+  m_Name: VHS_TWITCH
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_TWITCH
+  active: 1
+  TwitchMode:
+    m_OverrideState: 1
+    m_Value: 0
+  _Amount:
+    m_OverrideState: 1
+    m_Value: 0
+  _BurstInterval:
+    m_OverrideState: 1
+    m_Value: 1
+  _AmpH:
+    m_OverrideState: 1
+    m_Value: 1
+  _AmpV:
+    m_OverrideState: 1
+    m_Value: 1
+  _Speed:
+    m_OverrideState: 1
+    m_Value: 1
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-9167874883656233139
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -22,6 +69,113 @@ MonoBehaviour:
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
+--- !u!114 &-8621767826849395908
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10fea1c97e07f47e9bd7f60f0e75e2fe, type: 3}
+  m_Name: ANALOG_NOISE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.ANALOG_NOISE
+  active: 1
+  fade:
+    m_OverrideState: 1
+    m_Value: 0
+  staticNoise:
+    m_OverrideState: 1
+    m_Value: 0
+  Horizontal:
+    m_OverrideState: 1
+    m_Value: 1
+  barWidth:
+    m_OverrideState: 1
+    m_Value: 21
+  tile:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1}
+  textureAngle:
+    m_OverrideState: 1
+    m_Value: 1
+  edgeCutOff:
+    m_OverrideState: 1
+    m_Value: 0
+  CutOff:
+    m_OverrideState: 1
+    m_Value: 1
+  barSpeed:
+    m_OverrideState: 1
+    m_Value: 1
+  texture:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-8425935050041713066
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377ef837e39074b47b52a88095e4b790, type: 3}
+  m_Name: TAPE_DISTORTION
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.TAPE_DISTORTION
+  active: 1
+  Fade:
+    m_OverrideState: 1
+    m_Value: 0
+  tapeIntensity:
+    m_OverrideState: 1
+    m_Value: 0.5
+  tapeSpeed:
+    m_OverrideState: 1
+    m_Value: 1
+  TapeFeather:
+    m_OverrideState: 1
+    m_Value: 0.1
+  TapeWidth:
+    m_OverrideState: 1
+    m_Value: 0.05
+  TapeFrequency:
+    m_OverrideState: 1
+    m_Value: 2
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-8270506406425502121
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -44,6 +198,47 @@ MonoBehaviour:
   balance:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-8137813171912668082
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7942413263386430284c3a24e8e45f75, type: 3}
+  m_Name: VHS_JITTER
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_JITTER
+  active: 1
+  jitterHorizontalAmount:
+    m_OverrideState: 1
+    m_Value: 0
+  jitterHorizontalSpeed:
+    m_OverrideState: 1
+    m_Value: 0
+  jitterVerticalAmount:
+    m_OverrideState: 1
+    m_Value: 0
+  jitterVerticalSpeed:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-8104416584915340131
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -64,6 +259,44 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   p21:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-8012730050613684338
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276a5630032384146b316cadd0c5da2c, type: 3}
+  m_Name: VCRGHOSTING
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VCRGHOSTING
+  active: 1
+  _Amount:
+    m_OverrideState: 1
+    m_Value: 0
+  _BlurGhostPx:
+    m_OverrideState: 1
+    m_Value: 1
+  GhostOffset:
+    m_OverrideState: 1
+    m_Value: 0.1
+  _Tilt:
+    m_OverrideState: 1
+    m_Value: -0.05
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
     m_OverrideState: 1
     m_Value: 0
 --- !u!114 &-7750755424749557576
@@ -146,6 +379,56 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+--- !u!114 &-6881882585325731013
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4388191585ea44bb892b7a3954c42607, type: 3}
+  m_Name: DOT_CRAWL
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.DOT_CRAWL
+  active: 1
+  Amount:
+    m_OverrideState: 1
+    m_Value: 0
+  EdgeSensitivity:
+    m_OverrideState: 1
+    m_Value: 1
+  DotSize:
+    m_OverrideState: 1
+    m_Value: 1
+  AnimationSpeed:
+    m_OverrideState: 1
+    m_Value: 1
+  EdgeDetectionMode:
+    m_OverrideState: 1
+    m_Value: 1
+  DotOffsetPx:
+    m_OverrideState: 1
+    m_Value: 1
+  DotFeatherPx:
+    m_OverrideState: 1
+    m_Value: 2
+  _BleedPower:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-6335409530604852063
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -280,6 +563,43 @@ MonoBehaviour:
   SunScatteringIntensity:
     m_OverrideState: 1
     m_Value: 2
+--- !u!114 &-4913136903140610383
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74abaf4275fad06449cff335abb53fad, type: 3}
+  m_Name: FISHEYE_VIGNETTE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.FISHEYE_VIGNETTE
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  FisheyeSize:
+    m_OverrideState: 1
+    m_Value: 0.6
+  CutoffX:
+    m_OverrideState: 1
+    m_Value: 50
+  CutoffY:
+    m_OverrideState: 1
+    m_Value: 60
+  CutoffFadeX:
+    m_OverrideState: 1
+    m_Value: 100
+  CutoffFadeY:
+    m_OverrideState: 1
+    m_Value: 40
+  ChromaFringe:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-4463884970436517307
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -299,6 +619,201 @@ MonoBehaviour:
   cropToFit:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &-3317390498342191095
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72dcd3e85e6a31e44878a43f2cafab5f, type: 3}
+  m_Name: AnalogFrameFeedback
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.AnalogFrameFeedback
+  active: 1
+  amount:
+    m_OverrideState: 1
+    m_Value: 0
+  cutOff:
+    m_OverrideState: 1
+    m_Value: 0.5
+  fade:
+    m_OverrideState: 1
+    m_Value: 0.5
+  SpreadX:
+    m_OverrideState: 1
+    m_Value: 0.5
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  debugArtefacts:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-2980723417544380306
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7321846e3f41462a9ae9dabb9989e19, type: 3}
+  m_Name: CRTAPERTURE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.CRTAPERTURE
+  active: 1
+  Fade:
+    m_OverrideState: 1
+    m_Value: 0
+  HaloStrength:
+    m_OverrideState: 1
+    m_Value: 5
+  GlowDiffusion:
+    m_OverrideState: 1
+    m_Value: 2
+  MaskColorCount:
+    m_OverrideState: 1
+    m_Value: 5
+  MaskStrength:
+    m_OverrideState: 1
+    m_Value: 1
+  InputGamma:
+    m_OverrideState: 1
+    m_Value: 5
+  OutputGamma:
+    m_OverrideState: 1
+    m_Value: 5
+  OutputBrightness:
+    m_OverrideState: 1
+    m_Value: 0.26
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-2756040155804079864
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4a1a48c0e9d524b8f3cbac79170fcf, type: 3}
+  m_Name: BLEED_3PHASE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.BLEED_3PHASE
+  active: 1
+  BleedAmount:
+    m_OverrideState: 1
+    m_Value: 0
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-2749403845158379352
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd09682cb11f59249b5e5897dbf305b0, type: 3}
+  m_Name: VHS_STRETCH
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_STRETCH
+  active: 1
+  Fade:
+    m_OverrideState: 1
+    m_Value: 0
+  speed:
+    m_OverrideState: 1
+    m_Value: 1
+  StretchMode:
+    m_OverrideState: 1
+    m_Value: 0
+  stretchResolution:
+    m_OverrideState: 1
+    m_Value: 240
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-1984491675204864108
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2250da75c7274d10bbf3229d78287f3, type: 3}
+  m_Name: NTSCCODEC
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.NTSCCODEC
+  active: 1
+  Amount:
+    m_OverrideState: 1
+    m_Value: 0
+  LineScanTimeOffset:
+    m_OverrideState: 1
+    m_Value: 4
+  LinePhaseRandomness:
+    m_OverrideState: 1
+    m_Value: {x: 0.25, y: 0}
+  LumaGain:
+    m_OverrideState: 1
+    m_Value: -0.1
+  ChromaSaturation:
+    m_OverrideState: 1
+    m_Value: 0
+  LumaBlurWidth:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-1410297666881709256
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -342,6 +857,9 @@ MonoBehaviour:
   skyOcclusionIntensityMultiplier:
     m_OverrideState: 1
     m_Value: 1
+  worldOffset:
+    m_OverrideState: 1
+    m_Value: {x: 0, y: 0, z: 0}
 --- !u!114 &-1216621516061285780
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -374,6 +892,9 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
+    m_OverrideState: 1
+    m_Value: 0
+  filter:
     m_OverrideState: 1
     m_Value: 0
   downscale:
@@ -430,6 +951,41 @@ MonoBehaviour:
   p31:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-218106235542686284
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57321394a6fc3134696fe1c2753da1d2, type: 3}
+  m_Name: SIGNAL_NOISE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.SIGNAL_NOISE
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  SignalNoisePower:
+    m_OverrideState: 1
+    m_Value: 0.9
+  SignalNoiseAmount:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,8 +1018,29 @@ MonoBehaviour:
   - {fileID: -6288072647309666549}
   - {fileID: 7518938298396184218}
   - {fileID: -1410297666881709256}
-  - {fileID: -7750755424749557576}
-  - {fileID: -5139089513906902183}
+  - {fileID: 6072626769967172341}
+  - {fileID: -6881882585325731013}
+  - {fileID: -9196616037857122656}
+  - {fileID: 4945168652214564548}
+  - {fileID: 6025599377698101551}
+  - {fileID: -1984491675204864108}
+  - {fileID: -8012730050613684338}
+  - {fileID: -4913136903140610383}
+  - {fileID: 8115679198908712258}
+  - {fileID: -8425935050041713066}
+  - {fileID: 2201054701320400046}
+  - {fileID: -2749403845158379352}
+  - {fileID: 5096479333361106147}
+  - {fileID: -2980723417544380306}
+  - {fileID: 6276271442792359830}
+  - {fileID: -8621767826849395908}
+  - {fileID: -8137813171912668082}
+  - {fileID: 7582925353789616049}
+  - {fileID: -2756040155804079864}
+  - {fileID: -218106235542686284}
+  - {fileID: -3317390498342191095}
+  - {fileID: 2272998901701353328}
+  - {fileID: 2729725167370023589}
 --- !u!114 &853819529557874667
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -774,6 +1351,138 @@ MonoBehaviour:
   contribution:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &2201054701320400046
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13db3e4b93f60004fa4a99653c6828ea, type: 3}
+  m_Name: FILMGRAIN
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.FILMGRAIN
+  active: 1
+  GranularityAmount:
+    m_OverrideState: 1
+    m_Value: 0
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &2272998901701353328
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188d5997694590c4e87f20d535a3895f, type: 3}
+  m_Name: VHSSCANLINES
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHSSCANLINES
+  active: 1
+  Fade:
+    m_OverrideState: 1
+    m_Value: 0
+  ScanLinesColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 0}
+  ScanlineDensity:
+    m_OverrideState: 1
+    m_Value: 0.58
+  Speed:
+    m_OverrideState: 1
+    m_Value: 1
+  EnableHorizontal:
+    m_OverrideState: 1
+    m_Value: 1
+  JitterDivisor:
+    m_OverrideState: 1
+    m_Value: 0
+  FisheyeSpherical:
+    m_OverrideState: 1
+    m_Value: 0.1
+  FisheyeBarrel:
+    m_OverrideState: 1
+    m_Value: 0
+  FisheyeScale:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &2729725167370023589
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35616e0a3863174a97701d922d25fda, type: 3}
+  m_Name: VHS_TAPE_REWIND
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.VHS_TAPE_REWIND
+  active: 1
+  fade:
+    m_OverrideState: 1
+    m_Value: 0
+  AnimationMode:
+    m_OverrideState: 1
+    m_Value: 0
+  intencity:
+    m_OverrideState: 1
+    m_Value: 0.8
+  RegionFeather:
+    m_OverrideState: 1
+    m_Value: 0.167
+  RegionHeight:
+    m_OverrideState: 1
+    m_Value: 0.337
+  AnimSpeed:
+    m_OverrideState: 1
+    m_Value: 4
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &3959858460715838825
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -852,6 +1561,226 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &4945168652214564548
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfffc298908164ce083c9c5e7137028d, type: 3}
+  m_Name: RETROSCALE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.RETROSCALE
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  CRT43Mode:
+    m_OverrideState: 1
+    m_Value: 0
+  RenderScale:
+    m_OverrideState: 1
+    m_Value: 0.5
+  ChromaCompression:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &5096479333361106147
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c26ccf3b3d21d741a97b824ff06db2b, type: 3}
+  m_Name: BLEED_2PHASE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.BLEED_2PHASE
+  active: 1
+  BleedAmount:
+    m_OverrideState: 1
+    m_Value: 0
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &6025599377698101551
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010d965b528b46f44b26e3d88c894505, type: 3}
+  m_Name: LINE_NOISE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.LINE_NOISE
+  active: 1
+  LineNoiseFade:
+    m_OverrideState: 1
+    m_Value: 0
+  LineNoiseAmount:
+    m_OverrideState: 1
+    m_Value: 0.1
+  LineNoiseSpeed:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &6072626769967172341
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829e49b51eba2bb46b1b2fdb7f9a907d, type: 3}
+  m_Name: OldTV_SIGNAL_DISTORTION
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.OldTV_SIGNAL_DISTORTION
+  active: 1
+  Amount:
+    m_OverrideState: 1
+    m_Value: 0
+  Speed:
+    m_OverrideState: 1
+    m_Value: 1
+  LineJitterAmount:
+    m_OverrideState: 1
+    m_Value: 0.5
+  ChunkJitterAmount:
+    m_OverrideState: 1
+    m_Value: 1
+  ChunkJitterSegments:
+    m_OverrideState: 1
+    m_Value: 1
+  SineRippleAmount:
+    m_OverrideState: 1
+    m_Value: 1
+  SineRippleSpeed:
+    m_OverrideState: 1
+    m_Value: 0.06
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &6276271442792359830
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72301a2fb0bc694ea87b61e9bc691c7, type: 3}
+  m_Name: TAPE_NOISE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.TAPE_NOISE
+  active: 1
+  Fade:
+    m_OverrideState: 1
+    m_Value: 0
+  TapePreset:
+    m_OverrideState: 1
+    m_Value: 0
+  VerticalResolution:
+    m_OverrideState: 1
+    m_Value: 1
+  Speed:
+    m_OverrideState: 1
+    m_Value: 0.5
+  TapeJitter:
+    m_OverrideState: 1
+    m_Value: 0
+  TapeNoiseFade:
+    m_OverrideState: 1
+    m_Value: 1
+  TapeNoiseAmount:
+    m_OverrideState: 1
+    m_Value: 1
+  tapeLinesAmount:
+    m_OverrideState: 1
+    m_Value: 0.8
+  ColorMode:
+    m_OverrideState: 1
+    m_Value: 0
+  TapeLineColorAmount:
+    m_OverrideState: 1
+    m_Value: 0.02
+  TapeLineHueShift:
+    m_OverrideState: 1
+    m_Value: 6
+  _TapeLineRainbowScale:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  unscaledTime:
+    m_OverrideState: 1
+    m_Value: 0
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &6940869943325143175
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -921,6 +1850,66 @@ MonoBehaviour:
   scale:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &7582925353789616049
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde31adeeb757954da16646cb13d8f72, type: 3}
+  m_Name: BLEED_OLD3PHASE
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.BLEED_OLD3PHASE
+  active: 1
+  BleedAmount:
+    m_OverrideState: 1
+    m_Value: 0
+  mask:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  maskChannel:
+    m_OverrideState: 1
+    m_Value: 0
+  maskEdgeFineTuning:
+    m_OverrideState: 1
+    m_Value: 0.15
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &8115679198908712258
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2ffdaccda304c43bf522153e06fc9c, type: 3}
+  m_Name: Warp
+  m_EditorClassIdentifier: Assembly-CSharp::RetroVisionPro.Warp
+  active: 1
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  Fade:
+    m_OverrideState: 1
+    m_Value: 0
+  warpMode:
+    m_OverrideState: 1
+    m_Value: 0
+  warp:
+    m_OverrideState: 1
+    m_Value: {x: 0.03125, y: 0.04166}
+  scale:
+    m_OverrideState: 1
+    m_Value: 1
+  GlobalPostProcessingSettings:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &9001657382290151224
 MonoBehaviour:
   m_ObjectHideFlags: 3

@@ -5,9 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
+=======
+  - enabled: 0
+    path: Assets/Scenes/PlayerScene.unity
+>>>>>>> 0104fc83ab2bf925c484404a26667b1999cb8e5f
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4fd926f97e5553f458bf52387d0b6e8d
+  - enabled: 1
+    path: Assets/Scenes/HouseSyndromeScene.unity
+    guid: 49f5f784c79155a49b2d90c2da261358
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
