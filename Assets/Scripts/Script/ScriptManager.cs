@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[System.Serializable]
+public struct TimedDialogueEntry
+{
+    [Tooltip("두 자릿수 ID (10~99)")]
+    public int id;
+    [Tooltip("게임 시작 후 몇 초 뒤에 표시할지")]
+    public float delaySeconds;
+}
+
 [DefaultExecutionOrder(200)]
 public class ScriptManager : MonoBehaviour
 {
+    public static ScriptManager Instance { get; private set; }
+
     [Header("Chat Data")]
     [SerializeField]
     private ChatData chatData;
@@ -31,15 +42,26 @@ public class ScriptManager : MonoBehaviour
     [SerializeField]
     private bool chatIdStartsFromZero = true;
 
+    [Header("Timed Dialogue (두 자릿수 ID: 10~99)")]
+    [Tooltip("게임 시작 후 지정한 시간이 지나면 자동으로 표시됩니다.")]
+    [SerializeField]
+    private List<TimedDialogueEntry> timedDialogues = new List<TimedDialogueEntry>();
+
     private Dictionary<int, string> chatDictionary = new Dictionary<int, string>();
 
     private Coroutine delayRoutine;
     private Coroutine displayRoutine;
+    private List<Coroutine> timedRoutines = new List<Coroutine>();
 
     private int lastShownDay = -1;
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
         MakeChatDictionary();
         HideDialogue();
     }
@@ -59,7 +81,11 @@ public class ScriptManager : MonoBehaviour
         // SpawnManager가 currentDay를 세팅하고 스폰 처리할 시간을 기다림
         yield return null;
 
+        // 한 자릿수 ID: 현재 날짜에 맞는 대사 표시
         ShowDialogueForCurrentDay();
+
+        // 두 자릿수 ID: 현재 날짜에 해당하는 타이머 시작
+        StartTimedDialoguesForCurrentDay();
     }
 
     private void MakeChatDictionary()
@@ -74,19 +100,23 @@ public class ScriptManager : MonoBehaviour
 
         foreach (Chat chat in chatData.chatDataList)
         {
-            // 같은 id가 있으면 마지막 값으로 덮어씀
             chatDictionary[chat.id] = chat.content;
         }
 
         Debug.Log($"ScriptManager: 대사 Dictionary 생성 완료 - {chatDictionary.Count}개");
     }
 
+    // ──────────────────────────────────────────────
+    // 한 자릿수 ID (0~9): 날짜에 매치되는 대사
+    // ──────────────────────────────────────────────
+
     private void OnDayChanged()
     {
         if (delayRoutine != null)
-        {
             StopCoroutine(delayRoutine);
-        }
+
+        // 이전 날의 남은 타이머 취소
+        StopAllTimedRoutines();
 
         delayRoutine = StartCoroutine(ShowDialogueAfterDelay());
     }
@@ -94,8 +124,10 @@ public class ScriptManager : MonoBehaviour
     private IEnumerator ShowDialogueAfterDelay()
     {
         yield return new WaitForSeconds(showDelayAfterDayChanged);
-
         ShowDialogueForCurrentDay();
+
+        // 새 날의 두 자릿수 타이머 시작
+        StartTimedDialoguesForCurrentDay();
 
         delayRoutine = null;
     }
@@ -111,29 +143,88 @@ public class ScriptManager : MonoBehaviour
         int currentDay = SpawnManager.Instance.GetCurrentDay();
 
         if (lastShownDay == currentDay)
-        {
             return;
-        }
 
         int id = GetChatIdByDay(currentDay);
 
         bool success = ShowDialogueById(id);
 
         if (success)
-        {
             lastShownDay = currentDay;
-        }
     }
 
     private int GetChatIdByDay(int currentDay)
     {
-        if (chatIdStartsFromZero)
+        return chatIdStartsFromZero ? currentDay - 1 : currentDay;
+    }
+
+    // ──────────────────────────────────────────────
+    // 두 자릿수 ID (10~89): 날짜별 시간 설정 기반 대사
+    // 10~19 → Day1, 20~29 → Day2, ..., 80~89 → Day8
+    // ──────────────────────────────────────────────
+
+    private int GetTargetDayFromTimedId(int id) => id / 10;
+
+    private void StartTimedDialoguesForCurrentDay()
+    {
+        if (SpawnManager.Instance == null) return;
+
+        int currentDay = SpawnManager.Instance.GetCurrentDay();
+
+        foreach (TimedDialogueEntry entry in timedDialogues)
         {
-            return currentDay - 1;
+            if (entry.id < 10 || entry.id > 89)
+            {
+                Debug.LogWarning($"ScriptManager: TimedDialogue id {entry.id}는 10~89 범위여야 합니다. 무시됩니다.");
+                continue;
+            }
+
+            if (GetTargetDayFromTimedId(entry.id) != currentDay)
+                continue;
+
+            Coroutine c = StartCoroutine(ShowTimedDialogue(entry));
+            timedRoutines.Add(c);
+        }
+    }
+
+    private void StopAllTimedRoutines()
+    {
+        foreach (Coroutine c in timedRoutines)
+        {
+            if (c != null)
+                StopCoroutine(c);
+        }
+        timedRoutines.Clear();
+    }
+
+    private IEnumerator ShowTimedDialogue(TimedDialogueEntry entry)
+    {
+        yield return new WaitForSeconds(entry.delaySeconds);
+        ShowDialogueById(entry.id);
+    }
+
+    // ──────────────────────────────────────────────
+    // 세 자릿수 ID (100~999): 오브젝트 상호작용 시
+    // 외부 스크립트에서 ScriptManager.Instance.ShowInteractionDialogue(id) 호출
+    // ──────────────────────────────────────────────
+
+    /// <summary>
+    /// 오브젝트 상호작용 시 호출. id는 세 자릿수(100~999)를 사용합니다.
+    /// </summary>
+    public void ShowInteractionDialogue(int id)
+    {
+        if (id < 100 || id > 999)
+        {
+            Debug.LogWarning($"ScriptManager: ShowInteractionDialogue id {id}는 세 자릿수(100~999)여야 합니다.");
+            return;
         }
 
-        return currentDay;
+        ShowDialogueById(id);
     }
+
+    // ──────────────────────────────────────────────
+    // 공통 표시 로직
+    // ──────────────────────────────────────────────
 
     public bool ShowDialogueById(int id)
     {
@@ -150,9 +241,7 @@ public class ScriptManager : MonoBehaviour
         }
 
         if (chatDictionary.Count == 0)
-        {
             MakeChatDictionary();
-        }
 
         if (!chatDictionary.TryGetValue(id, out string content))
         {
@@ -168,9 +257,7 @@ public class ScriptManager : MonoBehaviour
         }
 
         if (displayRoutine != null)
-        {
             StopCoroutine(displayRoutine);
-        }
 
         displayRoutine = StartCoroutine(DisplayDialogueRoutine(id, content));
         return true;
@@ -182,7 +269,7 @@ public class ScriptManager : MonoBehaviour
 
         dialogueText.text = content;
 
-        Debug.Log($"ScriptManager: Day {id + 1}, ID {id}, Content: {content}");
+        Debug.Log($"ScriptManager: ID {id}, Content: {content}");
 
         yield return new WaitForSeconds(dialogueDisplayDuration);
 
@@ -194,14 +281,10 @@ public class ScriptManager : MonoBehaviour
     private void ShowDialogueUI()
     {
         if (dialogueBackground != null)
-        {
             dialogueBackground.SetActive(true);
-        }
 
         if (dialogueText != null)
-        {
             dialogueText.gameObject.SetActive(true);
-        }
     }
 
     private void HideDialogue()
@@ -213,8 +296,6 @@ public class ScriptManager : MonoBehaviour
         }
 
         if (dialogueBackground != null)
-        {
             dialogueBackground.SetActive(false);
-        }
     }
 }

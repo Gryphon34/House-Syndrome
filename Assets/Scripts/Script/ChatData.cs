@@ -82,7 +82,14 @@ public class ChatDataReaderEditor : Editor
     private void UpdateStats(UnityAction<GstuSpreadSheet> callback, bool mergedcells = false)
     {
         SpreadsheetManager.Read(
-            new GSTU_Search(data.sheetURL, data.sheetName),
+            new GSTU_Search(
+                data.sheetURL,
+                data.sheetName,
+                "A1",
+                "B" + data.endRowIndex,
+                "A",
+                1
+            ),
             callback,
             mergedcells
         );

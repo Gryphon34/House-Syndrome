@@ -173,14 +173,27 @@ public class ItemInteraction : MonoBehaviour
 
                         if (day == 6)
                         {
-                            if (!_hasDay6FadeDone && IsInDay6DimActiveMap())
+                            _day6HandleInteractCount++;
+
+                            if (_day6HandleInteractCount == 1)
                             {
-                                _hasDay6FadeDone = true;
-                                if (objectToActivateOnDay6Handle != null)
-                                    objectToActivateOnDay6Handle.SetActive(true);
-                                ToggleHandleObject();
-                                StartCoroutine(Day6FadeBlackAndBack());
+                                // 1회: 오브젝트 토글 ON → handleShownThisNight = true
+                                if (!_hasDay6FadeDone && IsInDay6DimActiveMap())
+                                {
+                                    _hasDay6FadeDone = true;
+                                    if (objectToActivateOnDay6Handle != null)
+                                        objectToActivateOnDay6Handle.SetActive(true);
+                                    ToggleHandleObject();
+                                    StartCoroutine(Day6FadeBlackAndBack());
+                                }
                             }
+                            else if (_day6HandleInteractCount == 2)
+                            {
+                                // 2회: 오브젝트 토글 OFF → handleHiddenAfterShow = true → CanSleep = true
+                                ToggleHandleObject();
+                                ScriptManager.Instance?.ShowInteractionDialogue(160);
+                            }
+
                             return;
                         }
                     }
@@ -191,7 +204,20 @@ public class ItemInteraction : MonoBehaviour
                         ToggleHandleObject();
 
                     if (item.itemName == BathroomHandleItemName)
+                    {
                         _bathroomHandleInteractCount++;
+
+                        int day = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+
+                        if (_bathroomHandleInteractCount == 2 && day == 1)
+                            ScriptManager.Instance?.ShowInteractionDialogue(100);
+
+                        if (_bathroomHandleInteractCount == 2 && day == 2)
+                            ScriptManager.Instance?.ShowInteractionDialogue(110);
+
+                        if (_bathroomHandleInteractCount == 2 && day == 4)
+                            ScriptManager.Instance?.ShowInteractionDialogue(140);
+                    }
 
                     if (!_hasDimmedAfterSecondHandle
                         && item.itemName == BathroomHandleItemName
@@ -295,6 +321,8 @@ public class ItemInteraction : MonoBehaviour
     private bool _isDay6Fading = false;
     private int _bathroomHandleInteractCount = 0;
     private int _day6HandleInteractCount = 0;
+    private int _totalBoxCount = 0;
+    private int _deactivatedBoxCount = 0;
 
     IEnumerator ToggleHandleObjectWithFade()
     {
@@ -488,12 +516,35 @@ public class ItemInteraction : MonoBehaviour
             SleepRuleManager.Instance.RecordBathroomHandleToggle(setActive);
     }
 
+    void CountActiveBoxes()
+    {
+        _totalBoxCount = 0;
+        Item[] allItems = FindObjectsOfType<Item>();
+        foreach (Item i in allItems)
+        {
+            if (i.itemName == "box")
+                _totalBoxCount++;
+        }
+        _deactivatedBoxCount = 0;
+    }
+
     void InteractWithBox(Item item)
     {
         _interactedBoxObject = item.gameObject;
         _interactedBoxObject.SetActive(false);
         if (boxGlitchObject != null)
             boxGlitchObject.SetActive(true);
+
+        _deactivatedBoxCount++;
+
+        int currentDay = SpawnManager.Instance != null ? SpawnManager.Instance.currentDay : 0;
+        if (currentDay == 1 && _totalBoxCount > 0 && _deactivatedBoxCount >= _totalBoxCount)
+            ScriptManager.Instance?.ShowInteractionDialogue(101);
+    }
+
+    void Start()
+    {
+        CountActiveBoxes();
     }
 
     void OnEnable()
@@ -527,6 +578,8 @@ public class ItemInteraction : MonoBehaviour
         RemoveDimOverlay();
         _bedPillowTrueEndingDone = false;
         _bedPillowInteracted = false;
+        _deactivatedBoxCount = 0;
+        CountActiveBoxes();
     }
 
     bool IsInDimActiveMap()

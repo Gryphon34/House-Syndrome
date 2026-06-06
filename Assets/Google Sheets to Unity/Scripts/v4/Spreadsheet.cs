@@ -120,19 +120,57 @@ namespace GoogleSheetsToUnity
 
         public string WorkSheet()
         {
-            return valueRange.range.Substring(0, valueRange.range.IndexOf("!") - 1);
+            if (valueRange == null || string.IsNullOrEmpty(valueRange.range))
+                return "";
+
+            int bangIndex = valueRange.range.IndexOf("!");
+
+            if (bangIndex < 0)
+                return valueRange.range;
+
+            return valueRange.range.Substring(0, bangIndex).Trim('\'');
         }
 
         public string StartCell()
         {
-            int start = valueRange.range.IndexOf("!") + 1;
-            int end = valueRange.range.IndexOf(":", start);
-            return valueRange.range.Substring(start, end - start);
+            if (valueRange == null || string.IsNullOrEmpty(valueRange.range))
+                return "A1";
+
+            Debug.Log("GSTU Range: " + valueRange.range);
+
+            string range = valueRange.range;
+
+            int bangIndex = range.IndexOf("!");
+            int startIndex = bangIndex >= 0 ? bangIndex + 1 : 0;
+
+            int colonIndex = range.IndexOf(":", startIndex);
+
+            if (colonIndex < 0)
+            {
+                return range.Substring(startIndex).Replace("$", "").Trim();
+            }
+
+            return range.Substring(startIndex, colonIndex - startIndex).Replace("$", "").Trim();
         }
 
         public string EndCell()
         {
-            return valueRange.range.Substring(valueRange.range.IndexOf(":") + 1);
+            if (valueRange == null || string.IsNullOrEmpty(valueRange.range))
+                return "A1";
+
+            string range = valueRange.range;
+
+            int bangIndex = range.IndexOf("!");
+            int startIndex = bangIndex >= 0 ? bangIndex + 1 : 0;
+
+            int colonIndex = range.IndexOf(":", startIndex);
+
+            if (colonIndex < 0)
+            {
+                return StartCell();
+            }
+
+            return range.Substring(colonIndex + 1).Replace("$", "").Trim();
         }
 
         public GSTU_SpreadsheetResponce() { }
