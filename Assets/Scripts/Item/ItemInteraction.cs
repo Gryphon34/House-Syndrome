@@ -557,6 +557,12 @@ public class ItemInteraction : MonoBehaviour
         dimOverlayImage.gameObject.SetActive(false);
     }
 
+    /// <summary>Day4 dim 등 화면 어둡게 오버레이를 해제합니다. NightMareMap 전환 시 BedInteraction에서 호출.</summary>
+    public void ClearDimOverlay()
+    {
+        RemoveDimOverlay();
+    }
+
     bool IsInDay6DimActiveMap()
     {
         if (string.IsNullOrEmpty(day6DimActiveMapRootName))

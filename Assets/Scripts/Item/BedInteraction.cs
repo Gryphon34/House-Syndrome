@@ -66,6 +66,7 @@ public class BedInteraction : MonoBehaviour
                 StartCoroutine(WakeUpToNextDay());
             if (Input.GetKeyDown(KeyCode.O))
             {
+                HandInputSystem.ResetNightMareMapMode();
                 if (nightmareHUD != null) nightmareHUD.SetActive(false);
                 nightmarePlayer.SetActive(false);
                 if (walkingPlayer != null) walkingPlayer.SetActive(true);
@@ -152,10 +153,16 @@ public class BedInteraction : MonoBehaviour
             yield return null;
         }
 
-        // 2. Switch player states
+        // 2. Switch player states (NightMareMap = NightMarePlayer 활성화 시점)
+        if (_itemInteraction == null)
+            _itemInteraction = FindObjectOfType<ItemInteraction>();
+        if (_itemInteraction != null)
+            _itemInteraction.ClearDimOverlay();
+
         if (walkingPlayer != null) walkingPlayer.SetActive(false);
         if (nightmarePlayer != null) nightmarePlayer.SetActive(true);
         if (nightmareHUD != null) nightmareHUD.SetActive(true);
+        HandInputSystem.SetNightMareMapMode(true);
 
         // 작은 대기 후 Fade In
         yield return new WaitForSeconds(1f);
@@ -177,6 +184,7 @@ public class BedInteraction : MonoBehaviour
     IEnumerator WakeUpToNextDay()
     {
         isTransitioning = true;
+        HandInputSystem.ResetNightMareMapMode();
         if (nightmareHUD != null) nightmareHUD.SetActive(false);
 
         float timer = 0f;

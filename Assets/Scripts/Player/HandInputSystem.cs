@@ -74,6 +74,19 @@ public class HandInputSystem : MonoBehaviour
 
     public bool isTwinMode = false; // 쌍둥이 귀신 등장 시 true로 설정
 
+    /// <summary>NightMareMap 진입 후 양손 알파벳을 동시에 표시할지 여부.</summary>
+    public static bool IsNightMareMapMode { get; private set; }
+
+    public static void SetNightMareMapMode(bool enabled)
+    {
+        IsNightMareMapMode = enabled;
+    }
+
+    public static void ResetNightMareMapMode()
+    {
+        IsNightMareMapMode = false;
+    }
+
     void Start()
     {
         leftGauge = 0f;
@@ -121,8 +134,21 @@ public class HandInputSystem : MonoBehaviour
         CheckWinCondition();
     }
 
+    bool IsHandCompleted()
+    {
+        float gauge = handSide == HandSide.Left ? leftGauge : rightGauge;
+        return gauge >= individualWinThreshold;
+    }
+
+    static bool IsThumbHighlightKey(KeyCode key)
+    {
+        return key == KeyCode.V || key == KeyCode.B;
+    }
+
     void ApplyGaugeDecay()
     {
+        if (IsHandCompleted()) return;
+
         float decayMultiplier = 1.0f;
         // �� ���ų� ���� ���� �� ���� ���� (��¥�� ���� �� �������� �Ŵ��� ���� ����)
         if (!uiParentGroup.activeSelf || !Input.GetKey(thumbKey))
@@ -217,6 +243,8 @@ public class HandInputSystem : MonoBehaviour
 
     void WakeUp()
     {
+        ResetNightMareMapMode();
+
         Debug.Log("<color=cyan>���� Ż�� ����!</color>");
 
         // 1. ������ �ʱ�ȭ
@@ -241,11 +269,17 @@ public class HandInputSystem : MonoBehaviour
         // ������Ʈ�� ���� �� ���� Ȱ��ȭ�� ���� ī�޶�(NightmareCamera)�� �ٽ� �����ɴϴ�.
         mainCam = Camera.main;
         UpdateDifficultyFromManager();
+
+        var nightmarePlayer = GameObject.Find("NightMarePlayer");
+        if (nightmarePlayer != null && nightmarePlayer.activeInHierarchy)
+            SetNightMareMapMode(true);
     }
 
 
     void CheckInput()
 {
+    if (IsHandCompleted()) return;
+
     // [핵심] 현재 귀신 효과 유무에 따라 사용할 키 세트를 결정 (왼손/오른손 개별 적용)
     KeyCode activeThumb = isVisualMirrored ? mirroredThumbKey : thumbKey;
     KeyCode[] activeFingers = isVisualMirrored ? mirroredFingerKeys : fingerKeys;
@@ -308,6 +342,18 @@ public class HandInputSystem : MonoBehaviour
         if (mainCam == null || uiParentGroup == null) return;
 
         // [����] ���� ���� ���� ���¶�� UI�� �ƿ� ǥ������ ����
+        if (IsHandCompleted())
+        {
+            uiParentGroup.SetActive(false);
+            return;
+        }
+
+        if (IsNightMareMapMode)
+        {
+            uiParentGroup.SetActive(true);
+            return;
+        }
+
         if (eyeController != null && eyeController.eyeOpenAmount < 0.1f)
         {
             uiParentGroup.SetActive(false);
@@ -342,7 +388,15 @@ public class HandInputSystem : MonoBehaviour
     }
 
     void SetupUI() {
-        if (thumbUI != null) thumbUI.GetComponent<TextMeshProUGUI>().text = thumbKey.ToString();
+        if (thumbUI != null)
+        {
+            var thumbText = thumbUI.GetComponent<TextMeshProUGUI>();
+            if (thumbText != null)
+            {
+                thumbText.text = thumbKey.ToString();
+                thumbText.color = IsThumbHighlightKey(thumbKey) ? targetColor : normalColor;
+            }
+        }
         for (int i = 0; i < fingerUIs.Length; i++) {
             if (fingerUIs[i] != null) fingerUIs[i].GetComponent<TextMeshProUGUI>().text = fingerKeys[i].ToString();
         }
@@ -358,9 +412,13 @@ public class HandInputSystem : MonoBehaviour
     KeyCode activeThumb = isVisualMirrored ? mirroredThumbKey : thumbKey;
     KeyCode[] activeFingers = isVisualMirrored ? mirroredFingerKeys : fingerKeys;
 
-    // 엄지 UI 텍스트 업데이트
-    var thumbText = thumbUI.GetComponent<TextMeshProUGUI>();
-    if (thumbText != null) thumbText.text = activeThumb.ToString();
+    // 엄지 UI 텍스트 업데이트 (V, B는 항상 노란색)
+    var thumbText = thumbUI != null ? thumbUI.GetComponent<TextMeshProUGUI>() : null;
+    if (thumbText != null)
+    {
+        thumbText.text = activeThumb.ToString();
+        thumbText.color = IsThumbHighlightKey(activeThumb) ? targetColor : normalColor;
+    }
 
     int targetKeyIndex = -1;
     if (currentSequence.Count > currentIndex)
