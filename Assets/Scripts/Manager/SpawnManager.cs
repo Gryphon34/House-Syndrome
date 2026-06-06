@@ -86,7 +86,7 @@ public class SpawnManager : MonoBehaviour
     {
         // 1. 현재 날짜를 먼저 가져옴
         int nextDay = currentDay + 1;
-        if (nextDay > 7) nextDay = 7;
+        if (nextDay > 8) nextDay = 8;
 
         // 2. 난이도 매니저(Instance)에 먼저 저장 (가장 중요)
         if (DifficultyManager.Instance != null)
