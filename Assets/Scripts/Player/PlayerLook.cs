@@ -12,10 +12,31 @@ public class PlayerLook : MonoBehaviour
     private float xAxisClamp;
     private bool m_cursorIsLocked = true;
 
+    // 감도 PlayerPrefs 키 (MainMenuManager와 동일하게 유지)
+    public const string KeySensitivity = "MouseSensitivity";
+    // 슬라이더 100% 일 때의 실제 감도 최댓값
+    public const float MaxSensitivity = 300f;
+
     private void Awake()
     {
+        // 저장된 감도 퍼센트(1~100)를 실제 감도값으로 변환해 적용
+        float savedPercent = PlayerPrefs.GetFloat(KeySensitivity, 50f);
+        mouseSensitivity = PercentToSensitivity(savedPercent);
+
         LockCursor();
         xAxisClamp = 0.0f;
+    }
+
+    /// <summary>퍼센트(1~100) → 실제 감도값 변환</summary>
+    public static float PercentToSensitivity(float percent)
+    {
+        return (Mathf.Clamp(percent, 1f, 100f) / 100f) * MaxSensitivity;
+    }
+
+    /// <summary>런타임에 감도를 퍼센트(1~100)로 즉시 변경합니다.</summary>
+    public void SetSensitivityPercent(float percent)
+    {
+        mouseSensitivity = PercentToSensitivity(percent);
     }
 
     private void LockCursor()

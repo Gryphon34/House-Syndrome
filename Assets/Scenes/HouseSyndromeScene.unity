@@ -49924,12 +49924,12 @@ GameObject:
   - component: {fileID: 694603595}
   - component: {fileID: 694603597}
   m_Layer: 0
-  m_Name: Global Volume (1)
+  m_Name: Global Volume_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &694603595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49977,7 +49977,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -64077,7 +64077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &902561942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105537,12 +105537,12 @@ GameObject:
   - component: {fileID: 1496578374}
   - component: {fileID: 1496578373}
   m_Layer: 0
-  m_Name: Global Volume (2)
+  m_Name: Global Volume_NightMare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1496578373
 BoxCollider:
   m_ObjectHideFlags: 0
