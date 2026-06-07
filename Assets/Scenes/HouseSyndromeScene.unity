@@ -36033,18 +36033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
-  currentDay: 1
-  spawnPoints: []
-  player: {fileID: 0}
-  dayText: {fileID: 0}
-  displayDuration: 2
-  fadeSpeed: 1
-  screenFadeImage: {fileID: 0}
-  spawnBlackHoldDuration: 5
-  dayNightCycle: {fileID: 0}
-  dayMapManager: {fileID: 0}
-  spawnAudioKey: 
-  spawnAudioVolume: 1
 --- !u!1 &486753505
 GameObject:
   m_ObjectHideFlags: 0
@@ -64089,7 +64077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &902561942
 MonoBehaviour:
   m_ObjectHideFlags: 0
