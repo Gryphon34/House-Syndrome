@@ -5804,7 +5804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::AudioEmitter
   soundKey: clock
-  playOnEnable: 0
+  playOnEnable: 1
   loop: 1
   volume: 1
   playOnlyWhenActive: {fileID: 0}
@@ -36550,50 +36550,6 @@ LightProbeGroup:
   - {x: 1.235302, y: 0.21936417, z: 4.390977}
   - {x: -0.7244587, y: 0.21936417, z: 4.390977}
   m_Dering: 1
---- !u!1 &491000922
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 491000923}
-  - component: {fileID: 491000924}
-  m_Layer: 0
-  m_Name: ClockManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &491000923
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491000922}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2079908563}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &491000924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491000922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9911d97eb00ab4444accb315a4f0113a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GameScripts::DayNightSystem.Clock
 --- !u!1 &492397432
 GameObject:
   m_ObjectHideFlags: 0
@@ -53699,7 +53655,7 @@ MonoBehaviour:
     volume: 0
   - key: clock
     clip: {fileID: 8300000, guid: 7a79f3671187db447a49f5d9e3010d1b, type: 3}
-    volume: 0.2
+    volume: 0.3
   - key: knock_1
     clip: {fileID: 8300000, guid: 6a4561016e3f4124ba914adf37e6d4c6, type: 3}
     volume: 0.4
@@ -82074,7 +82030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::AudioEmitter
   soundKey: clock
-  playOnEnable: 0
+  playOnEnable: 1
   loop: 1
   volume: 1
   playOnlyWhenActive: {fileID: 0}
@@ -137650,6 +137606,9 @@ MonoBehaviour:
   - {fileID: 986088033}
   - {fileID: 399757188}
   - {fileID: 2056528478}
+  nightmareMap: {fileID: 586483738}
+  trueEndingMap: {fileID: 1348526614}
+  badEndingMap: {fileID: 2142734571}
 --- !u!1 &1867398522
 GameObject:
   m_ObjectHideFlags: 0
@@ -152348,7 +152307,6 @@ Transform:
   - {fileID: 1866498418}
   - {fileID: 1846859856}
   - {fileID: 1408025003}
-  - {fileID: 491000923}
   - {fileID: 766524036}
   - {fileID: 1970710534}
   - {fileID: 432570985}
@@ -154509,7 +154467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GameScripts::AudioEmitter
   soundKey: clock
-  playOnEnable: 0
+  playOnEnable: 1
   loop: 1
   volume: 1
   playOnlyWhenActive: {fileID: 0}

@@ -164,6 +164,10 @@ public class BedInteraction : MonoBehaviour
         if (nightmareHUD != null) nightmareHUD.SetActive(true);
         HandInputSystem.SetNightMareMapMode(true);
 
+        // 현재 데이맵 비활성화, NightMareMap 활성화
+        if (SpawnManager.Instance != null && SpawnManager.Instance.dayMapManager != null)
+            SpawnManager.Instance.dayMapManager.EnterNightmareMap();
+
         // 작은 대기 후 Fade In
         yield return new WaitForSeconds(1f);
 
@@ -261,12 +265,12 @@ public class BedInteraction : MonoBehaviour
         yield return null;
     }
 
-    // 2. 플레이어 오브젝트 비활성화
-    // 스폰 지점으로 옮길 필요 없이 여기서 바로 끕니다.
+    // 2. 플레이어 비활성화 + TrueEndingMap 활성화
     if (walkingPlayer != null)
-    {
         walkingPlayer.SetActive(false);
-    }
+
+    if (SpawnManager.Instance != null && SpawnManager.Instance.dayMapManager != null)
+        SpawnManager.Instance.dayMapManager.EnterTrueEndingMap();
 
     // 3. 진엔딩 컷신 재생
     if (trueEndingDirector != null)
@@ -311,11 +315,12 @@ IEnumerator BadEndingSleepFadeAndTeleport()
         yield return null;
     }
 
-    // 2. 플레이어 오브젝트 비활성화
+    // 2. 플레이어 비활성화 + BadEndingMap 활성화
     if (walkingPlayer != null)
-    {
         walkingPlayer.SetActive(false);
-    }
+
+    if (SpawnManager.Instance != null && SpawnManager.Instance.dayMapManager != null)
+        SpawnManager.Instance.dayMapManager.EnterBadEndingMap();
 
     // 3. 배드엔딩 컷신 시스템 활성화 및 재생
     if (badEndingDirector != null)
