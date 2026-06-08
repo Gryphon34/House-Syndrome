@@ -3742,7 +3742,7 @@ MonoBehaviour:
     m_Bits: 64
   rayDistance: 20
   mirroredThumbKey: 118
-  mirroredFingerKeys: 64000000610000006c00000068000000
+  mirroredFingerKeys: 66000000640000007300000061000000
   audioSource: {fileID: 58346614}
   correctKeyClip: {fileID: 8300000, guid: 563568dbc43eced47bf50c5f00eb2e5c, type: 3}
   cycleSuccessClip: {fileID: 8300000, guid: 966875543bcadc5439c057480bfec005, type: 3}
@@ -24985,6 +24985,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361020717}
   m_Mesh: {fileID: 4300010, guid: 14cf328cd0a9046e5a177954438c6a56, type: 3}
+--- !u!1 &361771768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2439517157990167644, guid: de1b4cc51638ea74fb77dd4fc7eb8aa4, type: 3}
+  m_PrefabInstance: {fileID: 5493584527165956276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &361771773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361771768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bd26f3a8c9b004099665e8de18c848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EyeBlinkController
+  topLid: {fileID: 992447809}
+  bottomLid: {fileID: 362328166}
+  stamina: 100
+  maxStamina: 100
+  staminaDrainRate: 10
+  staminaRegenRate: 50
+  scrollSensitivity: 0.1
+  staminaSlider: {fileID: 1145203646}
+  fillImage: {fileID: 75661098}
+  highStaminaColor: {r: 1, g: 1, b: 1, a: 1}
+  midStaminaColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lowStaminaColor: {r: 1, g: 0, b: 0, a: 1}
+  redStaminaThreshold: 0.33
+  redStaminaEyeOpenDelay: 2
+  jitterThreshold: 30
+  jitterIntensity: 5
+  eyeOpenAmount: 1
 --- !u!1 &362328165
 GameObject:
   m_ObjectHideFlags: 0
@@ -36033,6 +36067,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8955fff31eb083343a242d0caff0bfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  currentDay: 1
+  spawnPoints: []
+  player: {fileID: 0}
+  dayText: {fileID: 0}
+  displayDuration: 2
+  fadeSpeed: 1
+  screenFadeImage: {fileID: 0}
+  spawnBlackHoldDuration: 5
+  dayNightCycle: {fileID: 0}
+  dayMapManager: {fileID: 0}
+  spawnAudioKey: 
+  spawnAudioVolume: 1
 --- !u!1 &486753505
 GameObject:
   m_ObjectHideFlags: 0
@@ -121732,7 +121778,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1640685799}
-  - component: {fileID: 1640685800}
   m_Layer: 5
   m_Name: NIghtMare_HUD
   m_TagString: Untagged
@@ -121764,34 +121809,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1640685800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640685798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21bd26f3a8c9b004099665e8de18c848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EyeBlinkController
-  topLid: {fileID: 992447809}
-  bottomLid: {fileID: 362328166}
-  stamina: 100
-  maxStamina: 100
-  staminaDrainRate: 3
-  staminaRegenRate: 15
-  scrollSensitivity: 0.1
-  staminaSlider: {fileID: 1145203646}
-  fillImage: {fileID: 0}
-  highStaminaColor: {r: 1, g: 1, b: 1, a: 1}
-  midStaminaColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  lowStaminaColor: {r: 1, g: 0, b: 0, a: 1}
-  jitterThreshold: 30
-  jitterIntensity: 5
-  fatigueClosingSpeed: 0.5
-  eyeOpenAmount: 1
 --- !u!1001 &1641781846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152862,7 +152879,7 @@ MonoBehaviour:
     m_Bits: 64
   rayDistance: 20
   mirroredThumbKey: 98
-  mirroredFingerKeys: 730000006a0000006b00000066000000
+  mirroredFingerKeys: 680000006a0000006b0000006c000000
   audioSource: {fileID: 2088948199}
   correctKeyClip: {fileID: 8300000, guid: 563568dbc43eced47bf50c5f00eb2e5c, type: 3}
   cycleSuccessClip: {fileID: 8300000, guid: 966875543bcadc5439c057480bfec005, type: 3}
@@ -163907,7 +163924,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2439517157990167644, guid: de1b4cc51638ea74fb77dd4fc7eb8aa4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 361771773}
   m_SourcePrefab: {fileID: 100100000, guid: de1b4cc51638ea74fb77dd4fc7eb8aa4, type: 3}
 --- !u!4 &5493584527165956277 stripped
 Transform:

@@ -16,12 +16,20 @@ public class StalkerGhost : NavMeshGhostBase
     public float ghostHeightOffset = 1.5f; // 귀신의 가슴/얼굴 높이 (판정 기준)
     public LayerMask obstacleLayer;        // 벽, 가구 등이 포함된 레이어
 
+    [Header("Speed Settings")]
+    [Tooltip("시선 밖에서의 속도 배율. 시선 밖 속도 = speed × 이 값.\nspeed(0.4) × 2.0 = 0.8 unit/초")]
+    public float outOfSightSpeedMultiplier = 2.0f;
+
     [Header("Audio")]
     public AudioSource audioSource;
+
+    private float _baseSpeed;
+
     protected override void Start()
     {
         base.Start(); // 부모 클래스의 타겟 설정 및 기본 초기화 수행
-        
+        _baseSpeed = speed; // 인스펙터 기본 speed 저장
+
         mainCam = Camera.main;
         eyeController = FindFirstObjectByType<EyeBlinkController>();
 
@@ -31,33 +39,45 @@ public class StalkerGhost : NavMeshGhostBase
     }
 
     protected override void Update()
-{
-    if (isPlayerAwake || playerTarget == null) return;
-
-    bool isBeingWatched = IsPlayerLookingAtMe();
-
-    if (isBeingWatched)
     {
-        if (animator != null) animator.speed = 0f;
-        if (agent != null) agent.isStopped = true;
-        
-        // 쳐다보고 있으면 소리 일시정지
-        if (audioSource != null && audioSource.isPlaying) audioSource.Pause();
-    }
-    else
-    {
-        if (animator != null) animator.speed = 1f;
-        if (agent != null) agent.isStopped = false;
-        
-        // 시선을 돌리면 다시 소리 재생
-        if (audioSource != null && !audioSource.isPlaying) audioSource.UnPause();
-    }
+        if (isPlayerAwake || playerTarget == null) return;
 
-    base.Update();
-}
+        bool isBeingWatched = IsPlayerLookingAtMe();
+
+        if (isBeingWatched)
+        {
+            // 시야 안 → 완전 정지
+            speed = _baseSpeed;
+            if (animator != null) animator.speed = 0f;
+            if (agent != null) agent.isStopped = true;
+
+            // 쳐다보고 있으면 소리 일시정지
+            if (audioSource != null && audioSource.isPlaying) audioSource.Pause();
+        }
+        else
+        {
+            // 시야 밖 → 빠르게 다가옴
+            speed = _baseSpeed * outOfSightSpeedMultiplier;
+            if (animator != null) animator.speed = 1f;
+            if (agent != null) agent.isStopped = false;
+
+            // 시선을 돌리면 다시 소리 재생
+            if (audioSource != null && !audioSource.isPlaying) audioSource.UnPause();
+        }
+
+        base.Update();
+    }
 
     bool IsPlayerLookingAtMe()
     {
+        // 0. 카메라/눈 컨트롤러는 귀신 스폰 시점에 비활성이었을 수 있으므로,
+        //    악몽 카메라가 뒤늦게 활성화된 경우를 대비해 필요 시 다시 탐색합니다.
+        //    (mainCam이 stale 상태면 WorldToViewportPoint 판정이 깨져 멈추지 않습니다.)
+        if (mainCam == null || !mainCam.isActiveAndEnabled)
+            mainCam = Camera.main;
+        if (eyeController == null)
+            eyeController = FindFirstObjectByType<EyeBlinkController>(FindObjectsInactive.Include);
+
         // 1. 눈을 감았는가?
         if (eyeController != null && eyeController.eyeOpenAmount < 0.1f) return false;
         if (mainCam == null) return false;

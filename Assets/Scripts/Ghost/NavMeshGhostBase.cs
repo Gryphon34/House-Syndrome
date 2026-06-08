@@ -48,6 +48,10 @@ public abstract class NavMeshGhostBase : MonoBehaviour
 
         agent.speed = speed;
 
+        // 매 프레임 목적지 갱신 — 이동 중인 플레이어를 계속 추적
+        if (agent != null && !agent.isStopped)
+            agent.SetDestination(playerTarget.position);
+
         if (Vector3.Distance(transform.position, playerTarget.position) <= catchDistance)
         {
             CatchPlayer();
@@ -57,7 +61,7 @@ public abstract class NavMeshGhostBase : MonoBehaviour
         HandlePeriodicSound();
     }
 
-    private void HandlePeriodicSound()
+    protected void HandlePeriodicSound()
     {
         if (ghostAudioSource != null && ghostSoundClip != null && Time.time >= nextSoundTime)
         {

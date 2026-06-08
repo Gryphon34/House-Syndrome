@@ -6,26 +6,53 @@ using UnityEngine;
 public class ReflectionGhost : NavMeshGhostBase
 {
     [Header("Animation & Components")]
-
     public Animator animator;
+
+    [Header("Fail Counter — 6회 실패 즉시 게임오버")]
+    [Tooltip("이 횟수만큼 입력 실패 시 거리와 무관하게 즉시 게임오버 처리")]
+    public int maxFailsBeforeCatch = 6;
+
+    private int _failCount = 0;
+    private bool _hasCaught = false;
+    private HandInputSystem[] _hands;
 
     protected override void Start()
     {
         base.Start(); // 부모 클래스의 타겟 설정 및 기본 초기화 수행
-        
+
         if (animator == null) animator = GetComponent<Animator>();
+        _hands = FindObjectsByType<HandInputSystem>(FindObjectsSortMode.None);
 
         SetGhostVisibility(true);
 
         // [특징 반영] 스폰되자마자 모든 손(왼손, 오른손)의 반전 효과 활성화
         SetMirrorEffect(true);
-        
+
         Debug.Log("<color=purple>[ReflectionGhost] 반사체 귀신 스폰: 양손 시각 반전 활성화</color>");
     }
 
     protected override void Update()
     {
         if (isPlayerAwake || playerTarget == null) return;
+        if (_hasCaught) return;
+
+        // ─── 실패 카운터 ───
+        foreach (var hand in _hands)
+        {
+            if (hand == null) continue;
+            if (hand.didJustFail)
+            {
+                _failCount++;
+                Debug.Log($"<color=purple>[ReflectionGhost] 실패 {_failCount}/{maxFailsBeforeCatch}회</color>");
+
+                if (_failCount >= maxFailsBeforeCatch)
+                {
+                    _hasCaught = true;
+                    CatchPlayer();
+                    return;
+                }
+            }
+        }
 
         // 애니메이션 속도 고정
         if (animator != null) animator.speed = 1.0f;
